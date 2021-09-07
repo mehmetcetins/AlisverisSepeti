@@ -1,0 +1,33 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    Layout = "~/Views/Layouts/Admin/AdminLayout.cshtml";
+}
+
+<a href="@Context.Request.Path/BirimForm/Add/">Ekle</a>
+<table cellspacing="0" border="1" cellpadding="10">
+    <thead>
+        <tr>
+            <th>Birim</th>
+            <th>EklenmeTarihi</th>
+            <th>İşlemler</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var birimler in ViewBag.birimler)
+        {
+            <tr>
+                <td><a href="@Context.Request.Path/@birimler.BirimId">@birimler.Birim</a></td>
+                <td>@birimler.EklenmeTarihi</td>
+                <td>
+                    <a class="sil" href="@Context.Request.Path/Delete/@birimler.BirimId">Sil</a>
+                    <a href="@Context.Request.Path/BirimForm/Update/@birimler.BirimId">Düzenle</a>
+                </td>
+            </tr>
+
+
+
+        }
+    </tbody>
+    </table>

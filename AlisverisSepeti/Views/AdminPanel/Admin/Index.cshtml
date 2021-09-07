@@ -1,0 +1,21 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    Layout = "~/Views/Layouts/Admin/AdminLayout.cshtml";
+}
+
+<p>admin sayfası</p>
+<table>
+    @foreach (var Table in ViewBag.Tables)
+    {
+
+        <tr>
+            <td>
+                @Html.RouteLink((string)Table, (string)Table)
+            </td>
+        </tr>
+
+        
+    }
+</table>
