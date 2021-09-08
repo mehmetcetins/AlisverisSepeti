@@ -1,0 +1,82 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    Layout = "~/Views/Layouts/Admin/AdminLayout.cshtml";
+    var Doviz = ViewBag.Doviz;
+}
+<form method="POST">
+    <table>
+        <tr>
+            <td>
+                <b>Doviz Adı</b>
+            </td>
+            <td>
+                
+                <input type="text" name="DovizAdi" value="@Doviz.DovizAdi" />
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Doviz Adı Global</b>
+
+            </td>
+
+            <td>
+                <input type="text" name="DovizAdiGlobal" value="@Doviz.DovizAdiGlobal" /> 
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Doviz Kodu</b>
+            </td>
+            <td>
+                <input type="text" name="DovizKodu" value="@Doviz.DovizKodu" /> 
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Doviz Kuru</b>
+            </td>
+            <td>
+                <input type="number" name="Kur" value="@Doviz.Kur" step="0.01" /> 
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Tarih</b>
+            </td>
+            <td>
+                <input type="datetime-local" name="Tarih" value="@Doviz.Tarih" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Aktif Mi</b>
+            </td>
+            <td>
+                <input type="radio" name="Aktifmi" value="0" checked="@(Doviz.Aktifmi == 0 ? true: false)" />
+                <input type="radio" name="Aktifmi" value="1" checked="@(Doviz.Aktifmi == 1 ? true: false)" />
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Doviz Sembolü</b>
+            </td>
+            <td>
+                <input type="text" name="Sembol" value="@Doviz.Sembol" />
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <center><input type="submit" value="@ViewBag.SubmitButtonValue" /></center>
+            </td>
+        </tr>
+       
+
+    </table>
+
+
+</form>

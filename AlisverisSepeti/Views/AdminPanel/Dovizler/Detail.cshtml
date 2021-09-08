@@ -1,0 +1,78 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    Layout = "~/Views/Layouts/Admin/AdminLayout.cshtml";
+    var Doviz = ViewBag.Doviz;
+}
+
+
+<table>
+    <tbody>
+        <tr>
+            <td>
+                <b>Doviz Adı</b>
+            </td>
+            <td>
+                @Doviz.DovizAdi
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Doviz Adı Global</b>
+
+            </td>
+
+            <td>
+                @Doviz.DovizAdiGlobal
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Doviz Kodu</b>
+            </td>
+            <td>
+                @Doviz.DovizKodu
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Doviz Kuru</b>
+            </td>
+            <td>
+                @Doviz.Kur
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Tarih</b>
+            </td>
+            <td>
+                @Doviz.Tarih
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Aktif Mi</b>
+            </td>
+            <td>
+                @Doviz.Aktifmi
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Doviz Sembolü</b>
+            </td>
+            <td>
+                @Doviz.Sembol
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <a class="sil" href="/admin/Dovizler/Delete/@Doviz.DovizId">Sil</a>
+                <a href="/admin/Dovizler/DovizForm/Update/@Doviz.DovizId">Duzenle</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
