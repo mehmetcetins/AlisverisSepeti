@@ -1,0 +1,83 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    Layout = "~/Views/Layouts/Admin/AdminLayout.cshtml";
+    var dil = ViewBag.Dil;
+}
+<form method="POST" enctype="multipart/form-data">
+    <table>
+        <tr>
+            <td>
+                <b>Dil Adı</b>
+            </td>
+            <td>
+                
+                <input type="text" name="DilAdi" value="@dil.DilAdi" />
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>DilKodu</b>
+
+            </td>
+
+            <td>
+                <input type="text" name="DilKodu" value="@dil.DilKodu" /> 
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Bölge Dil Adi</b>
+            </td>
+            <td>
+                <input type="text" name="BolgeDilAdi" value="@dil.BolgeDilAdi" /> 
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Doviz Kodu</b>
+            </td>
+            <td>
+                <input type="text" name="DovizKodu" value="@dil.DovizKodu" /> 
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Dil Logo</b>
+            </td>
+            <td>
+                <input type="file" name="DilLogo" value="@dil.DilLogo" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Aktif Mi</b>
+            </td>
+            <td>
+                <input type="radio" name="Aktifmi" value="0" checked="@(dil.Aktifmi == 0 ? true: false)" />
+                <input type="radio" name="Aktifmi" value="1" checked="@(dil.Aktifmi == 1 ? true: false)" />
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Varsayılan mı</b>
+            </td>
+            <td>
+                <input type="radio" name="Varsayilanmi" value="0" checked="@(dil.Varsayilanmi == 0 ? true: false)" />
+                <input type="radio" name="Varsayilanmi" value="1" checked="@(dil.Varsayilanmi == 1 ? true: false)" />
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <center><input type="submit" value="@ViewBag.SubmitButtonValue" /></center>
+            </td>
+        </tr>
+       
+
+    </table>
+
+
+</form>

@@ -6,18 +6,19 @@ using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace AlisverisSepeti.Models
 {
-    public partial class AlisverisSepetiContext : DbContext
+    public partial class alisverissepetiContext : DbContext
     {
-        public AlisverisSepetiContext()
+        public alisverissepetiContext()
         {
         }
 
-        public AlisverisSepetiContext(DbContextOptions<AlisverisSepetiContext> options)
+        public alisverissepetiContext(DbContextOptions<alisverissepetiContext> options)
             : base(options)
         {
         }
 
         public virtual DbSet<Birimler> Birimlers { get; set; }
+        public virtual DbSet<Diller> Dillers { get; set; }
         public virtual DbSet<Dovizler> Dovizlers { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -25,7 +26,7 @@ namespace AlisverisSepeti.Models
             if (!optionsBuilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-                optionsBuilder.UseMySQL("server=localhost;port=3306;user=root;password=190598;database=AlisverisSepeti");
+                optionsBuilder.UseMySQL("server=localhost;port=3306;uid=root;pwd=190598;database=alisverissepeti");
             }
         }
 
@@ -49,6 +50,32 @@ namespace AlisverisSepeti.Models
                     .HasMaxLength(50);
 
                 entity.Property(e => e.GuncellenmeTarihi).HasMaxLength(50);
+            });
+
+            modelBuilder.Entity<Diller>(entity =>
+            {
+                entity.HasKey(e => e.DilId)
+                    .HasName("PRIMARY");
+
+                entity.ToTable("diller");
+
+                entity.Property(e => e.DilId).HasColumnName("DilID");
+
+                entity.Property(e => e.BolgeDilAdi)
+                    .IsRequired()
+                    .HasMaxLength(23);
+
+                entity.Property(e => e.DilAdi)
+                    .IsRequired()
+                    .HasMaxLength(9);
+
+                entity.Property(e => e.DilKodu)
+                    .IsRequired()
+                    .HasMaxLength(5);
+
+                entity.Property(e => e.DilLogo).HasMaxLength(0);
+
+                entity.Property(e => e.DovizKodu).HasMaxLength(3);
             });
 
             modelBuilder.Entity<Dovizler>(entity =>
@@ -76,9 +103,9 @@ namespace AlisverisSepeti.Models
 
                 entity.Property(e => e.Kur)
                     .IsRequired()
-                    .HasMaxLength(3);
+                    .HasMaxLength(4);
 
-                entity.Property(e => e.Sembol).HasMaxLength(0);
+                entity.Property(e => e.Sembol).HasMaxLength(5);
 
                 entity.Property(e => e.Tarih).HasMaxLength(50);
             });

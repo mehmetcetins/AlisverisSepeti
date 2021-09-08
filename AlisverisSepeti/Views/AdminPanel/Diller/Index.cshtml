@@ -1,0 +1,40 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    Layout = "~/Views/Layouts/Admin/AdminLayout.cshtml";
+}
+
+<a href="@Context.Request.Path/DilForm/Add/">Ekle</a>
+<table cellspacing="0" border="1" cellpadding="10">
+    <thead>
+        <tr>
+            <th>Dil Adi</th>
+            <th>Dil Kodu</th>
+            <th>Doviz Kodu</th>
+            <th>Aktif Mi?</th>
+            <th>Varsayılan Mı?</th>
+            <th>İşlemler</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var diller in ViewBag.Diller)
+        {
+        <tr>
+            <td>@diller.DilAdi</td>
+            <td><a href="@Context.Request.Path/@diller.DilId">@diller.DilKodu</a></td>
+            <td>@diller.DovizKodu</td>
+            <td>@diller.Aktifmi</td>
+            <td>@diller.Varsayilanmi</td>
+
+            <td>
+                <a class="sil" href="@Context.Request.Path/Delete/@diller.DilId">Sil</a>
+                <a href="@Context.Request.Path/DilForm/Update/@diller.DilId">Düzenle</a>
+            </td>
+        </tr>
+
+
+
+        }
+    </tbody>
+</table>

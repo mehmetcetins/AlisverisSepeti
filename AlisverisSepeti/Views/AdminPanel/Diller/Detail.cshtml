@@ -1,0 +1,78 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    Layout = "~/Views/Layouts/Admin/AdminLayout.cshtml";
+    var Diller = ViewBag.Diller;
+}
+
+
+<table>
+    <tbody>
+        <tr>
+            <td>
+                <b>Dil Adı</b>
+            </td>
+            <td>
+                @Diller.DilAdi
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Dil Kodu</b>
+
+            </td>
+
+            <td>
+                @Diller.DilKodu
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>BolgeDilAdi</b>
+            </td>
+            <td>
+                @Diller.BolgeDilAdi
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>DovizKodu</b>
+            </td>
+            <td>
+                @Diller.DovizKodu
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Dil Logo</b>
+            </td>
+            <td>
+                @Diller.DilLogo
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Aktif mi</b>
+            </td>
+            <td>
+                @Diller.Aktifmi
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Varsayılan mı</b>
+            </td>
+            <td>
+                @Diller.Varsayilanmi
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <a class="sil" href="/admin/Diller/Delete/@Diller.DovizId">Sil</a>
+                <a href="/admin/Diller/DilForm/Update/@Diller.DovizId">Duzenle</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
