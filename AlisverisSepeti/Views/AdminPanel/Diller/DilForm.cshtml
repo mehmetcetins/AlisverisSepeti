@@ -56,9 +56,9 @@
                 <b>Aktif Mi</b>
             </td>
             <td>
-                <input type="radio" name="Aktifmi" value="0" checked="@(dil.Aktifmi == 0 ? true: false)" />
-                <input type="radio" name="Aktifmi" value="1" checked="@(dil.Aktifmi == 1 ? true: false)" />
-                
+                <input type="radio" name="Aktifmi" value="false" checked="@(dil.Aktifmi == false)" />
+                <input type="radio" name="Aktifmi" value="true" checked="@(dil.Aktifmi == true)" />
+
             </td>
         </tr>
         <tr>
@@ -66,8 +66,8 @@
                 <b>Varsayılan mı</b>
             </td>
             <td>
-                <input type="radio" name="Varsayilanmi" value="0" checked="@(dil.Varsayilanmi == 0 ? true: false)" />
-                <input type="radio" name="Varsayilanmi" value="1" checked="@(dil.Varsayilanmi == 1 ? true: false)" />
+                <input type="radio" name="Varsayilanmi" value="false" checked="@(dil.Varsayilanmi ==  false || dil.Varsayilanmi == null)" />
+                <input type="radio" name="Varsayilanmi" value="true" checked="@(dil.Varsayilanmi == true)" />
             </td>
         </tr>
         <tr>
