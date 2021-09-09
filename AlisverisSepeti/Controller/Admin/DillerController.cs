@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -89,7 +90,7 @@ namespace AlisverisSepeti.Admin
                 }
                 else
                 {
-                    dil.DilId = id;
+                   
                     if (DilLogo != null)
                     {
                         dil.DilLogo = DilLogo.FileName;
@@ -97,10 +98,10 @@ namespace AlisverisSepeti.Admin
                     }
                     else
                     {
-                        dil.DilLogo = context.Dillers.Where(diller => diller.DilId == id).First().DilLogo;
+                        dil.DilLogo = context.Dillers.AsNoTracking().Where(diller => diller.DilId == id).First().DilLogo;
                     }
-
-                    context.Entry(dil).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+                    dil.DilId = id;
+                    context.Dillers.Update(dil);
                     context.SaveChanges();
                     return RedirectToAction("Index");
                 }
