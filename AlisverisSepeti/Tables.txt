@@ -1,1 +1,1 @@
-﻿birimler, dovizler, diller
+﻿birimler, dovizler, diller, markalar

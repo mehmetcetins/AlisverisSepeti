@@ -20,6 +20,7 @@ namespace AlisverisSepeti.Models
         public virtual DbSet<Birimler> Birimlers { get; set; }
         public virtual DbSet<Diller> Dillers { get; set; }
         public virtual DbSet<Dovizler> Dovizlers { get; set; }
+        public virtual DbSet<Markalar> Markalars { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -59,6 +60,9 @@ namespace AlisverisSepeti.Models
 
                 entity.ToTable("diller");
 
+                entity.HasIndex(e => e.BolgeDilAdi, "BolgeDilAdi_UNIQUE")
+                    .IsUnique();
+
                 entity.Property(e => e.DilId).HasColumnName("DilID");
 
                 entity.Property(e => e.BolgeDilAdi)
@@ -73,7 +77,7 @@ namespace AlisverisSepeti.Models
                     .IsRequired()
                     .HasMaxLength(5);
 
-                entity.Property(e => e.DilLogo).HasMaxLength(0);
+                entity.Property(e => e.DilLogo).HasMaxLength(100);
 
                 entity.Property(e => e.DovizKodu).HasMaxLength(3);
             });
@@ -108,6 +112,26 @@ namespace AlisverisSepeti.Models
                 entity.Property(e => e.Sembol).HasMaxLength(5);
 
                 entity.Property(e => e.Tarih).HasMaxLength(50);
+            });
+
+            modelBuilder.Entity<Markalar>(entity =>
+            {
+                entity.HasKey(e => e.MarkaId)
+                    .HasName("PRIMARY");
+
+                entity.ToTable("markalar");
+
+                entity.Property(e => e.MarkaId).HasColumnName("MarkaID");
+
+                entity.Property(e => e.MarkaAdi)
+                    .IsRequired()
+                    .HasMaxLength(10);
+
+                entity.Property(e => e.MarkaBanner).HasMaxLength(50);
+
+                entity.Property(e => e.MarkaHakkinda).HasMaxLength(300);
+
+                entity.Property(e => e.MarkaLogo).HasMaxLength(50);
             });
 
             OnModelCreatingPartial(modelBuilder);
