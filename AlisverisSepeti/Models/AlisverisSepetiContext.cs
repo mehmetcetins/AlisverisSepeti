@@ -20,6 +20,7 @@ namespace AlisverisSepeti.Models
         public virtual DbSet<Birimler> Birimlers { get; set; }
         public virtual DbSet<Diller> Dillers { get; set; }
         public virtual DbSet<Dovizler> Dovizlers { get; set; }
+        public virtual DbSet<Gonderimsekilleri> Gonderimsekilleris { get; set; }
         public virtual DbSet<Markalar> Markalars { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -112,6 +113,24 @@ namespace AlisverisSepeti.Models
                 entity.Property(e => e.Sembol).HasMaxLength(5);
 
                 entity.Property(e => e.Tarih).HasMaxLength(50);
+            });
+
+            modelBuilder.Entity<Gonderimsekilleri>(entity =>
+            {
+                entity.HasKey(e => e.GonderimId)
+                    .HasName("PRIMARY");
+
+                entity.ToTable("gonderimsekilleri");
+
+                entity.Property(e => e.Aktifmi).HasDefaultValueSql("'0'");
+
+                entity.Property(e => e.DizilisSira).HasDefaultValueSql("'-1'");
+
+                entity.Property(e => e.GonderimSekli)
+                    .IsRequired()
+                    .HasMaxLength(30);
+
+                entity.Property(e => e.MinTutar).HasDefaultValueSql("'0'");
             });
 
             modelBuilder.Entity<Markalar>(entity =>

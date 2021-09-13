@@ -1,0 +1,41 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    Layout = "~/Views/Layouts/Admin/AdminLayout.cshtml";
+}
+
+<a href="@Context.Request.Path/GonderimSekilleriForm/Add/">Ekle</a>
+<table cellspacing="0" border="1" cellpadding="10">
+    <thead>
+        <tr>
+            <th>Gonderim Sekli</th>
+            <th>Dizilis Sira</th>
+            <th>Min Tutar</th>
+            <th>Max Tutar</th>
+            <th>Aktif Mi?</th>
+            
+            <th>İşlemler</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var GonderimSekilleri in ViewBag.GonderimSekilleri)
+        {
+        <tr>
+            <td><a href="@Context.Request.Path/@GonderimSekilleri.GonderimId">@GonderimSekilleri.GonderimSekli</a></td>
+            <td>@GonderimSekilleri.DizilisSira</td>
+            <td>@GonderimSekilleri.MinTutar</td>
+            <td>@GonderimSekilleri.MaxTutar</td>
+            <td>@GonderimSekilleri.Aktifmi</td>
+
+            <td>
+                <a class="sil" href="@Context.Request.Path/Delete/@GonderimSekilleri.GonderimId">Sil</a>
+                <a href="@Context.Request.Path/GonderimSekilleriForm/Update/@GonderimSekilleri.GonderimId">Düzenle</a>
+            </td>
+        </tr>
+
+
+
+        }
+    </tbody>
+</table>

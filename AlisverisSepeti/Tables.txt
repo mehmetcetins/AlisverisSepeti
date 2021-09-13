@@ -1,1 +1,1 @@
-﻿birimler, dovizler, diller, markalar
+﻿birimler, dovizler, diller, markalar, gonderimsekilleri

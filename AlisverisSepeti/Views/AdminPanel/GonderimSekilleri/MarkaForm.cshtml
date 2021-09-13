@@ -1,0 +1,97 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    Layout = "~/Views/Layouts/Admin/AdminLayout.cshtml";
+    var gonderimSekli = ViewBag.GonderimSekli;
+}
+<form method="POST" enctype="multipart/form-data">
+    <table>
+        <tr>
+            <td>
+                <b>Gonderim Sekli</b>
+            </td>
+            <td>
+
+                <input type="text" name="GonderimSekli" value="@gonderimSekli.GonderimSekli" />
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Min Tutar</b>
+
+            </td>
+
+            <td>
+                <input type="number" step="0.01" name="MinTutar" value="@gonderimSekli.MinTutar" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Max Tutar</b>
+            </td>
+            <td>
+                <input type="number" step="0.01" name="MaxTutar" value="@gonderimSekli.MaxTutar" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Dizilis Sira</b>
+            </td>
+            <td>
+                <input type="number" name="DizilisSira" value="@gonderimSekli.DizilisSira" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Aktif Mi</b>
+            </td>
+            <td>
+                <input type="radio" name="Aktifmi" value="false" checked="@(gonderimSekli.Aktifmi == false)" />
+                <input type="radio" name="Aktifmi" value="true" checked="@(gonderimSekli.Aktifmi == true)" />
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Kapıda Ödeme Var mı</b>
+            </td>
+            <td>
+                <input type="radio" name="KapidaOdemeVarmi" value="false" checked="@(gonderimSekli.KapidaOdemeVarmi == false)" />
+                <input type="radio" name="KapidaOdemeVarmi" value="true" checked="@(gonderimSekli.KapidaOdemeVarmi == true)" />
+
+            </td>
+        </tr>        
+        <tr>
+            <td>
+                <b>Yurt İçi Gönderim Var mı</b>
+            </td>
+            <td>
+                <input type="radio" name="YurtIciGonderimVarmi" value="false" checked="@(gonderimSekli.YurtIciGonderimVarmi == false)" />
+                <input type="radio" name="YurtIciGonderimVarmi" value="true" checked="@(gonderimSekli.YurtIciGonderimVarmi == true)" />
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Yurt Dışı Gönderim Var mı</b>
+            </td>
+            <td>
+                <input type="radio" name="YurtDisiGonderimVarmi" value="false" checked="@(gonderimSekli.YurtDisiGonderimVarmi == false)" />
+                <input type="radio" name="YurtDisiGonderimVarmi" value="true" checked="@(gonderimSekli.YurtDisiGonderimVarmi == true)" />
+
+            </td>
+        </tr>
+        
+        <tr>
+            <td colspan="2">
+                <center><input type="submit" value="@ViewBag.SubmitButtonValue" /></center>
+            </td>
+        </tr>
+
+
+    </table>
+
+
+</form>

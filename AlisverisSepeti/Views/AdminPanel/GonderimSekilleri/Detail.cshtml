@@ -1,0 +1,89 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    Layout = "~/Views/Layouts/Admin/AdminLayout.cshtml";
+    var GonderimSekilleri = ViewBag.GonderimSekilleri;
+}
+
+
+<table>
+    <tbody>
+        <tr>
+            <td>
+                <b>Gönderim Sekli</b>
+            </td>
+            <td>
+                @GonderimSekilleri.GonderimSekli
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Min Tutar</b>
+
+            </td>
+
+            <td>
+                @GonderimSekilleri.MinTutar
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Max Tutar</b>
+            </td>
+            <td>
+                @GonderimSekilleri.MaxTutar
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Dizilis Sira</b>
+            </td>
+            <td>
+                @GonderimSekilleri.DizilisSira
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Aktif mi</b>
+            </td>
+            <td>
+                @GonderimSekilleri.Aktifmi
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Kapıda Ödeme Var mı</b>
+            </td>
+            <td>
+                @GonderimSekilleri.KapidaOdemeVarmi
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Yurt İçi Gönderim Var mı</b>
+            </td>
+            <td>
+                @GonderimSekilleri.YurtIciGonderimVarmi
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Yurt Dışı Gönderim Var mı </b>
+            </td>
+            <td>
+                @GonderimSekilleri.YurtDisiGonderimVarmi
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <a class="sil" href="/admin/GonderimSekilleri/Delete/@GonderimSekilleri.GonderimId">Sil</a>
+                <a href="/admin/GonderimSekilleri/GonderimSekilleriForm/Update/@GonderimSekilleri.GonderimId">Duzenle</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
