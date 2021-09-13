@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace AlisverisSepeti.Admin
 {
-    [Route("/admin/Markalar",Name ="Markalar")]
+    [Route("/admin/Markalar/",Name ="Markalar")]
     public class MarkalarController : Controller
     {
         public IActionResult Index()
@@ -49,26 +49,118 @@ namespace AlisverisSepeti.Admin
                     ViewBag.error = "Aynı marka adında başka bir kayıt var";
                     ViewBag.Marka = marka;
                     ViewBag.SubmitButtonValue = "Ekle";
+                    return View("~/Views/AdminPanel/Markalar/MarkaForm.cshtml");
                 }
                 else
                 {
-                    MagickImage imageMagick = new MagickImage(MarkaLogo.OpenReadStream());
-                    imageMagick.Resize(200,200);
-
                     context.Markalars.Add(marka);
                     int id = context.SaveChanges();
+                    if (MarkaLogo == null)
+                    {
+                        marka.MarkaLogo = null;
+                    }
+                    else
+                    {
+                        marka.MarkaLogo = Utils.Utils.ToFileName(MarkaLogo.FileName, id);
+                        MagickImage imageMagick = new MagickImage(MarkaLogo.OpenReadStream());
+                        imageMagick.Resize(200, 200);
+                        imageMagick.Write(new FileStream(Path.Combine("Public/images/Markalar/", marka.MarkaLogo), FileMode.Create));
+                    }
 
-                    marka.MarkaLogo = Utils.Utils.ToFileName(MarkaLogo.FileName,id);
-                    marka.MarkaBanner = Utils.Utils.ToFileName(MarkaBanner.FileName,id);
-
-                    MarkaBanner.CopyTo(new FileStream(Path.Combine("Public/images/Markalar/", marka.MarkaLogo), FileMode.Create));
-                    imageMagick.Write(new FileStream(Path.Combine("Public/images/Markalar/", marka.MarkaBanner), FileMode.Create));
-
+                    if (MarkaBanner == null)
+                    {
+                        marka.MarkaBanner = null;
+                    }
+                    else
+                    {
+                        marka.MarkaBanner = Utils.Utils.ToFileName(MarkaBanner.FileName, id);
+                        MarkaBanner.CopyTo(new FileStream(Path.Combine("Public/images/Markalar/", marka.MarkaLogo), FileMode.Create));
+                    }
                     context.Markalars.Update(marka);
                     context.SaveChanges();
                 }
             }
             return RedirectToAction("Index");
+        }
+
+        [HttpGet("MarkaForm/Update/{id:int}")]
+        public IActionResult Update(int id)
+        {
+            using (var context = new Models.AlisverisSepetiContext())
+            {
+                Models.Markalar marka =  context.Markalars.Where(marka => marka.MarkaId == id).First();
+                if (marka == null)
+                {
+                    ViewBag.error = "Marka Bulunamadi.";
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    ViewBag.Marka = marka;
+                    ViewBag.SubmitButtonValue = "Güncelle";
+                    return View("~/Views/AdminPanel/Markalar/MarkaForm.cshtml");
+                }
+            }
+        }
+        [HttpPost("MarkaForm/Update/{id:int}")]
+        public IActionResult Update(int id, Models.Markalar marka, IFormFile MarkaLogo, IFormFile MarkaBanner)
+        {
+            string markaLogoName;
+            string markaBannerName;
+            using (var context = new Models.AlisverisSepetiContext())
+            {
+                Models.Markalar eskiMarka = context.Markalars.AsNoTracking().Where(markalar => markalar.MarkaId == id).First();
+                if (eskiMarka == null)
+                {
+                    ViewBag.error = "marka bulunamadı.";
+                    ViewBag.SubmitButtonValue = "Guncelle";
+                    ViewBag.Marka = marka;
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    if (MarkaLogo == null)
+                    {
+                        markaLogoName = eskiMarka.MarkaLogo;
+                    }
+                    else
+                    {
+                        // değiştirmelerde eski resimler silinmeli mi?
+                        MagickImage magickImage = new MagickImage(MarkaLogo.OpenReadStream());
+                        magickImage.Resize(200,200);
+                        markaLogoName = Utils.Utils.ToFileName(MarkaLogo.FileName,eskiMarka.MarkaId);
+                        magickImage.Write(new FileStream(Path.Combine("Public/images/Markalar/", markaLogoName), FileMode.Create));
+                    }
+
+                    if (MarkaBanner == null)
+                    {
+                        markaBannerName = eskiMarka.MarkaBanner;
+                    }
+                    else
+                    {
+                        markaBannerName = Utils.Utils.ToFileName(MarkaBanner.FileName,eskiMarka.MarkaId);
+                        MarkaBanner.CopyTo(new FileStream(Path.Combine("Public/images/Markalar/", markaBannerName), FileMode.Create));
+                    }
+
+                    marka.MarkaBanner = markaBannerName;
+                    marka.MarkaLogo = markaLogoName;
+                    marka.MarkaId = id;
+                    context.Markalars.Update(marka);
+                    context.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+            }
+        }
+        
+        [HttpDelete("Delete/{id:int}")]
+        public IActionResult Delete(int id)
+        {
+            using (var context = new Models.AlisverisSepetiContext())
+            {
+                context.Markalars.Remove(context.Markalars.Where(marka => marka.MarkaId == id).First());
+                context.SaveChanges();
+                return RedirectToAction("Index");
+            }
         }
     }
 }

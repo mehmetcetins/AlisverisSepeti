@@ -25,7 +25,13 @@
                         let href = window.location.href;
                         let adminendpoint = href.search("admin/") + "admin/".length;
                         let modelendpoint = href.substring(adminendpoint).search("/");
-                        window.location.href = href.substring(0, adminendpoint + modelendpoint);
+                        if (modelendpoint == -1) {
+                            window.location.reload();
+                        }
+                        else {
+                            window.location.href = href.substring(0, adminendpoint + modelendpoint);
+                        }
+                        
                     }
                 }
                 req.send();
