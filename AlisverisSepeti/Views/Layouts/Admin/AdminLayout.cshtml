@@ -11,10 +11,10 @@
 
 <body>
     <p style="color:red;">
-        <b>@ViewBag.error</b>
+        <b>@ViewBag.error @TempData["error"]</b>
     </p>
     <p style="color:green;">
-        <b>@ViewBag.success</b>
+        <b>@ViewBag.success @TempData["success"]</b>
     </p>
     @RenderBody()
     <script>
