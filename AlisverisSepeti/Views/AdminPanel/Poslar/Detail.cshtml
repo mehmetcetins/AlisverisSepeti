@@ -1,0 +1,97 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    Layout = "~/Views/Layouts/Admin/AdminLayout.cshtml";
+    var Poslar = ViewBag.Poslar;
+}
+
+
+<table>
+    <tbody>
+        <tr>
+            <td>
+                <b>Pos Banka Adı</b>
+            </td>
+            <td>
+                @Poslar.PosBankaAdi
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Api User</b>
+
+            </td>
+
+            <td>
+                @Poslar.ApiUser
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Api Password</b>
+            </td>
+            <td>
+                @Poslar.ApiPassword
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Geçerli Kartlar</b>
+            </td>
+            <td>
+                @Poslar.GecerliKartlar
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Dizilis Sira</b>
+            </td>
+            <td>
+                @Poslar.DizilisSira
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Aktif mi</b>
+            </td>
+            <td>
+                @Poslar.Aktifmi
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Şifreli Olsun mu</b>
+            </td>
+            <td>
+                @Poslar.SifreliOlsunmu
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Sifreli Alisveris Varmi</b>
+            </td>
+            <td>
+                @Poslar.SifreliAlisverisVarmi
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Taksit Var mi</b>
+            </td>
+            <td>
+                @Poslar.TaksitVarmi
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <a class="sil" href="/admin/Poslar/Delete/@Poslar.PosId">Sil</a>
+                <a href="/admin/Poslar/PoslarForm/Update/@Poslar.PosId">Duzenle</a>
+            </td>
+        </tr>
+    </tbody>
+</table>

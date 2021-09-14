@@ -1,0 +1,41 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    Layout = "~/Views/Layouts/Admin/AdminLayout.cshtml";
+}
+
+<a href="@Context.Request.Path/PoslarForm/Add/">Ekle</a>
+<table cellspacing="0" border="1" cellpadding="10">
+    <thead>
+        <tr>
+            <th>Pos Banka Adi</th>
+            <th>Api User</th>
+            <th>Dizilis Sira</th>
+            <th>Aktif Mi?</th>
+            <th>Taksit Var mi?</th>
+            
+            <th>İşlemler</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var Poslar in ViewBag.Poslar)
+        {
+        <tr>
+            <td><a href="@Context.Request.Path/@Poslar.PosId">@Poslar.PosBankaAdi</a></td>
+            <td>@Poslar.DizilisSira</td>
+            <td>@Poslar.ApiUser</td>
+            <td>@Poslar.Akitfmi</td>
+            <td>@Poslar.TaksitVarmi</td>
+
+            <td>
+                <a class="sil" href="@Context.Request.Path/Delete/@Poslar.PosId">Sil</a>
+                <a href="@Context.Request.Path/PoslarForm/Update/@Poslar.PosId">Düzenle</a>
+            </td>
+        </tr>
+
+
+
+        }
+    </tbody>
+</table>

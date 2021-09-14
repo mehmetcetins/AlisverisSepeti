@@ -1,0 +1,97 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    Layout = "~/Views/Layouts/Admin/AdminLayout.cshtml";
+    var pos = ViewBag.Pos;
+}
+<form method="POST" enctype="multipart/form-data">
+    <table>
+        <tr>
+            <td>
+                <b>Pos Banka Adi</b>
+            </td>
+            <td>
+
+                <input type="text" name="PosBankaAdi" value="@pos.PosBankaAdi" />
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Api User</b>
+
+            </td>
+
+            <td>
+                <input type="text"  name="ApiUser" value="@pos.ApiUser" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Api Password</b>
+            </td>
+            <td>
+                <input type="text"  name="ApiPassword" value="@pos.ApiPassword" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Dizilis Sira</b>
+            </td>
+            <td>
+                <input type="number" name="DizilisSira" value="@pos.DizilisSira" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Aktif Mi</b>
+            </td>
+            <td>
+                <input type="radio" name="Aktifmi" value="false" checked="@(pos.Aktifmi == false)" />
+                <input type="radio" name="Aktifmi" value="true" checked="@(pos.Aktifmi == true)" />
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Sifreli Alisveris Var mi</b>
+            </td>
+            <td>
+                <input type="radio" name="SifreliAlisverisVarmi" value="false" checked="@(pos.SifreliAlisverisVarmi == false)" />
+                <input type="radio" name="SifreliAlisverisVarmi" value="true" checked="@(pos.SifreliAlisverisVarmi == true)" />
+
+            </td>
+        </tr>        
+        <tr>
+            <td>
+                <b>Sifreli Olsun mu</b>
+            </td>
+            <td>
+                <input type="radio" name="SifreliOlsunmu" value="false" checked="@(pos.SifreliOlsunmu == false)" />
+                <input type="radio" name="SifreliOlsunmu" value="true" checked="@(pos.SifreliOlsunmu == true)" />
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Taksit Var mi</b>
+            </td>
+            <td>
+                <input type="radio" name="TaksitVarmi" value="false" checked="@(pos.TaksitVarmi == false)" />
+                <input type="radio" name="TaksitVarmi" value="true" checked="@(pos.TaksitVarmi == true)" />
+
+            </td>
+        </tr>
+        
+        <tr>
+            <td colspan="2">
+                <center><input type="submit" value="@ViewBag.SubmitButtonValue" /></center>
+            </td>
+        </tr>
+
+
+    </table>
+
+
+</form>
