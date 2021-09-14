@@ -10,7 +10,12 @@
 </head>
 
 <body>
-
+    <p style="color:red;">
+        <b>@ViewBag.error</b>
+    </p>
+    <p style="color:green;">
+        <b>@ViewBag.success</b>
+    </p>
     @RenderBody()
     <script>
         var array = document.getElementsByClassName("sil");

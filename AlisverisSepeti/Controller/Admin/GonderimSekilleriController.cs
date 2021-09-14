@@ -46,7 +46,7 @@ namespace AlisverisSepeti.Admin
             }
             using (var context = new Models.AlisverisSepetiContext())
             {
-                if (context.Gonderimsekilleris.Where(gonderim => gonderim.GonderimSekli == gonderim.GonderimSekli).Count() > 0)
+                if (!context.Gonderimsekilleris.Any(gonderim => gonderim.GonderimSekli == gonderim.GonderimSekli))
                 {
                     ViewBag.SubmitButtonValue = "Ekle";
                     ViewBag.error = "Ayni isimde gönderim sekli bulunmakta." ;
@@ -81,6 +81,53 @@ namespace AlisverisSepeti.Admin
                     return View("~/Views/AdminPanel/GonderimSekilleri/GonderimSekilleriForm.cshtml");
                 }
             }
+        }
+        [HttpPost("GonderimSekilleriForm/Update/{id:int}")]
+        public IActionResult Update(int id,Models.Gonderimsekilleri gonderim)
+        {
+            if (gonderim == null)
+            {
+                ViewBag.error = "GonderimSekli boş";
+                return RedirectToAction("Index");
+            }
+            using (var context=new Models.AlisverisSepetiContext())
+            {
+                if (context.Gonderimsekilleris.Where(gonderimSekli => gonderimSekli.GonderimSekli == gonderim.GonderimSekli).Count() > 1)
+                {
+                    ViewBag.GonderimSekli = gonderim;
+                    ViewBag.error = "Aynı GonderimSeklinde başka bir kayıt var";
+                    ViewBag.SubmitButtonValue = "Guncelle";
+                    return View("~/Views/AdminPanel/GonderimSekilleri/GonderimSekilleriForm.cshtml");
+                }
+                else
+                {
+                    ViewBag.success = "Basariyla Kaydedildi.";
+                    gonderim.GonderimId = id;
+                    context.Gonderimsekilleris.Update(gonderim);
+                    context.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+            }
+        }
+
+        [HttpDelete("Delete/{id:int}")]
+
+        public IActionResult Delete(int id)
+        {
+            using (var context = new Models.AlisverisSepetiContext())
+            {
+                if (context.Gonderimsekilleris.Any(gonderim => gonderim.GonderimId == id))
+                {
+                    context.Gonderimsekilleris.Remove(context.Gonderimsekilleris.AsNoTracking().Where(gonderim => gonderim.GonderimId == id).First());
+                    context.SaveChanges();
+                }
+                else
+                {
+                    ViewBag.error = "GonderimSekli bulunamadi.";
+                    
+                }
+            }
+            return new EmptyResult();
         }
     }
 }
