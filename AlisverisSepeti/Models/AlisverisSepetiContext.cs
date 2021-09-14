@@ -122,8 +122,6 @@ namespace AlisverisSepeti.Models
 
                 entity.ToTable("gonderimsekilleri");
 
-                entity.Property(e => e.Aktifmi).HasDefaultValueSql("'0'");
-
                 entity.Property(e => e.DizilisSira).HasDefaultValueSql("'-1'");
 
                 entity.Property(e => e.GonderimSekli)

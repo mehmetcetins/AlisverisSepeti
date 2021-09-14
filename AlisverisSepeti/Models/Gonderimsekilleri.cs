@@ -11,7 +11,7 @@ namespace AlisverisSepeti.Models
         public bool KapidaOdemeVarmi { get; set; }
         public float? MinTutar { get; set; }
         public float? MaxTutar { get; set; }
-        public bool? Aktifmi { get; set; }
+        public bool Aktifmi { get; set; }
         public int? DizilisSira { get; set; }
         public bool YurtIciGonderimVarmi { get; set; }
         public bool YurtDisiGonderimVarmi { get; set; }
