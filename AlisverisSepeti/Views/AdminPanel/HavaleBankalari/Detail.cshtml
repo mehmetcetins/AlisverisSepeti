@@ -1,0 +1,106 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    Layout = "~/Views/Layouts/Admin/AdminLayout.cshtml";
+    var HavaleBankalari = ViewBag.HavaleBankalari as AlisverisSepeti.Models.Havalebankalari;
+}
+
+
+<table>
+    <tbody>
+        <tr>
+            <td>
+                <b>Banka Adı</b>
+            </td>
+            <td>
+                @HavaleBankalari.BankaAdi
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Şube Adı</b>
+
+            </td>
+
+            <td>
+                @HavaleBankalari.SubeAdi
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Şube Kodu</b>
+            </td>
+            <td>
+                @HavaleBankalari.SubeKodu
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Hesap No</b>
+            </td>
+            <td>
+                @HavaleBankalari.HesapNo
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>IBAN</b>
+            </td>
+            <td>
+                @HavaleBankalari.Iban
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>DovizKodu</b>
+            </td>
+            <td>
+                @HavaleBankalari.DovizKodu
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Banka Logo</b>
+            </td>
+            <td>
+                @HavaleBankalari.BankaLogo
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Dizilis Sira</b>
+            </td>
+            <td>
+                @HavaleBankalari.DizilisSira
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Yurt İçi Aktif Mi</b>
+            </td>
+            <td>
+                @HavaleBankalari.Yiaktifmi;
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Yurt Dışı Aktif Mi</b>
+            </td>
+            <td>
+                @HavaleBankalari.Ydaktifmi;
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <a class="sil" href="/admin/HavaleBankalari/Delete/@HavaleBankalari.HavaleBankaId">Sil</a>
+                <a href="/admin/HavaleBankalari/HavaleBankalariForm/Update/@HavaleBankalari.HavaleBankaId">Duzenle</a>
+            </td>
+        </tr>
+    </tbody>
+</table>

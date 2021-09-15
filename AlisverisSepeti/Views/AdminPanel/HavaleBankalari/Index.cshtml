@@ -1,0 +1,42 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    Layout = "~/Views/Layouts/Admin/AdminLayout.cshtml";
+}
+
+<a href="@Context.Request.Path/HavaleBankalariForm/Add/">Ekle</a>
+<table cellspacing="0" border="1" cellpadding="10">
+    <thead>
+        <tr>
+            <th>Banka Adi</th>
+            <th>Sube Adi</th>
+            <th>Dizilis Sira</th>
+            <th>Yurt İçin Aktif Mi?</th>
+            <th>Yurt Dışı Aktif Mi?</th>
+            
+            <th>İşlemler</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var HavaleBankalari in ViewBag.HavaleBankalari as List<AlisverisSepeti.Models.Havalebankalari>)
+        {
+        <tr>
+            <td><a href="@Context.Request.Path/@HavaleBankalari.HavaleBankaId">@HavaleBankalari.BankaAdi</a></td>
+            <td>@HavaleBankalari.SubeAdi</td>
+            <td>@HavaleBankalari.DizilisSira</td>
+
+            <td>@HavaleBankalari.Yiaktifmi</td>
+            <td>@HavaleBankalari.Ydaktifmi</td>
+
+            <td>
+                <a class="sil" href="@Context.Request.Path/Delete/@HavaleBankalari.HavaleBankaId">Sil</a>
+                <a href="@Context.Request.Path/HavaleBankalariForm/Update/@HavaleBankalari.HavaleBankaId">Düzenle</a>
+            </td>
+        </tr>
+
+
+
+        }
+    </tbody>
+</table>
