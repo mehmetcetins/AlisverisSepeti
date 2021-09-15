@@ -1,0 +1,141 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    Layout = "~/Views/Layouts/Admin/AdminLayout.cshtml";
+    var Kargo = ViewBag.Kargo as AlisverisSepeti.Models.Kargolar;
+}
+<form method="POST" enctype="multipart/form-data">
+    <table>
+        <tr>
+            <td>
+                <b>Kargo Adi</b>
+            </td>
+            <td>
+
+                <input type="text" name="KargoAdi" value="@Kargo.KargoAdi" />
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Kargo Bedeli</b>
+
+            </td>
+
+            <td>
+                <input type="number" step="0.01" name="KargoBedeli" value="@Kargo.KargoBedeli" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Kargo Bedeli Doviz Kodu</b>
+            </td>
+            <td>
+                <input type="text" name="KargoBedeliDovizKodu" value="@Kargo.KargoBedeliDovizKodu" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Ücretsiz Kargo Bedeli</b>
+            </td>
+            <td>
+                <input type="number" step="0.01" name="UcretsizKargoBedeli" value="@Kargo.UcretsizKargoBedeli" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Ücretsiz Kargo Bedeli Döviz Kodu</b>
+            </td>
+            <td>
+                <input type="text" name="UcretsizKargoBedeliDovizKodu" value="@Kargo.UcretsizKargoBedeliDovizKodu" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Kargo Logo</b>
+            </td>
+            <td>
+                <input type="text" name="KargoLogo" value="@Kargo.KargoLogo" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Diziliş Sıra</b>
+            </td>
+            <td>
+                <input type="number" name="DizilisSira" value="@Kargo.DizilisSira" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Kapıda Nakit Ödeme Var mı</b>
+            </td>
+            <td>
+                <input type="radio" name="KapidaNakitOdemeVarmi" value="false" checked="@(Kargo.KapidaNakitOdemeVarmi == false)" />
+                <input type="radio" name="KapidaNakitOdemeVarmi" value="true" checked="@(Kargo.KapidaNakitOdemeVarmi == true)" />
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Kapıda Kredi Kartı Ödeme Var mı</b>
+            </td>
+            <td>
+                <input type="radio" name="KapidaKrediKartOdemeVarmi" value="false" checked="@(Kargo.KapidaKrediKartOdemeVarmi == false)" />
+                <input type="radio" name="KapidaKrediKartOdemeVarmi" value="true" checked="@(Kargo.KapidaKrediKartOdemeVarmi== true)" />
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Yurt İçi Gönderim Var mı</b>
+            </td>
+            <td>
+                <input type="radio" name="YigonderimVarmi" value="false" checked="@(Kargo.YigonderimVarmi == false)" />
+                <input type="radio" name="YigonderimVarmi" value="true" checked="@(Kargo.YigonderimVarmi== true)" />
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Yurt Dışı Gönderim Var mı</b>
+            </td>
+            <td>
+                <input type="radio" name="YdgonderimVarmi" value="false" checked="@(Kargo.YdgonderimVarmi == false)" />
+                <input type="radio" name="YdgonderimVarmi" value="true" checked="@(Kargo.YdgonderimVarmi  == true)" />
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Şehir Dışı Gönderim Var mı</b>
+            </td>
+            <td>
+                <input type="radio" name="SehirDisiGonderimVarmi" value="false" checked="@(Kargo.SehirDisiGonderimVarmi == false)" />
+                <input type="radio" name="SehirDisiGonderimVarmi" value="true" checked="@(Kargo.SehirDisiGonderimVarmi == true)" />
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Aktif Mi</b>
+            </td>
+            <td>
+                <input type="radio" name="Aktifmi" value="false" checked="@(Kargo.Aktifmi == false)" />
+                <input type="radio" name="Aktifmi" value="true" checked="@(Kargo.Aktifmi == true)" />
+
+            </td>
+        </tr>
+
+        <tr>
+            <td colspan="2">
+                <center><input type="submit" value="@ViewBag.SubmitButtonValue" /></center>
+            </td>
+        </tr>
+
+
+    </table>
+
+
+</form>
