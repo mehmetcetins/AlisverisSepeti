@@ -22,6 +22,7 @@ namespace AlisverisSepeti.Models
         public virtual DbSet<Dovizler> Dovizlers { get; set; }
         public virtual DbSet<Gonderimsekilleri> Gonderimsekilleris { get; set; }
         public virtual DbSet<Havalebankalari> Havalebankalaris { get; set; }
+        public virtual DbSet<Kargolar> Kargolars { get; set; }
         public virtual DbSet<Markalar> Markalars { get; set; }
         public virtual DbSet<Poslar> Poslars { get; set; }
 
@@ -140,6 +141,15 @@ namespace AlisverisSepeti.Models
 
                 entity.ToTable("havalebankalari");
 
+                entity.HasIndex(e => e.HesapNo, "HesapNo_UNIQUE")
+                    .IsUnique();
+
+                entity.HasIndex(e => e.Iban, "IBAN_UNIQUE")
+                    .IsUnique();
+
+                entity.HasIndex(e => e.SubeKodu, "SubeKodu_UNIQUE")
+                    .IsUnique();
+
                 entity.Property(e => e.HavaleBankaId).HasColumnName("HavaleBankaID");
 
                 entity.Property(e => e.BankaAdi)
@@ -170,6 +180,30 @@ namespace AlisverisSepeti.Models
                 entity.Property(e => e.Ydaktifmi).HasColumnName("YDAktifmi");
 
                 entity.Property(e => e.Yiaktifmi).HasColumnName("YIAktifmi");
+            });
+
+            modelBuilder.Entity<Kargolar>(entity =>
+            {
+                entity.HasKey(e => e.KargoId)
+                    .HasName("PRIMARY");
+
+                entity.ToTable("kargolar");
+
+                entity.Property(e => e.KargoId).HasColumnName("KargoID");
+
+                entity.Property(e => e.KargoAdi)
+                    .IsRequired()
+                    .HasMaxLength(20);
+
+                entity.Property(e => e.KargoBedeliDovizKodu).HasMaxLength(10);
+
+                entity.Property(e => e.KargoLogo).HasMaxLength(100);
+
+                entity.Property(e => e.UcretsizKargoBedeliDovizKodu).HasMaxLength(10);
+
+                entity.Property(e => e.YdgonderimVarmi).HasColumnName("YDGonderimVarmi");
+
+                entity.Property(e => e.YigonderimVarmi).HasColumnName("YIGonderimVarmi");
             });
 
             modelBuilder.Entity<Markalar>(entity =>

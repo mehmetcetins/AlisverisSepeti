@@ -1,2 +1,2 @@
-﻿birimler, dovizler, diller, markalar, gonderimsekilleri,poslar, havalebankalari
+﻿birimler, dovizler, diller, markalar, gonderimsekilleri,poslar, havalebankalari,kargolar
 
