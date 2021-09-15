@@ -21,8 +21,8 @@ namespace AlisverisSepeti.Models
         public virtual DbSet<Diller> Dillers { get; set; }
         public virtual DbSet<Dovizler> Dovizlers { get; set; }
         public virtual DbSet<Gonderimsekilleri> Gonderimsekilleris { get; set; }
+        public virtual DbSet<Havalebankalari> Havalebankalaris { get; set; }
         public virtual DbSet<Markalar> Markalars { get; set; }
-        public virtual DbSet<Poslar> Poslars { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -132,6 +132,45 @@ namespace AlisverisSepeti.Models
                 entity.Property(e => e.MinTutar).HasDefaultValueSql("'0'");
             });
 
+            modelBuilder.Entity<Havalebankalari>(entity =>
+            {
+                entity.HasKey(e => e.HavaleBankaId)
+                    .HasName("PRIMARY");
+
+                entity.ToTable("havalebankalari");
+
+                entity.Property(e => e.HavaleBankaId).HasColumnName("HavaleBankaID");
+
+                entity.Property(e => e.BankaAdi)
+                    .IsRequired()
+                    .HasMaxLength(20);
+
+                entity.Property(e => e.BankaLogo).HasMaxLength(50);
+
+                entity.Property(e => e.DovizKodu).HasMaxLength(10);
+
+                entity.Property(e => e.HesapNo)
+                    .IsRequired()
+                    .HasMaxLength(50);
+
+                entity.Property(e => e.Iban)
+                    .IsRequired()
+                    .HasMaxLength(32)
+                    .HasColumnName("IBAN");
+
+                entity.Property(e => e.SubeAdi)
+                    .IsRequired()
+                    .HasMaxLength(50);
+
+                entity.Property(e => e.SubeKodu)
+                    .IsRequired()
+                    .HasMaxLength(10);
+
+                entity.Property(e => e.Ydaktifmi).HasColumnName("YDAktifmi");
+
+                entity.Property(e => e.Yiaktifmi).HasColumnName("YIAktifmi");
+            });
+
             modelBuilder.Entity<Markalar>(entity =>
             {
                 entity.HasKey(e => e.MarkaId)
@@ -150,32 +189,6 @@ namespace AlisverisSepeti.Models
                 entity.Property(e => e.MarkaHakkinda).HasMaxLength(300);
 
                 entity.Property(e => e.MarkaLogo).HasMaxLength(50);
-            });
-
-            modelBuilder.Entity<Poslar>(entity =>
-            {
-                entity.HasKey(e => e.PosId)
-                    .HasName("PRIMARY");
-
-                entity.ToTable("poslar");
-
-                entity.Property(e => e.PosId).HasColumnName("PosID");
-
-                entity.Property(e => e.ApiPassword)
-                    .IsRequired()
-                    .HasMaxLength(50);
-
-                entity.Property(e => e.ApiUser)
-                    .IsRequired()
-                    .HasMaxLength(100);
-
-                entity.Property(e => e.DizilisSira).HasDefaultValueSql("'-1'");
-
-                entity.Property(e => e.GecerliKartlar).HasMaxLength(100);
-
-                entity.Property(e => e.PosBankaAdi)
-                    .IsRequired()
-                    .HasMaxLength(50);
             });
 
             OnModelCreatingPartial(modelBuilder);
