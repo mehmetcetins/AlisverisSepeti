@@ -23,6 +23,7 @@ namespace AlisverisSepeti.Models
         public virtual DbSet<Gonderimsekilleri> Gonderimsekilleris { get; set; }
         public virtual DbSet<Havalebankalari> Havalebankalaris { get; set; }
         public virtual DbSet<Markalar> Markalars { get; set; }
+        public virtual DbSet<Poslar> Poslars { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -189,6 +190,32 @@ namespace AlisverisSepeti.Models
                 entity.Property(e => e.MarkaHakkinda).HasMaxLength(300);
 
                 entity.Property(e => e.MarkaLogo).HasMaxLength(50);
+            });
+
+            modelBuilder.Entity<Poslar>(entity =>
+            {
+                entity.HasKey(e => e.PosId)
+                    .HasName("PRIMARY");
+
+                entity.ToTable("poslar");
+
+                entity.Property(e => e.PosId).HasColumnName("PosID");
+
+                entity.Property(e => e.ApiPassword)
+                    .IsRequired()
+                    .HasMaxLength(50);
+
+                entity.Property(e => e.ApiUser)
+                    .IsRequired()
+                    .HasMaxLength(100);
+
+                entity.Property(e => e.DizilisSira).HasDefaultValueSql("'-1'");
+
+                entity.Property(e => e.GecerliKartlar).HasMaxLength(100);
+
+                entity.Property(e => e.PosBankaAdi)
+                    .IsRequired()
+                    .HasMaxLength(50);
             });
 
             OnModelCreatingPartial(modelBuilder);
