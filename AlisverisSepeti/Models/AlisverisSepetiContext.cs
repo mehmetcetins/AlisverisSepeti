@@ -18,6 +18,7 @@ namespace AlisverisSepeti.Models
         }
 
         public virtual DbSet<Birimler> Birimlers { get; set; }
+        public virtual DbSet<Dilbolgeler> Dilbolgelers { get; set; }
         public virtual DbSet<Diller> Dillers { get; set; }
         public virtual DbSet<Dovizkurlari> Dovizkurlaris { get; set; }
         public virtual DbSet<Dovizler> Dovizlers { get; set; }
@@ -31,11 +32,9 @@ namespace AlisverisSepeti.Models
         {
             if (!optionsBuilder.IsConfigured)
             {
-
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
                 optionsBuilder.UseMySQL("server=localhost;port=3306;uid=root;pwd=190598;database=AlisverisSepeti");
             }
-            
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -58,6 +57,24 @@ namespace AlisverisSepeti.Models
                     .HasMaxLength(50);
 
                 entity.Property(e => e.GuncellenmeTarihi).HasMaxLength(50);
+            });
+
+            modelBuilder.Entity<Dilbolgeler>(entity =>
+            {
+                entity.HasKey(e => e.BolgeId)
+                    .HasName("PRIMARY");
+
+                entity.ToTable("dilbolgeler");
+
+                entity.Property(e => e.BolgeId).HasColumnName("BolgeID");
+
+                entity.Property(e => e.BolgeDilAdi)
+                    .IsRequired()
+                    .HasMaxLength(50);
+
+                entity.Property(e => e.DilKodu)
+                    .IsRequired()
+                    .HasMaxLength(10);
             });
 
             modelBuilder.Entity<Diller>(entity =>
