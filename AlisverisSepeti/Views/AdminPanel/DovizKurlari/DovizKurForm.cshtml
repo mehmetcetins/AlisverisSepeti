@@ -1,0 +1,45 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    Layout = "~/Views/Layouts/Admin/AdminLayout.cshtml";
+    var Kur = ViewBag.Kur;
+}
+<form method="POST">
+    <table>
+        
+        <tr>
+            <td>
+                <b>Doviz Kodu</b>
+            </td>
+            <td>
+                <input type="text" name="DovizKodu" value="@Kur.Doviz.DovizKodu" /> 
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Doviz Kuru</b>
+            </td>
+            <td>
+                <input type="number" name="Kur" value="@Kur.Kur" step="0.01" /> 
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Tarih</b>
+            </td>
+            <td>
+                <input type="datetime-local" name="Tarih" value="@Kur.Tarih" />
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <center><input type="submit" value="@ViewBag.SubmitButtonValue" /></center>
+            </td>
+        </tr>
+       
+
+    </table>
+
+
+</form>

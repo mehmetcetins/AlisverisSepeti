@@ -3,7 +3,7 @@
 *@
 @{
     Layout = "~/Views/Layouts/Admin/AdminLayout.cshtml";
-    var Doviz = ViewBag.Doviz;
+    var Doviz = ViewBag.Doviz == null ? ViewData["Doviz"] : ViewBag.Doviz;
 }
 
 

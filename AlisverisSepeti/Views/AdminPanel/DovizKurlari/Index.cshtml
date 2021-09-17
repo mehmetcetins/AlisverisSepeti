@@ -1,0 +1,35 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    Layout = "~/Views/Layouts/Admin/AdminLayout.cshtml";
+}
+
+<a href="@Context.Request.Path/DovizKurForm/Add/">Ekle</a>
+<table cellspacing="0" border="1" cellpadding="10">
+    <thead>
+        <tr>
+            <th>Doviz Kodu</th>
+            <th>Kur</th>
+            <th>Tarih</th>
+            <th>İşlemler</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var kurlar in ViewBag.Doviz as List<AlisverisSepeti.Models.Dovizkurlari>)
+        {
+        <tr>
+            <td><a href="@Context.Request.Path/@kurlar.DovizKurId">@kurlar.Doviz.DovizKodu</a></td>
+            <td>@kurlar.Kur</td>
+            <td>@kurlar.Tarih</td>
+            <td>
+                <a class="sil" href="@Context.Request.Path/Delete/@kurlar.DovizKurId">Sil</a>
+                <a href="@Context.Request.Path/DovizKurForm/Update/@kurlar.DovizKurId">Düzenle</a>
+            </td>
+        </tr>
+
+
+
+        }
+    </tbody>
+</table>
