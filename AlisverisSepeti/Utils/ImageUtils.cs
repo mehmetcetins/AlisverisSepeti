@@ -11,13 +11,24 @@ namespace AlisverisSepeti.Utils
 {
     public static class ImageUtils
     {
-        public static Bitmap ResizeImage(Stream stream,int width,int height)
+        private static string imageRoot = "Public/images/";
+        public static bool ResizeAndSave(Stream stream,int width,int height,string folderName,string fileName)
         {
-
-            MagickImage imageMagick = new MagickImage (stream);
-            imageMagick.Resize(width, height);
-
-            return imageMagick.ToBitmap();
+            try
+            {
+                MagickImage imageMagick = new MagickImage(stream);
+                imageMagick.Resize(width, height);
+                FileStream fls = new FileStream(Path.Combine(imageRoot, folderName, fileName), FileMode.Create);
+                imageMagick.Write(fls);
+                stream.Close();
+                fls.Close();
+            }
+            catch(IOException)
+            {
+                return false;
+            }
+            
+            return true;
         }
     }
 }

@@ -19,6 +19,7 @@ namespace AlisverisSepeti.Models
 
         public virtual DbSet<Birimler> Birimlers { get; set; }
         public virtual DbSet<Diller> Dillers { get; set; }
+        public virtual DbSet<Dovizkurlari> Dovizkurlaris { get; set; }
         public virtual DbSet<Dovizler> Dovizlers { get; set; }
         public virtual DbSet<Gonderimsekilleri> Gonderimsekilleris { get; set; }
         public virtual DbSet<Havalebankalari> Havalebankalaris { get; set; }
@@ -84,6 +85,35 @@ namespace AlisverisSepeti.Models
                 entity.Property(e => e.DilLogo).HasMaxLength(100);
 
                 entity.Property(e => e.DovizKodu).HasMaxLength(3);
+            });
+
+            modelBuilder.Entity<Dovizkurlari>(entity =>
+            {
+                entity.HasKey(e => e.DovizKurId)
+                    .HasName("PRIMARY");
+
+                entity.ToTable("dovizkurlari");
+
+                entity.HasIndex(e => e.DovizId, "unique_DovizID")
+                    .IsUnique();
+
+                entity.Property(e => e.DovizKurId).HasColumnName("DovizKurID");
+
+                entity.Property(e => e.DovizId).HasColumnName("DovizID");
+
+                entity.Property(e => e.DovizKodu)
+                    .IsRequired()
+                    .HasMaxLength(10);
+
+                entity.Property(e => e.Tarih)
+                    .IsRequired()
+                    .HasMaxLength(30);
+
+                entity.HasOne(d => d.Doviz)
+                    .WithOne(p => p.Dovizkurlari)
+                    .HasForeignKey<Dovizkurlari>(d => d.DovizId)
+                    .OnDelete(DeleteBehavior.Cascade)
+                    .HasConstraintName("lnk_dovizkurlari_dovizler");
             });
 
             modelBuilder.Entity<Dovizler>(entity =>

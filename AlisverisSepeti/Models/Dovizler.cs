@@ -15,5 +15,7 @@ namespace AlisverisSepeti.Models
         public string Tarih { get; set; }
         public byte Aktifmi { get; set; }
         public string Sembol { get; set; }
+
+        public virtual Dovizkurlari Dovizkurlari { get; set; }
     }
 }

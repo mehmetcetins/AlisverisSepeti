@@ -14,7 +14,7 @@ namespace AlisverisSepeti.Models
         public string KargoLogo { get; set; }
         public float KargoBedeli { get; set; }
         public float? UcretsizKargoBedeli { get; set; }
-        public int? DizilisSira { get; set; }
+        public int DizilisSira { get; set; }
         public bool KapidaNakitOdemeVarmi { get; set; }
         public bool KapidaKrediKartOdemeVarmi { get; set; }
         public bool YigonderimVarmi { get; set; }
