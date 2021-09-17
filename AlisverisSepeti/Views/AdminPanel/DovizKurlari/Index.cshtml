@@ -16,7 +16,7 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var kurlar in ViewBag.Doviz as List<AlisverisSepeti.Models.Dovizkurlari>)
+        @foreach (var kurlar in ViewBag.Kur as List<AlisverisSepeti.Models.Dovizkurlari>)
         {
         <tr>
             <td><a href="@Context.Request.Path/@kurlar.DovizKurId">@kurlar.Doviz.DovizKodu</a></td>

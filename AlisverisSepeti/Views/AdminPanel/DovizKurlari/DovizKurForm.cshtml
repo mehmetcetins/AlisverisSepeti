@@ -3,7 +3,7 @@
 *@
 @{
     Layout = "~/Views/Layouts/Admin/AdminLayout.cshtml";
-    var Kur = ViewBag.Kur;
+    var Kur = ViewBag.Kur as AlisverisSepeti.Models.Dovizkurlari;
 }
 <form method="POST">
     <table>
@@ -13,7 +13,19 @@
                 <b>Doviz Kodu</b>
             </td>
             <td>
-                <input type="text" name="DovizKodu" value="@Kur.Doviz.DovizKodu" /> 
+                <select name="DovizID">
+                    @foreach (var Doviz in ViewBag.Dovizler as List<AlisverisSepeti.Models.Dovizler>)
+                    {
+                        <option value="@Doviz.DovizId" @if (Kur.DovizId >0) {
+                            if (Doviz.DovizId == Kur.DovizId)
+                            {
+                                 @("selected")
+                            }
+                                                    }>
+                            @Doviz.DovizKodu
+                        </option>
+                    }
+                </select>
             </td>
         </tr>
         <tr>

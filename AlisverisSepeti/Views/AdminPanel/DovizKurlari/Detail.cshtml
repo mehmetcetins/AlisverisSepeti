@@ -15,7 +15,7 @@
                 <b>Kur Kodu</b>
             </td>
             <td>
-                @Kur.KurKodu
+                @Kur.DovizKodu
             </td>
         </tr>
         <tr>
@@ -44,4 +44,4 @@
     </tbody>
 </table>
 
-@Html.Partial("~/Views/AdminPanel/Dovizler/Detail.cshtml",new ViewDataDictionary(null) { {"Doviz",Kur.Doviz } })
+@Html.Partial("~/Views/AdminPanel/Dovizler/Detail.cshtml",new ViewDataDictionary(this.ViewData) { {"Doviz",Kur.Doviz } })
