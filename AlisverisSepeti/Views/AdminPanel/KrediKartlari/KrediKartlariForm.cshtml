@@ -1,0 +1,87 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    Layout = "~/Views/Layouts/Admin/AdminLayout.cshtml";
+    var KrediKarti = ViewBag.KrediKarti as AlisverisSepeti.Models.Kredikartlari;
+}
+<form method="POST" enctype="multipart/form-data">
+    <table>
+        <tr>
+            <td>
+                <b>Kredi Kartı Adı</b>
+            </td>
+            <td>
+
+                <input type="text" name="KartAdi" value="@KrediKarti.KartAdi" />
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Geçerli Kartlar</b>
+            </td>
+
+            <td>
+                <input type="text"  name="GecerliKartlar" value="@KrediKarti.GecerliKartlar" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Kart Logo</b>
+            </td>
+            <td>
+                <input type="file"  name="KartLogo" value="@KrediKarti.KartLogo" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Dizilis Sira</b>
+            </td>
+            <td>
+                <input type="number" name="DizilisSira" value="@KrediKarti.DizilisSira" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Taksit Varmi</b>
+            </td>
+            <td>
+                <input type="radio" name="TaksitVarmi" value="false" checked="@(KrediKarti.TaksitVarmi == false)" />
+                <input type="radio" name="TaksitVarmi" value="true" checked="@(KrediKarti.TaksitVarmi == true)" />
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Yurt Dışı Aktif mi</b>
+            </td>
+            <td>
+                <input type="radio" name="Ydaktifmi" value="false" checked="@(KrediKarti.Ydaktifmi == false)" />
+                <input type="radio" name="Ydaktifmi" value="true" checked="@(KrediKarti.Ydaktifmi == true)" />
+
+            </td>
+        </tr>        
+        <tr>
+            <td>
+                <b>Yurt İçi Aktif Mi</b>
+            </td>
+            <td>
+                <input type="radio" name="Yiaktifmi" value="false" checked="@(KrediKarti.Yiaktifmi == false)" />
+                <input type="radio" name="Yiaktifmi" value="true" checked="@(KrediKarti.Yiaktifmi == true)" />
+
+            </td>
+        </tr>
+        
+        
+        <tr>
+            <td colspan="2">
+                <center><input type="submit" value="@ViewBag.SubmitButtonValue" /></center>
+            </td>
+        </tr>
+
+
+    </table>
+
+
+</form>

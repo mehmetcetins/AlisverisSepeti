@@ -1,0 +1,101 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    Layout = "~/Views/Layouts/Admin/AdminLayout.cshtml";
+    var KrediKarti = ViewBag.KrediKarti as AlisverisSepeti.Models.Kredikartlari;
+}
+
+
+<table>
+    <tbody>
+        <tr>
+            <td>
+                <b>Kredi Kartı Adı</b>
+            </td>
+            <td>
+                @KrediKarti.KartAdi
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Pos Banka Adi</b>
+
+            </td>
+
+            <td>
+                @if (KrediKarti.Pos == null)
+                {
+                    @("Yok")
+                }
+                else
+                {
+                    @KrediKarti.Pos.PosBankaAdi;
+                }
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Geçerli Kartlar</b>
+            </td>
+            <td>
+                @KrediKarti.GecerliKartlar
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Kart Logo</b>
+            </td>
+            <td>
+                <img src="/Public/images/KrediKartlari/@KrediKarti.KartLogo" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Dizilis Sira</b>
+            </td>
+            <td>
+                @KrediKarti.DizilisSira
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Taksit Var mı</b>
+            </td>
+            <td>
+                @KrediKarti.TaksitVarmi
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Yurt Dışı Aktif mi</b>
+            </td>
+            <td>
+                @KrediKarti.Ydaktifmi
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Yurt İçi Aktif mi</b>
+            </td>
+            <td>
+                @KrediKarti.Yiaktifmi
+
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <a class="sil" href="/admin/KrediKarti/Delete/@KrediKarti.KartId">Sil</a>
+                <a href="/admin/KrediKarti/KrediKartlariForm/Update/@KrediKarti.KartId">Duzenle</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+@if (KrediKarti.Pos != null)
+{
+    @Html.Partial("~/Views/AdminPanel/Poslar/Detail.cshtml", new ViewDataDictionary(this.ViewData) { { "Poslar", KrediKarti.Pos } });
+}
+

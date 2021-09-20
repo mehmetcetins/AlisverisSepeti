@@ -3,7 +3,7 @@
 *@
 @{
     Layout = "~/Views/Layouts/Admin/AdminLayout.cshtml";
-    var Poslar = ViewBag.Poslar;
+    var Poslar = ViewBag.Poslar == null ? ViewData["Poslar"] : ViewBag.Poslar;
 }
 
 

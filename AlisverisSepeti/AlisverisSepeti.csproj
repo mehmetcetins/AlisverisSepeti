@@ -25,6 +25,7 @@
     <Folder Include="Public\images\Markalar\" />
     <Folder Include="Public\images\HavaleBankalari\" />
     <Folder Include="Public\images\Kargolar\" />
+    <Folder Include="Public\images\KrediKartlari\" />
   </ItemGroup>
 
 </Project>
