@@ -135,8 +135,10 @@ namespace AlisverisSepeti.Models
             }
         }
         [HttpPost("DovizKurForm/Update/{id:int}")]
-        public IActionResult Update (int id, Models.Dovizkurlari dovizkurlari)
+        public IActionResult Update (int id,float Kur, Models.Dovizkurlari dovizkurlari)
         {
+            //sorun çözülemedi dövizler tablosunda string aldığım için düzgün çalışıyor
+            return new JsonResult(dovizkurlari);
             if (dovizkurlari == null)
             {
                 TempData["error"] = "Eklenemedi.";
