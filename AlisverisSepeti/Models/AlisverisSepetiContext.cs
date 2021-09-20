@@ -25,6 +25,7 @@ namespace AlisverisSepeti.Models
         public virtual DbSet<Gonderimsekilleri> Gonderimsekilleris { get; set; }
         public virtual DbSet<Havalebankalari> Havalebankalaris { get; set; }
         public virtual DbSet<Kargolar> Kargolars { get; set; }
+        public virtual DbSet<Kredikartlari> Kredikartlaris { get; set; }
         public virtual DbSet<Markalar> Markalars { get; set; }
         public virtual DbSet<Poslar> Poslars { get; set; }
 
@@ -33,7 +34,7 @@ namespace AlisverisSepeti.Models
             if (!optionsBuilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-                optionsBuilder.UseMySQL("server=localhost;port=3306;uid=root;pwd=190598;database=AlisverisSepeti");
+                optionsBuilder.UseMySQL("server=localhost;port=3306;uid=root;pwd=190598;database=AlisverisSepeti;");
             }
         }
 
@@ -253,6 +254,42 @@ namespace AlisverisSepeti.Models
                 entity.Property(e => e.YdgonderimVarmi).HasColumnName("YDGonderimVarmi");
 
                 entity.Property(e => e.YigonderimVarmi).HasColumnName("YIGonderimVarmi");
+            });
+
+            modelBuilder.Entity<Kredikartlari>(entity =>
+            {
+                entity.HasKey(e => e.KartId)
+                    .HasName("PRIMARY");
+
+                entity.ToTable("kredikartlari");
+
+                entity.HasIndex(e => e.PosId, "lnk_poslar_kredikartlari");
+
+                entity.Property(e => e.KartId).HasColumnName("KartID");
+
+                entity.Property(e => e.GecerliKartlar).HasMaxLength(100);
+
+                entity.Property(e => e.KartAdi)
+                    .IsRequired()
+                    .HasMaxLength(20);
+
+                entity.Property(e => e.KartLogo).HasMaxLength(100);
+
+                entity.Property(e => e.PosBankaAdi)
+                    .IsRequired()
+                    .HasMaxLength(50);
+
+                entity.Property(e => e.PosId).HasColumnName("PosID");
+
+                entity.Property(e => e.Ydaktifmi).HasColumnName("YDAktifmi");
+
+                entity.Property(e => e.Yiaktifmi).HasColumnName("YIAktifmi");
+
+                entity.HasOne(d => d.Pos)
+                    .WithMany(p => p.Kredikartlaris)
+                    .HasForeignKey(d => d.PosId)
+                    .OnDelete(DeleteBehavior.Cascade)
+                    .HasConstraintName("lnk_poslar_kredikartlari");
             });
 
             modelBuilder.Entity<Markalar>(entity =>

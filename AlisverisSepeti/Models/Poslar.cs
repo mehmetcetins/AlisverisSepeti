@@ -7,6 +7,11 @@ namespace AlisverisSepeti.Models
 {
     public partial class Poslar
     {
+        public Poslar()
+        {
+            Kredikartlaris = new HashSet<Kredikartlari>();
+        }
+
         public int PosId { get; set; }
         public string PosBankaAdi { get; set; }
         public string GecerliKartlar { get; set; }
@@ -17,5 +22,7 @@ namespace AlisverisSepeti.Models
         public bool SifreliOlsunmu { get; set; }
         public bool Aktifmi { get; set; }
         public bool TaksitVarmi { get; set; }
+
+        public virtual ICollection<Kredikartlari> Kredikartlaris { get; set; }
     }
 }
