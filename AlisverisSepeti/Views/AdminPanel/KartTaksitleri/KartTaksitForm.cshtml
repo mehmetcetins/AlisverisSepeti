@@ -37,7 +37,7 @@
                 <select name="KartId">
                     @foreach (var kartlar in ViewBag.KrediKartlari as List<AlisverisSepeti.Models.Kredikartlari>)
                     {
-                        <option value="@kartlar.KartId">@kartlar.KartAdi</option>
+                        <option value="@kartlar.KartId" @if (KartTaksitleri.KartId != null) { if (KartTaksitleri.KartId == kartlar.KartId) @("selected") }>@kartlar.KartAdi</option>
                     }
 
                 </select> 
