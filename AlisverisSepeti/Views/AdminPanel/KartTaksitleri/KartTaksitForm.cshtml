@@ -29,6 +29,23 @@
         </tr>
         <tr>
             <td>
+                <b>Kredi Kartı</b>
+
+            </td>
+
+            <td>
+                <select name="KartId">
+                    @foreach (var kartlar in ViewBag.KrediKartlari as List<AlisverisSepeti.Models.Kredikartlari>)
+                    {
+                        <option value="@kartlar.KartId">@kartlar.KartAdi</option>
+                    }
+
+                </select> 
+            </td>
+        </tr>
+
+        <tr>
+            <td>
                 <b>Taksit Sayısı</b>
             </td>
             <td>
