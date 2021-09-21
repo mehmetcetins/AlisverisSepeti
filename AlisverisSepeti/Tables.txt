@@ -1,1 +1,1 @@
-﻿birimler, dovizler, diller, markalar, gonderimsekilleri,poslar, havalebankalari, kargolar, dovizkurlari, dilbolgeler, kredikartlari, opsiyontipleri
+﻿birimler, dovizler, diller, markalar, gonderimsekilleri,poslar, havalebankalari, kargolar, dovizkurlari, dilbolgeler, kredikartlari,karttaksitleri, opsiyontipleri
