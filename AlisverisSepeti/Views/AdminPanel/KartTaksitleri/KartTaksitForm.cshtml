@@ -1,0 +1,84 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    Layout = "~/Views/Layouts/Admin/AdminLayout.cshtml";
+    var KartTaksitleri = ViewBag.KartTaksitleri as AlisverisSepeti.Models.Karttaksitleri;
+}
+<form method="POST" enctype="multipart/form-data">
+    <table>
+        <tr>
+            <td>
+                <b>Taksit Açıklama</b>
+            </td>
+            <td>
+                
+                <input type="text" name="TaksitAciklama" value="@KartTaksitleri.TaksitAciklama" />
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Durum</b>
+
+            </td>
+
+            <td>
+                <input type="text" name="Durum" value="@KartTaksitleri.Durum" /> 
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Taksit Sayısı</b>
+            </td>
+            <td>
+                <input type="number" name="TaksitSayisi" value="@KartTaksitleri.TaksitSayisi" /> 
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Taksit Oranı</b>
+            </td>
+            <td>
+                <input type="number" step="any" name="TaksitOran" value="@KartTaksitleri.TaksitOran" /> 
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Peşin Fiyatına Taksitlemi</b>
+            </td>
+            <td>
+                <input type="radio" name="PesinFiyatinaTaksitlemi" value="false" checked="@(KartTaksitleri.PesinFiyatinaTaksitlemi == false)" />
+                <input type="radio" name="PesinFiyatinaTaksitlemi" value="true" checked="@(KartTaksitleri.PesinFiyatinaTaksitlemi == true)" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Aktif Mi</b>
+            </td>
+            <td>
+                <input type="radio" name="Aktifmi" value="false" checked="@(KartTaksitleri.Aktifmi == false)" />
+                <input type="radio" name="Aktifmi" value="true" checked="@(KartTaksitleri.Aktifmi == true)" />
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Varsayılan mı</b>
+            </td>
+            <td>
+                <input type="radio" name="Varsayilanmi" value="false" checked="@(KartTaksitleri.Varsayilanmi ==  false || KartTaksitleri.Varsayilanmi == null)" />
+                <input type="radio" name="Varsayilanmi" value="true" checked="@(KartTaksitleri.Varsayilanmi == true)" />
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <center><input type="submit" value="@ViewBag.SubmitButtonValue" /></center>
+            </td>
+        </tr>
+       
+
+    </table>
+
+
+</form>

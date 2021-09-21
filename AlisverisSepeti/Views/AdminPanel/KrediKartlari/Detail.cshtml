@@ -3,7 +3,7 @@
 *@
 @{
     Layout = "~/Views/Layouts/Admin/AdminLayout.cshtml";
-    var KrediKarti = ViewBag.KrediKarti as AlisverisSepeti.Models.Kredikartlari;
+    var KrediKarti = (ViewBag.KrediKarti == null ? TempData["KrediKarti"] : ViewBag.KrediKarti) as AlisverisSepeti.Models.Kredikartlari;
 }
 
 

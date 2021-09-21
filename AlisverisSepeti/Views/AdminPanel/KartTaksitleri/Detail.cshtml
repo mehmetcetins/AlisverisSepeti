@@ -1,0 +1,72 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    Layout = "~/Views/Layouts/Admin/AdminLayout.cshtml";
+    var KartTaksitleri = ViewBag.KartTaksitleri as AlisverisSepeti.Models.Karttaksitleri;
+}
+
+
+<table>
+    <tbody>
+        <tr>
+            <td>
+                <b>Taksit Açıklama</b>
+            </td>
+            <td>
+                @KartTaksitleri.TaksitAciklama
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Durum</b>
+
+            </td>
+
+            <td>
+                @KartTaksitleri.Durum
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Taksit Sayısı</b>
+            </td>
+            <td>
+                @KartTaksitleri.TaksitSayisi
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Taksit Oranı</b>
+            </td>
+            <td>
+                @KartTaksitleri.TaksitOran
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Peşin Fiyatına Taksitle mi</b>
+            </td>
+            <td>
+                @KartTaksitleri.PesinFiyatinaTaksitlemi
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Aktif mi</b>
+            </td>
+            <td>
+                @KartTaksitleri.Aktifmi
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <a class="sil" href="/admin/KartTaksitleri/Delete/@KartTaksitleri.TaksitId">Sil</a>
+                <a href="/admin/KartTaksitleri/KartTaksitForm/Update/@KartTaksitleri.TaksitId">Duzenle</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+@Html.Partial("~/Views/AdminPanel/KrediKartlari/Detail.cshtml", new ViewDataDictionary(this.ViewData) { { "KrediKarti", KartTaksitleri.Kart } })
