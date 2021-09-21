@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Localization;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,10 +32,20 @@ namespace AlisverisSepeti
             {
                 app.UseDeveloperExceptionPage();
             }
-            app.UseRequestLocalization(new RequestLocalizationOptions
-            {
-                DefaultRequestCulture = new RequestCulture("tr-TR")
-            });
+            var options = app.ApplicationServices.GetService<IOptions<RequestLocalizationOptions>>();
+            var cookieProvider = options.Value.RequestCultureProviders
+                .OfType<CookieRequestCultureProvider>()
+                .First();
+            var urlProvider = options.Value.RequestCultureProviders
+                .OfType<QueryStringRequestCultureProvider>().First();
+            cookieProvider.Options.DefaultRequestCulture = new RequestCulture(System.Globalization.CultureInfo.InvariantCulture);
+            urlProvider.Options.DefaultRequestCulture = new RequestCulture(System.Globalization.CultureInfo.InvariantCulture);
+            cookieProvider.CookieName = "UserCulture";
+            options.Value.RequestCultureProviders.Clear();
+            options.Value.RequestCultureProviders.Add(cookieProvider);
+            options.Value.RequestCultureProviders.Add(urlProvider);
+            app.UseRequestLocalization(options.Value);
+            
             app.UseStaticFiles(new StaticFileOptions
             {
                 FileProvider = new PhysicalFileProvider(System.IO.Path.Combine(env.ContentRootPath,"Public")),

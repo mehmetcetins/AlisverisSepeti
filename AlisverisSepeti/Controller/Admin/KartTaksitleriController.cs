@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -81,6 +82,7 @@ namespace AlisverisSepeti.Admin
                     }
                     try
                     {
+                        
                         context.Karttaksitleris.Add(karttaksitleri);
                         context.SaveChanges();
                     }
@@ -120,6 +122,7 @@ namespace AlisverisSepeti.Admin
         [HttpPost("KartTaksitForm/Update/{id:int}")]
         public IActionResult Update(int id, Models.Karttaksitleri karttaksitleri)
         {
+            
             if (karttaksitleri == null)
             {
                 TempData["error"] = "Kayıt Sirasında Bir Sorun Oluştu.";
@@ -143,6 +146,7 @@ namespace AlisverisSepeti.Admin
                     }
                     try
                     {
+                        
                         karttaksitleri.TaksitId = id;
                         context.Karttaksitleris.Update(karttaksitleri);
                         context.SaveChanges();
