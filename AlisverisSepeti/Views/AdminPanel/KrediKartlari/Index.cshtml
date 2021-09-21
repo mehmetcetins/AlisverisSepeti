@@ -5,7 +5,7 @@
     Layout = "~/Views/Layouts/Admin/AdminLayout.cshtml";
 }
 
-<a href="@Context.Request.Path/KrediKartiForm/Add/">Ekle</a>
+<a href="@Context.Request.Path/KrediKartlariForm/Add/">Ekle</a>
 <table cellspacing="0" border="1" cellpadding="10">
     <thead>
         <tr>
@@ -24,6 +24,7 @@
         @foreach (var KrediKarti in ViewBag.KrediKartlari as List<AlisverisSepeti.Models.Kredikartlari>)
         {
         <tr>
+            
             <td><a href="@Context.Request.Path/@KrediKarti.KartId">@KrediKarti.KartAdi</a></td>
             <td>@if (KrediKarti.Pos == null) {
                 @("Yok")

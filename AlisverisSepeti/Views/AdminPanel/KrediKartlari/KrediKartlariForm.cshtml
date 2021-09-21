@@ -19,6 +19,21 @@
         </tr>
         <tr>
             <td>
+                <b>Pos</b> 
+            </td>
+            <td>
+                <select name="PosId">
+
+
+                    @foreach (var poslar in ViewBag.Poslar as List<AlisverisSepeti.Models.Poslar>)
+                    {
+                        <option value="@poslar.PosId" @if (KrediKarti.PosId != null) { if (poslar.PosId == KrediKarti.PosId) { @("selected") } }>@poslar.PosBankaAdi</option>
+                    }
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>
                 <b>Geçerli Kartlar</b>
             </td>
 
