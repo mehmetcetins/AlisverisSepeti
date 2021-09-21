@@ -25,6 +25,7 @@ namespace AlisverisSepeti.Models
         public virtual DbSet<Gonderimsekilleri> Gonderimsekilleris { get; set; }
         public virtual DbSet<Havalebankalari> Havalebankalaris { get; set; }
         public virtual DbSet<Kargolar> Kargolars { get; set; }
+        public virtual DbSet<Karttaksitleri> Karttaksitleris { get; set; }
         public virtual DbSet<Kredikartlari> Kredikartlaris { get; set; }
         public virtual DbSet<Markalar> Markalars { get; set; }
         public virtual DbSet<Poslar> Poslars { get; set; }
@@ -256,6 +257,37 @@ namespace AlisverisSepeti.Models
                 entity.Property(e => e.YigonderimVarmi).HasColumnName("YIGonderimVarmi");
             });
 
+            modelBuilder.Entity<Karttaksitleri>(entity =>
+            {
+                entity.HasKey(e => e.TaksitId)
+                    .HasName("PRIMARY");
+
+                entity.ToTable("karttaksitleri");
+
+                entity.HasIndex(e => e.KartId, "lnk_kredikartlari_karttaksitleri");
+
+                entity.Property(e => e.TaksitId).HasColumnName("TaksitID");
+
+                entity.Property(e => e.Durum)
+                    .IsRequired()
+                    .HasMaxLength(20);
+
+                entity.Property(e => e.KartId).HasColumnName("KartID");
+
+                entity.Property(e => e.TaksitAciklama).HasMaxLength(200);
+
+                entity.Property(e => e.TaksitOran).HasDefaultValueSql("'1'");
+
+                entity.Property(e => e.TaksitSayisi)
+                    .HasColumnType("tinyint")
+                    .HasDefaultValueSql("'1'");
+
+                entity.HasOne(d => d.Kart)
+                    .WithMany(p => p.Karttaksitleris)
+                    .HasForeignKey(d => d.KartId)
+                    .HasConstraintName("lnk_kredikartlari_karttaksitleri");
+            });
+
             modelBuilder.Entity<Kredikartlari>(entity =>
             {
                 entity.HasKey(e => e.KartId)
@@ -266,6 +298,8 @@ namespace AlisverisSepeti.Models
                 entity.HasIndex(e => e.PosId, "lnk_poslar_kredikartlari");
 
                 entity.Property(e => e.KartId).HasColumnName("KartID");
+
+                entity.Property(e => e.DizilisSira).HasDefaultValueSql("'0'");
 
                 entity.Property(e => e.GecerliKartlar).HasMaxLength(100);
 
