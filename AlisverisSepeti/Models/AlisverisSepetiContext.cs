@@ -18,6 +18,7 @@ namespace AlisverisSepeti.Models
         }
 
         public virtual DbSet<Birimler> Birimlers { get; set; }
+        public virtual DbSet<Degiskentipleri> Degiskentipleris { get; set; }
         public virtual DbSet<Dilbolgeler> Dilbolgelers { get; set; }
         public virtual DbSet<Diller> Dillers { get; set; }
         public virtual DbSet<Dovizkurlari> Dovizkurlaris { get; set; }
@@ -61,6 +62,16 @@ namespace AlisverisSepeti.Models
                     .HasMaxLength(50);
 
                 entity.Property(e => e.GuncellenmeTarihi).HasMaxLength(50);
+            });
+
+            modelBuilder.Entity<Degiskentipleri>(entity =>
+            {
+                entity.ToTable("degiskentipleri");
+
+                entity.Property(e => e.DegiskenAdi)
+                    .IsRequired()
+                    .HasMaxLength(20)
+                    .HasColumnName("degiskenAdi");
             });
 
             modelBuilder.Entity<Dilbolgeler>(entity =>
@@ -388,9 +399,17 @@ namespace AlisverisSepeti.Models
             {
                 entity.ToTable("urunopsiyonlar");
 
+                entity.HasIndex(e => e.DegiskenId, "lnk_degiskentipleri_urunopsiyonlar");
+
                 entity.HasIndex(e => e.OpsiyonTipi, "lnk_opsiyontipleri_urunopsiyonlar");
 
                 entity.Property(e => e.OpsiyonAdi).HasMaxLength(20);
+
+                entity.HasOne(d => d.Degisken)
+                    .WithMany(p => p.Urunopsiyonlars)
+                    .HasForeignKey(d => d.DegiskenId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("lnk_degiskentipleri_urunopsiyonlar");
 
                 entity.HasOne(d => d.OpsiyonTipiNavigation)
                     .WithMany(p => p.Urunopsiyonlars)

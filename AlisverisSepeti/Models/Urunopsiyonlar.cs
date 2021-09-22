@@ -11,7 +11,9 @@ namespace AlisverisSepeti.Models
         public string OpsiyonAdi { get; set; }
         public int OpsiyonTipi { get; set; }
         public bool Zorunlumu { get; set; }
+        public int DegiskenId { get; set; }
 
+        public virtual Degiskentipleri Degisken { get; set; }
         public virtual Opsiyontipleri OpsiyonTipiNavigation { get; set; }
     }
 }
