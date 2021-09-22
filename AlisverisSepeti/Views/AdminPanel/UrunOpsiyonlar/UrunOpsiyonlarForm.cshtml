@@ -1,0 +1,52 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    Layout = "~/Views/Layouts/Admin/AdminLayout.cshtml";
+    var UrunOpsiyonlar= ViewBag.UrunOpsiyonlar as AlisverisSepeti.Models.Urunopsiyonlar;
+}
+<form method="POST">
+    <table>
+        <tr>
+            <td>
+                <b>Opsiyon Adı</b>
+            </td>
+            <td>
+                <input type="text" name="OpsiyonAdi" value="@UrunOpsiyonlar.OpsiyonAdi" /> 
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>OpsiyonTipi</b>
+            </td>
+            <td>
+                <select name="OpsiyonTipi">
+                    @foreach (var opsiyontipi in ViewBag.OpsiyonTipleri as List<AlisverisSepeti.Models.Opsiyontipleri>)
+                    {
+                        <option value="@opsiyontipi.Id">@opsiyontipi.Ismi</option>
+                    }
+                </select>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Zorunlu mu</b>
+            </td>
+            <td>
+                <input type="radio" name="Zorunlumu" value="false" checked="@(@UrunOpsiyonlar.Zorunlumu == false)" /> 
+                <input type="radio" name="Zorunlumu" value="true" checked="@(@UrunOpsiyonlar.Zorunlumu == true)" /> 
+            </td>
+        </tr>
+        
+        <tr>
+            <td colspan="2">
+                <center><input type="submit" value="@ViewBag.SubmitButtonValue" /></center>
+            </td>
+        </tr>
+       
+
+    </table>
+
+
+</form>
