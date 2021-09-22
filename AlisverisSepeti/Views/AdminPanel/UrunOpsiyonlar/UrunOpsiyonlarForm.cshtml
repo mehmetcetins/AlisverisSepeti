@@ -23,7 +23,21 @@
                 <select name="OpsiyonTipi">
                     @foreach (var opsiyontipi in ViewBag.OpsiyonTipleri as List<AlisverisSepeti.Models.Opsiyontipleri>)
                     {
-                        <option value="@opsiyontipi.Id">@opsiyontipi.Ismi</option>
+                        <option value="@opsiyontipi.Id" @if(UrunOpsiyonlar.OpsiyonTipi != 0 && UrunOpsiyonlar.OpsiyonTipi == opsiyontipi.Id) @("selected") >@opsiyontipi.Ismi</option>
+                    }
+                </select>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Degisken Tipi</b>
+            </td>
+            <td>
+                <select name="DegiskenId">
+                    @foreach (var degiskentipi in ViewBag.DegiskenTipleri as List<AlisverisSepeti.Models.Degiskentipleri>)
+                    {
+                        <option value="@degiskentipi.Id" @if(UrunOpsiyonlar.DegiskenId != 0 && UrunOpsiyonlar.DegiskenId == degiskentipi.Id) @("selected")>@degiskentipi.DegiskenAdi</option>
                     }
                 </select>
                 

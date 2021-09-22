@@ -15,9 +15,15 @@ namespace AlisverisSepeti.Admin
         #region Index
         public IActionResult Index()
         {
+            return new JsonResult(new Models.Urunopsiyonlar());
             using (var context = new Models.AlisverisSepetiContext())
             {
-                ViewBag.UrunOpsiyonlar = context.Urunopsiyonlars.AsNoTracking().Include(opsiyonlar => opsiyonlar.OpsiyonTipiNavigation).ToList();
+                ViewBag.UrunOpsiyonlar = context
+                    .Urunopsiyonlars
+                    .AsNoTracking()
+                    .Include(opsiyonlar => opsiyonlar.OpsiyonTipiNavigation)
+                    .Include(opsiyonlar => opsiyonlar.Degisken)
+                    .ToList();
             }
             return View(IndexCS);
         }
@@ -26,11 +32,13 @@ namespace AlisverisSepeti.Admin
         [HttpGet("UrunOpsiyonlarForm/Add")]
         public IActionResult Add()
         {
+            
             ViewBag.SubmitButtonValue = "Ekle";
             ViewBag.UrunOpsiyonlar = new Models.Urunopsiyonlar();
             using (var context = new Models.AlisverisSepetiContext())
             {
                 ViewBag.OpsiyonTipleri = context.Opsiyontipleris.AsNoTracking().ToList();
+                ViewBag.DegiskenTipleri = context.Degiskentipleris.AsNoTracking().ToList();
             }
             return View(FormCS);
         }
@@ -49,6 +57,16 @@ namespace AlisverisSepeti.Admin
                     ViewBag.SubmitButtonValue = "Ekle";
                     ViewBag.UrunOpsiyonlar = urunopsiyonlar;
                     ViewBag.OpsiyonTipleri = context.Opsiyontipleris.AsNoTracking().ToList();
+                    ViewBag.DegiskenTipleri = context.Degiskentipleris.AsNoTracking().ToList();
+                    try
+                    {
+                        context.Degiskentipleris.AsNoTracking().Where(degisken => degisken.Id == urunopsiyonlar.DegiskenId).First();
+                        context.Opsiyontipleris.AsNoTracking().Where(opsiyon => opsiyon.Id == urunopsiyonlar.OpsiyonTipi).First();
+                    }
+                    catch (InvalidOperationException)
+                    {
+                        ViewBag.error = "DegiskenTipi veya OpsiyonTipi bulunamadi.";
+                    }
                     if (context.Urunopsiyonlars.AsNoTracking().Any(opsiyon => opsiyon.OpsiyonAdi == urunopsiyonlar.OpsiyonAdi))
                     {
                         ViewBag.error = "Aynı Opsiyon Adına Sahip Başka Bir Kayıt Var";
@@ -83,7 +101,13 @@ namespace AlisverisSepeti.Admin
             {
                 try
                 {
-                    ViewBag.UrunOpsiyonlar = context.Urunopsiyonlars.AsNoTracking().Where(urun => urun.Id == id).First();
+                    ViewBag.UrunOpsiyonlar = context
+                        .Urunopsiyonlars
+                        .AsNoTracking()
+                        .Where(urun => urun.Id == id)
+                        .Include(urun => urun.OpsiyonTipiNavigation)
+                        .Include(urun=> urun.Degisken)
+                        .First();
                 }
                 catch (InvalidOperationException)
                 {
@@ -91,6 +115,7 @@ namespace AlisverisSepeti.Admin
                     return RedirectToAction("Index");
                 }
                 ViewBag.OpsiyonTipleri = context.Opsiyontipleris.AsNoTracking().ToList();
+                ViewBag.DegiskenTipleri = context.Degiskentipleris.AsNoTracking().ToList();
             }
             return View(FormCS);
         }
@@ -109,6 +134,16 @@ namespace AlisverisSepeti.Admin
                     ViewBag.SubmitButtonValue = "Güncelle";
                     ViewBag.UrunOpsiyonlar = urunopsiyonlar;
                     ViewBag.OpsiyonTipleri = context.Opsiyontipleris.AsNoTracking().ToList();
+                    ViewBag.DegiskenTipleri = context.Degiskentipleris.AsNoTracking().ToList();
+                    try
+                    {
+                        context.Degiskentipleris.AsNoTracking().Where(degisken => degisken.Id == urunopsiyonlar.DegiskenId).First();
+                        context.Opsiyontipleris.AsNoTracking().Where(opsiyon => opsiyon.Id == urunopsiyonlar.OpsiyonTipi).First();
+                    }
+                    catch (InvalidOperationException)
+                    {
+                        ViewBag.error = "DegiskenTipi veya OpsiyonTipi bulunamadi.";
+                    }
                     if (context.Urunopsiyonlars.AsNoTracking().Any(opsiyon => opsiyon.OpsiyonAdi == urunopsiyonlar.OpsiyonAdi && opsiyon.Id != id))
                     {
                         ViewBag.error = "Aynı Opsiyon Adına Sahip Başka Bir Kayıt Var";
