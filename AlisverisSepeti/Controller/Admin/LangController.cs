@@ -7,33 +7,33 @@ using System.Threading.Tasks;
 
 namespace AlisverisSepeti.Admin
 {
-    [Route("admin/OdemeSecenekleri",Name = "Odemesecenekleri")]
-    public class OdemeSecenekleriController : Controller
+    [Route("admin/Lang",Name = "Lang")]
+    public class LangController : Controller
     {
-        private string IndexCS = "~/Views/AdminPanel/OdemeSecenekleri/Index.cshtml";
-        private string FormCS = "~/Views/AdminPanel/OdemeSecenekleri/OdemeSecenekleriForm.cshtml";
+        private string IndexCS = "~/Views/AdminPanel/Lang/Index.cshtml";
+        private string FormCS = "~/Views/AdminPanel/Lang/LangForm.cshtml";
         #region Index
         public IActionResult Index()
         {
             using (var context = new Models.AlisverisSepetiContext())
             {
-                ViewBag.OdemeSecenekleri = context.Odemesecenekleris.AsNoTracking().ToList();
+                ViewBag.Lang = context.Langs.AsNoTracking().ToList();
             }
             return View(IndexCS);
         }
         #endregion
         #region Add
-        [HttpGet("OdemeSecenekleriForm/Add")]
+        [HttpGet("LangForm/Add")]
         public IActionResult Add()
         {
-            ViewBag.OdemeSecenekleri = new Models.Odemesecenekleri();
+            ViewBag.Lang = new Models.Lang();
             ViewBag.SubmitButtonValue = "Ekle";
             return View(FormCS);
         }
-        [HttpPost("OdemeSecenekleriForm/Add")]
-        public IActionResult Add(Models.Odemesecenekleri odemesecenekleri)
+        [HttpPost("LangForm/Add")]
+        public IActionResult Add(Models.Lang lang)
         {
-            if (odemesecenekleri == null)
+            if (lang == null)
             {
                 TempData["error"] = "Bir Sorun Oluştu.";
                 return RedirectToAction("Index");
@@ -42,18 +42,18 @@ namespace AlisverisSepeti.Admin
             {
                 using (var context= new Models.AlisverisSepetiContext())
                 {
-                    ViewBag.OdemeSecenekleri = odemesecenekleri;
+                    ViewBag.Lang = lang;
                     ViewBag.SubmitButtonValue = "Ekle";
-                    if (context.Odemesecenekleris.AsNoTracking().Any(odeme => odeme.OdemeSekli == odemesecenekleri.OdemeSekli))
+                    if (context.Langs.AsNoTracking().Any(l => l.Title2 == lang.Title2))
                     {
-                        ViewBag.error = "Aynı Odeme Sekli İçin Kayıt Bulunmakta.";
+                        ViewBag.error = "Aynı Lang İçin Kayıt Bulunmakta.";
                         return View(FormCS);
                     }
                     else
                     {
                         try
                         {
-                            context.Odemesecenekleris.Add(odemesecenekleri);
+                            context.Langs.Add(lang);
                             context.SaveChanges();
                         }
                         catch (DbUpdateException)
@@ -70,14 +70,14 @@ namespace AlisverisSepeti.Admin
         }
         #endregion
         #region Update
-        [HttpGet("OdemeSecenekleriForm/Update/{id:int}")]
+        [HttpGet("LangForm/Update/{id:int}")]
         public IActionResult Update(int id)
         {
             using (var context = new Models.AlisverisSepetiContext())
             {
                 try
                 {
-                    ViewBag.OdemeSecenekleri = context.Odemesecenekleris.AsNoTracking().Where(odeme => odeme.Id == id).First();
+                    ViewBag.Lang = context.Langs.AsNoTracking().Where(l => l.Id == id).First();
                 }
                 catch (InvalidOperationException)
                 {
@@ -90,10 +90,10 @@ namespace AlisverisSepeti.Admin
 
             return View(FormCS);
         }
-        [HttpPost("OdemeSecenekleriForm/Update/{id:int}")]
-        public IActionResult Update(int id,Models.Odemesecenekleri odemesecenekleri)
+        [HttpPost("LangForm/Update/{id:int}")]
+        public IActionResult Update(int id,Models.Lang lang)
         {
-            if (odemesecenekleri == null)
+            if (lang == null)
             {
                 TempData["error"] = "Bir Sorun Oluştu.";
                 return RedirectToAction("Index");
@@ -102,18 +102,18 @@ namespace AlisverisSepeti.Admin
             {
                 using (var context = new Models.AlisverisSepetiContext())
                 {
-                    ViewBag.OdemeSecenekleri = odemesecenekleri;
+                    ViewBag.Lang = lang;
                     ViewBag.SubmitButtonValue = "Güncelle";
-                    if (context.Odemesecenekleris.AsNoTracking().Any(odeme => odeme.OdemeSekli == odemesecenekleri.OdemeSekli && odeme.Id != id))
+                    if (context.Langs.AsNoTracking().Any(l => l.Title2 == lang.Title2 && l.Id != id))
                     {
-                        ViewBag.error = "Aynı Odeme Sekli İçin Kayıt Bulunmakta.";
+                        ViewBag.error = "Aynı Lang İçin Kayıt Bulunmakta.";
                         return View(FormCS);
                     }
                     else
                     {
                         try
                         {
-                            context.Odemesecenekleris.Update(odemesecenekleri);
+                            context.Langs.Update(lang);
                             context.SaveChanges();
                         }
                         catch (DbUpdateException)
@@ -139,7 +139,7 @@ namespace AlisverisSepeti.Admin
                 {
                     try
                     {
-                        context.Odemesecenekleris.Remove(context.Odemesecenekleris.Where(odeme => odeme.Id == id).First());
+                        context.Langs.Remove(context.Langs.Where(l => l.Id == id).First());
 
                     }
                     catch (InvalidOperationException)
