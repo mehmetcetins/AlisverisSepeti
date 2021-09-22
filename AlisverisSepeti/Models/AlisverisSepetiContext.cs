@@ -29,6 +29,7 @@ namespace AlisverisSepeti.Models
         public virtual DbSet<Karttaksitleri> Karttaksitleris { get; set; }
         public virtual DbSet<Kredikartlari> Kredikartlaris { get; set; }
         public virtual DbSet<Markalar> Markalars { get; set; }
+        public virtual DbSet<Odemesecenekleri> Odemesecenekleris { get; set; }
         public virtual DbSet<Opsiyontipleri> Opsiyontipleris { get; set; }
         public virtual DbSet<Poslar> Poslars { get; set; }
         public virtual DbSet<Urunopsiyonlar> Urunopsiyonlars { get; set; }
@@ -357,6 +358,17 @@ namespace AlisverisSepeti.Models
                 entity.Property(e => e.MarkaHakkinda).HasMaxLength(300);
 
                 entity.Property(e => e.MarkaLogo).HasMaxLength(50);
+            });
+
+            modelBuilder.Entity<Odemesecenekleri>(entity =>
+            {
+                entity.ToTable("odemesecenekleri");
+
+                entity.Property(e => e.DizilisSira).HasDefaultValueSql("'0'");
+
+                entity.Property(e => e.OdemeSekli)
+                    .IsRequired()
+                    .HasMaxLength(50);
             });
 
             modelBuilder.Entity<Opsiyontipleri>(entity =>
