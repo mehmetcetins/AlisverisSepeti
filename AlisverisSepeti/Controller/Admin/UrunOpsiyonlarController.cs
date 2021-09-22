@@ -15,7 +15,7 @@ namespace AlisverisSepeti.Admin
         #region Index
         public IActionResult Index()
         {
-            return new JsonResult(new Models.Urunopsiyonlar());
+            
             using (var context = new Models.AlisverisSepetiContext())
             {
                 ViewBag.UrunOpsiyonlar = context
