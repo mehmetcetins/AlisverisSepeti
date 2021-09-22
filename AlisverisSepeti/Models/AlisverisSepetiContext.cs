@@ -28,6 +28,7 @@ namespace AlisverisSepeti.Models
         public virtual DbSet<Kargolar> Kargolars { get; set; }
         public virtual DbSet<Karttaksitleri> Karttaksitleris { get; set; }
         public virtual DbSet<Kredikartlari> Kredikartlaris { get; set; }
+        public virtual DbSet<Lang> Langs { get; set; }
         public virtual DbSet<Markalar> Markalars { get; set; }
         public virtual DbSet<Odemesecenekleri> Odemesecenekleris { get; set; }
         public virtual DbSet<Opsiyontipleri> Opsiyontipleris { get; set; }
@@ -338,6 +339,17 @@ namespace AlisverisSepeti.Models
                     .HasForeignKey(d => d.PosId)
                     .OnDelete(DeleteBehavior.Cascade)
                     .HasConstraintName("lnk_poslar_kredikartlari");
+            });
+
+            modelBuilder.Entity<Lang>(entity =>
+            {
+                entity.ToTable("lang");
+
+                entity.Property(e => e.Aktifmi).HasColumnName("aktifmi");
+
+                entity.Property(e => e.Title2)
+                    .IsRequired()
+                    .HasMaxLength(30);
             });
 
             modelBuilder.Entity<Markalar>(entity =>

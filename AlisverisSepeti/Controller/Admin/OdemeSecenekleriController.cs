@@ -13,8 +13,6 @@ namespace AlisverisSepeti.Admin
         private string IndexCS = "~/Views/AdminPanel/OdemeSecenekleri/Index.cshtml";
         private string FormCS = "~/Views/AdminPanel/OdemeSecenekleri/OdemeSecenekleriForm.cshtml";
         #region Index
-
-        
         public IActionResult Index()
         {
             using (var context = new Models.AlisverisSepetiContext())
