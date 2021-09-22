@@ -30,6 +30,7 @@ namespace AlisverisSepeti.Models
         public virtual DbSet<Markalar> Markalars { get; set; }
         public virtual DbSet<Opsiyontipleri> Opsiyontipleris { get; set; }
         public virtual DbSet<Poslar> Poslars { get; set; }
+        public virtual DbSet<Urunopsiyonlar> Urunopsiyonlars { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -381,6 +382,21 @@ namespace AlisverisSepeti.Models
                 entity.Property(e => e.PosBankaAdi)
                     .IsRequired()
                     .HasMaxLength(50);
+            });
+
+            modelBuilder.Entity<Urunopsiyonlar>(entity =>
+            {
+                entity.ToTable("urunopsiyonlar");
+
+                entity.HasIndex(e => e.OpsiyonTipi, "lnk_opsiyontipleri_urunopsiyonlar");
+
+                entity.Property(e => e.OpsiyonAdi).HasMaxLength(20);
+
+                entity.HasOne(d => d.OpsiyonTipiNavigation)
+                    .WithMany(p => p.Urunopsiyonlars)
+                    .HasForeignKey(d => d.OpsiyonTipi)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("lnk_opsiyontipleri_urunopsiyonlar");
             });
 
             OnModelCreatingPartial(modelBuilder);
