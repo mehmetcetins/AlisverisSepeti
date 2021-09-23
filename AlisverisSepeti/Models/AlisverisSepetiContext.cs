@@ -457,7 +457,7 @@ namespace AlisverisSepeti.Models
                     .IsRequired()
                     .HasMaxLength(50);
 
-                entity.Property(e => e.KullaciIsim)
+                entity.Property(e => e.KullaniciIsim)
                     .IsRequired()
                     .HasMaxLength(20);
 
