@@ -1,0 +1,75 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    Layout = "~/Views/Layouts/Admin/AdminLayout.cshtml";
+    var Users = ViewBag.Users as AlisverisSepeti.Models.User;
+}
+<form method="POST" enctype="multipart/form-data">
+    <table>
+        <tr>
+            <td>
+                <b>Kullanıcı İsmi</b>
+            </td>
+            <td>
+                
+                <input type="text" name="KullaniciIsim" value="@Users.KullaniciIsim" />
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Kullanici Tipi</b>
+
+            </td>
+
+            <td>
+                <input type="text" name="KullaniciTipi" value="@Users.KullaniciTipi" /> 
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Email</b>
+            </td>
+            <td>
+                <input type="text" name="Email" value="@Users.Email" /> 
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Password</b>
+            </td>
+            <td>
+                <input type="text" name="Password" value="@Users.Password" /> 
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Durum</b>
+            </td>
+            <td>
+                <input type="file" name="DilLogo" value="@Users.Durum" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Durum TXT</b>
+            </td>
+            <td>
+                <textarea name="DurumTxt">
+                @Users.DurumTxt
+                </textarea>
+            </td>
+        </tr>
+        
+        <tr>
+            <td colspan="2">
+                <center><input type="submit" value="@ViewBag.SubmitButtonValue" /></center>
+            </td>
+        </tr>
+       
+
+    </table>
+
+
+</form>
