@@ -19,7 +19,6 @@
         @foreach (var users in ViewBag.Users as List<AlisverisSepeti.Models.User>)
         {
         <tr>
-            <td>@users.KullaniciIsim</td>
             <td><a href="@Context.Request.Path/@users.UserId">@users.KullaniciIsim</a></td>
             <td>@users.KullaniciTipi</td>
             <td>@users.Durum</td>
