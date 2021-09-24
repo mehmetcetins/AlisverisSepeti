@@ -33,6 +33,7 @@ namespace AlisverisSepeti.Models
         public virtual DbSet<Odemesecenekleri> Odemesecenekleris { get; set; }
         public virtual DbSet<Opsiyontipleri> Opsiyontipleris { get; set; }
         public virtual DbSet<Poslar> Poslars { get; set; }
+        public virtual DbSet<Stokdurum> Stokdurums { get; set; }
         public virtual DbSet<Urunopsiyonlar> Urunopsiyonlars { get; set; }
         public virtual DbSet<Uruntipleri> Uruntipleris { get; set; }
         public virtual DbSet<User> Users { get; set; }
@@ -419,6 +420,50 @@ namespace AlisverisSepeti.Models
                 entity.Property(e => e.PosBankaAdi)
                     .IsRequired()
                     .HasMaxLength(50);
+            });
+
+            modelBuilder.Entity<Stokdurum>(entity =>
+            {
+                entity.ToTable("stokdurum");
+
+                entity.HasIndex(e => e.EkleyenId, "lnk_users_stokdurum");
+
+                entity.HasIndex(e => e.GuncelleyenId, "lnk_users_stokdurum_2");
+
+                entity.Property(e => e.StokDurumId).HasColumnName("StokDurumID");
+
+                entity.Property(e => e.EklenmeTarihi)
+                    .IsRequired()
+                    .HasMaxLength(19);
+
+                entity.Property(e => e.Ekleyen)
+                    .IsRequired()
+                    .HasMaxLength(30);
+
+                entity.Property(e => e.EkleyenId).HasColumnName("EkleyenID");
+
+                entity.Property(e => e.GuncellenmeTarihi).HasMaxLength(19);
+
+                entity.Property(e => e.Guncelleyen).HasMaxLength(30);
+
+                entity.Property(e => e.GuncelleyenId).HasColumnName("GuncelleyenID");
+
+                entity.Property(e => e.StokDurumKod)
+                    .IsRequired()
+                    .HasMaxLength(10);
+
+                entity.Property(e => e.StokDurumResim).HasMaxLength(50);
+
+                entity.HasOne(d => d.EkleyenNavigation)
+                    .WithMany(p => p.StokdurumEkleyenNavigations)
+                    .HasForeignKey(d => d.EkleyenId)
+                    .HasConstraintName("lnk_users_stokdurum");
+
+                entity.HasOne(d => d.GuncelleyenNavigation)
+                    .WithMany(p => p.StokdurumGuncelleyenNavigations)
+                    .HasForeignKey(d => d.GuncelleyenId)
+                    .OnDelete(DeleteBehavior.Cascade)
+                    .HasConstraintName("lnk_users_stokdurum_2");
             });
 
             modelBuilder.Entity<Urunopsiyonlar>(entity =>
