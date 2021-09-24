@@ -1,0 +1,53 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    Layout = "~/Views/Layouts/Admin/AdminLayout.cshtml";
+    var StokDurum = ViewBag.StokDurum as AlisverisSepeti.Models.Stokdurum;
+}
+<form method="POST" enctype="multipart/form-data">
+    <table>
+        <tr>
+            <td>
+                <b>Stok Durum Resim</b>
+            </td>
+            <td>
+
+                <input type="file" name="StokDurumResim" />
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Stok Durum Kod</b>
+            </td>
+
+            <td>
+                <input type="text" name="StokDurumKod" value="@StokDurum.StokDurumKod" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Sepet İzni</b>
+            </td>
+            <td>
+                <input type="radio" name="SepetIzni" value="false" checked="@(StokDurum.SepetIzni== false)" />
+                <input type="radio" name="SepetIzni" value="true" checked="@(StokDurum.SepetIzni == true)" />
+
+            </td>
+        </tr>
+
+        
+
+
+        <tr>
+            <td colspan="2">
+                <center><input type="submit" value="@ViewBag.SubmitButtonValue" /></center>
+            </td>
+        </tr>
+
+
+    </table>
+
+
+</form>

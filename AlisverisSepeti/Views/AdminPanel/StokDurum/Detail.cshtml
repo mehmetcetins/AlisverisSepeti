@@ -1,0 +1,84 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    Layout = "~/Views/Layouts/Admin/AdminLayout.cshtml";
+    var StokDurum = ViewBag.StokDurum as AlisverisSepeti.Models.Stokdurum;
+}
+
+
+<table>
+    <tbody>
+        <tr>
+            <td>
+                <b>Ekleyen</b>
+            </td>
+            <td>
+                @StokDurum.EkleyenNavigation.KullaniciIsim
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Eklenme Tarihi</b>
+
+            </td>
+
+            <td>
+                @StokDurum.EklenmeTarihi
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Güncelleyen</b>
+            </td>
+            <td>
+                @StokDurum.GuncelleyenNavigation.KullaniciIsim
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Güncellenme Tarihi</b>
+            </td>
+            <td>
+                @StokDurum.GuncellenmeTarihi
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>StokDurumResim</b>
+            </td>
+            <td>
+                <img src="/Public/images/StokDurum/@StokDurum.StokDurumResim" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Stok Durum Kod</b>
+            </td>
+            <td>
+                @StokDurum.StokDurumKod
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Sepet İzni</b>
+            </td>
+            <td>
+                @StokDurum.SepetIzni
+            </td>
+        </tr>
+
+
+
+        <tr>
+            <td>
+                <a class="sil" href="/admin/StokDurum/Delete/@StokDurum.StokDurumId">Sil</a>
+                <a href="/admin/StokDurum/StokDurumForm/Update/@StokDurum.StokDurumId">Duzenle</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+

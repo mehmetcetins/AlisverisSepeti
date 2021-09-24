@@ -1,0 +1,40 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    Layout = "~/Views/Layouts/Admin/AdminLayout.cshtml";
+}
+
+<a href="@Context.Request.Path/StokDurumForm/Add/">Ekle</a>
+<table cellspacing="0" border="1" cellpadding="10">
+    <thead>
+        <tr>
+            <th>Ekleyen</th>
+            <th>Eklenme Tarihi</th>
+            <th>Stok Durum Kod</th>
+            <th>Sepet İzni</th>
+            
+            <th>İşlemler</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var StokDurum in ViewBag.StokDurum as List<AlisverisSepeti.Models.Stokdurum>)
+        {
+        <tr>
+            
+            <td><a href="@Context.Request.Path/@StokDurum.StokDurumId">@StokDurum.EkleyenNavigation.KullaniciIsim</a></td>
+            <td>@StokDurum.EklenmeTarihi</td>
+            <td>@StokDurum.StokDurumKod</td>
+            <td>@StokDurum.SepetIzni</td>
+
+            <td>
+                <a class="sil" href="@Context.Request.Path/Delete/@StokDurum.StokDurumId">Sil</a>
+                <a href="@Context.Request.Path/StokDurumForm/Update/@StokDurum.StokDurumId">Düzenle</a>
+            </td>
+        </tr>
+
+
+
+        }
+    </tbody>
+</table>
