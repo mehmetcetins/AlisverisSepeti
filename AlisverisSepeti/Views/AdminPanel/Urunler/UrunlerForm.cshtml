@@ -1,0 +1,130 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    Layout = "~/Views/Layouts/Admin/AdminLayout.cshtml";
+    var Urun = ViewBag.Urunler as AlisverisSepeti.Models.Urunler;
+}
+<form method="POST" enctype="multipart/form-data">
+    <table>
+        <tr>
+            <td>
+                <b>Urun Kodu</b>
+            </td>
+            <td>
+
+                <input type="text" name="UrunKodu" value="@Urun.UrunKodu" />
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Urun Muhasebe Kodu</b>
+            </td>
+            <td>
+                <input type="text" name="UrunMuhasebeKodu" value="@Urun.UrunMuhasebeKodu" />
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Urun Barkodu</b>
+            </td>
+
+            <td>
+                <input type="text" name="UrunBarkodu" value="@Urun.UrunBarkodu" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Urun Tipi</b>
+            </td>
+            <td>
+                <select name="UrunTipi">
+
+
+                    @foreach (var uruntipi in ViewBag.UrunTipleri as List<AlisverisSepeti.Models.Uruntipleri>)
+                    {
+                        <option value="@uruntipi.UrunTipiId" @if (Urun.UrunTipi != 0) { if (uruntipi.UrunTipiId == Urun.UrunTipi) { @("selected") } }>@uruntipi.UrunTipi</option>
+                    }
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Baslangic Tarihi</b>
+            </td>
+            <td>
+                <input type="datetime-local" name="UrunGosterimTarihiBas" value="@Urun.UrunGosterimTarihiBas" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Bitis Tarihi</b>
+            </td>
+            <td>
+                <input type="datetime-local" name="UrunGosterimTarihiBit" value="@Urun.UrunGosterimTarihiBit" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Marka</b>
+            </td>
+            <td>
+                <select name="MarkaId">
+
+
+                    @foreach (var marka in ViewBag.Markalar as List<AlisverisSepeti.Models.Markalar>)
+                    {
+                        <option value="@marka.MarkaId" @if (Urun.MarkaId != 0) { if (marka.MarkaId == Urun.MarkaId) { @("selected") } }>@marka.MarkaAdi</option>
+                    }
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Stok Durumu</b>
+            </td>
+            <td>
+                <select name="">
+
+
+                    @foreach (var stokdurum in ViewBag.StokDurum as List<AlisverisSepeti.Models.Stokdurum>)
+                    {
+                        <option value="@stokdurum.StokDurumId" @if (Urun.StokDurumId != 0) { if (stokdurum.StokDurumId == Urun.StokDurumId) { @("selected") } }>@stokdurum.StokDurumKod</option>
+                    }
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Dizilis Sira</b>
+            </td>
+            <td>
+                <input type="number" name="DizilisSira" value="@Urun.DizilisSira" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Aktif mi</b>
+            </td>
+            <td>
+                <input type="radio" name="Aktifmi" value="false" checked="@(Urun.Aktifmi== false)" />
+                <input type="radio" name="Aktifmi" value="true" checked="@(Urun.Aktifmi== true)" />
+
+            </td>
+        </tr>
+        
+
+
+        <tr>
+            <td colspan="2">
+                <center><input type="submit" value="@ViewBag.SubmitButtonValue" /></center>
+            </td>
+        </tr>
+
+
+    </table>
+
+
+</form>
