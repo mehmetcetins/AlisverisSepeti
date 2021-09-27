@@ -7,6 +7,11 @@ namespace AlisverisSepeti.Models
 {
     public partial class Stokdurum
     {
+        public Stokdurum()
+        {
+            Urunlers = new HashSet<Urunler>();
+        }
+
         public int StokDurumId { get; set; }
         public string StokDurumKod { get; set; }
         public string StokDurumResim { get; set; }
@@ -20,5 +25,6 @@ namespace AlisverisSepeti.Models
 
         public virtual User EkleyenNavigation { get; set; }
         public virtual User GuncelleyenNavigation { get; set; }
+        public virtual ICollection<Urunler> Urunlers { get; set; }
     }
 }

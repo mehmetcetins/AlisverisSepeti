@@ -7,6 +7,11 @@ namespace AlisverisSepeti.Models
 {
     public partial class Markalar
     {
+        public Markalar()
+        {
+            Urunlers = new HashSet<Urunler>();
+        }
+
         public int MarkaId { get; set; }
         public string MarkaAdi { get; set; }
         public string MarkaHakkinda { get; set; }
@@ -14,5 +19,7 @@ namespace AlisverisSepeti.Models
         public int? DizilisSira { get; set; }
         public string MarkaLogo { get; set; }
         public string MarkaBanner { get; set; }
+
+        public virtual ICollection<Urunler> Urunlers { get; set; }
     }
 }

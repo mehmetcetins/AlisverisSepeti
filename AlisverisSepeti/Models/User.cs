@@ -11,6 +11,8 @@ namespace AlisverisSepeti.Models
         {
             StokdurumEkleyenNavigations = new HashSet<Stokdurum>();
             StokdurumGuncelleyenNavigations = new HashSet<Stokdurum>();
+            UrunlerEkleyenNavigations = new HashSet<Urunler>();
+            UrunlerGuncelleyenNavigations = new HashSet<Urunler>();
         }
 
         public int UserId { get; set; }
@@ -23,5 +25,7 @@ namespace AlisverisSepeti.Models
 
         public virtual ICollection<Stokdurum> StokdurumEkleyenNavigations { get; set; }
         public virtual ICollection<Stokdurum> StokdurumGuncelleyenNavigations { get; set; }
+        public virtual ICollection<Urunler> UrunlerEkleyenNavigations { get; set; }
+        public virtual ICollection<Urunler> UrunlerGuncelleyenNavigations { get; set; }
     }
 }
