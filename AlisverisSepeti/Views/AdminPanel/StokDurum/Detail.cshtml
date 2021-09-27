@@ -33,7 +33,14 @@
                 <b>Güncelleyen</b>
             </td>
             <td>
-                @StokDurum.GuncelleyenNavigation.KullaniciIsim
+                @if(StokDurum.GuncelleyenNavigation == null)
+                {
+                    @("-")
+                }
+                else
+                {
+                    @StokDurum.GuncelleyenNavigation.KullaniciIsim
+                }
             </td>
         </tr>
         <tr>

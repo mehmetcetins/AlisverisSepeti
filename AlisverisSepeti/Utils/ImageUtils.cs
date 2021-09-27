@@ -30,5 +30,18 @@ namespace AlisverisSepeti.Utils
             
             return true;
         }
+        public static bool SaveImage(Stream stream,string folderName,string fileName)
+        {
+            try
+            {
+                stream.CopyTo(new FileStream(Path.Combine(imageRoot,folderName,fileName),FileMode.Create));
+                stream.Close();
+            }
+            catch (IOException)
+            {
+                return false;
+            }
+            return true;
+        }
     }
 }
