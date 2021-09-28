@@ -158,7 +158,7 @@ namespace AlisverisSepeti.Admin
                 }
                 catch (DbUpdateException e)
                 {
-                    TempData["error"] = "Silme Sırasında Bir Hata Oluştu.";
+                    TempData["error"] = "Silme Sırasında Bir Hata Oluştu. " + e.InnerException.Message;
                     return new EmptyResult();
                 }
             }
