@@ -5,7 +5,7 @@
     Layout = "~/Views/Layouts/Admin/AdminLayout.cshtml";
 }
 
-<a href="@Context.Request.Path/UrunDillerDilForm/Add/">Ekle</a>
+<a href="@Context.Request.Path/UrunlerDilForm/Add/">Ekle</a>
 <table cellspacing="0" border="1" cellpadding="10">
     <thead>
         <tr>
@@ -20,7 +20,7 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var UrunDil in ViewBag.UrunDil as List<AlisverisSepeti.Models.UrunlerDil>)
+        @foreach (var UrunDil in ViewBag.UrunlerDil as List<AlisverisSepeti.Models.UrunlerDil>)
         {
         <tr>
             
