@@ -554,6 +554,10 @@ namespace AlisverisSepeti.Models
 
                 entity.ToTable("urunler_dil");
 
+                entity.HasIndex(e => e.DilId, "lnk_diller_urunler_dil");
+
+                entity.HasIndex(e => e.UrunId, "lnk_urunler_urunler_dil");
+
                 entity.Property(e => e.UrunDilId).HasColumnName("UrunDilID");
 
                 entity.Property(e => e.DilId).HasColumnName("DilID");
@@ -577,6 +581,16 @@ namespace AlisverisSepeti.Models
                 entity.Property(e => e.UrunId).HasColumnName("UrunID");
 
                 entity.Property(e => e.UrunKisaAciklama).HasColumnType("mediumtext");
+
+                entity.HasOne(d => d.Dil)
+                    .WithMany(p => p.UrunlerDils)
+                    .HasForeignKey(d => d.DilId)
+                    .HasConstraintName("lnk_diller_urunler_dil");
+
+                entity.HasOne(d => d.Urun)
+                    .WithMany(p => p.UrunlerDils)
+                    .HasForeignKey(d => d.UrunId)
+                    .HasConstraintName("lnk_urunler_urunler_dil");
             });
 
             modelBuilder.Entity<Urunopsiyonlar>(entity =>

@@ -18,5 +18,8 @@ namespace AlisverisSepeti.Models
         public string UrunKisaAciklama { get; set; }
         public int DilId { get; set; }
         public int UrunId { get; set; }
+
+        public virtual Diller Dil { get; set; }
+        public virtual Urunler Urun { get; set; }
     }
 }

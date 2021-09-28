@@ -7,6 +7,11 @@ namespace AlisverisSepeti.Models
 {
     public partial class Diller
     {
+        public Diller()
+        {
+            UrunlerDils = new HashSet<UrunlerDil>();
+        }
+
         public int DilId { get; set; }
         public string DilAdi { get; set; }
         public string DilKodu { get; set; }
@@ -15,5 +20,7 @@ namespace AlisverisSepeti.Models
         public string DilLogo { get; set; }
         public bool Aktifmi { get; set; }
         public bool? Varsayilanmi { get; set; }
+
+        public virtual ICollection<UrunlerDil> UrunlerDils { get; set; }
     }
 }
