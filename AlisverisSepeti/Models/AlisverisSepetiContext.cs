@@ -35,6 +35,7 @@ namespace AlisverisSepeti.Models
         public virtual DbSet<Poslar> Poslars { get; set; }
         public virtual DbSet<Stokdurum> Stokdurums { get; set; }
         public virtual DbSet<Urunler> Urunlers { get; set; }
+        public virtual DbSet<UrunlerDil> UrunlerDils { get; set; }
         public virtual DbSet<Urunopsiyonlar> Urunopsiyonlars { get; set; }
         public virtual DbSet<Uruntipleri> Uruntipleris { get; set; }
         public virtual DbSet<User> Users { get; set; }
@@ -544,6 +545,38 @@ namespace AlisverisSepeti.Models
                     .HasForeignKey(d => d.UrunTipi)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("lnk_uruntipleri_urunler");
+            });
+
+            modelBuilder.Entity<UrunlerDil>(entity =>
+            {
+                entity.HasKey(e => e.UrunDilId)
+                    .HasName("PRIMARY");
+
+                entity.ToTable("urunler_dil");
+
+                entity.Property(e => e.UrunDilId).HasColumnName("UrunDilID");
+
+                entity.Property(e => e.DilId).HasColumnName("DilID");
+
+                entity.Property(e => e.PageDescription).HasColumnType("tinytext");
+
+                entity.Property(e => e.PageKeywords).HasColumnType("tinytext");
+
+                entity.Property(e => e.PageLabels).HasColumnType("tinytext");
+
+                entity.Property(e => e.PageTitle).HasMaxLength(50);
+
+                entity.Property(e => e.UrunAdi)
+                    .IsRequired()
+                    .HasMaxLength(41);
+
+                entity.Property(e => e.UrunBilgisi).HasColumnType("tinytext");
+
+                entity.Property(e => e.UrunBilgisiText).HasColumnType("longtext");
+
+                entity.Property(e => e.UrunId).HasColumnName("UrunID");
+
+                entity.Property(e => e.UrunKisaAciklama).HasColumnType("mediumtext");
             });
 
             modelBuilder.Entity<Urunopsiyonlar>(entity =>
