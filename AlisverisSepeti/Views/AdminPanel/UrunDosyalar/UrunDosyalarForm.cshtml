@@ -1,0 +1,93 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    Layout = "~/Views/Layouts/Admin/AdminLayout.cshtml";
+    var UrunDosya = ViewBag.UrunDosyalar as AlisverisSepeti.Models.Urundosyalar;
+}
+<form method="POST" enctype="multipart/form-data">
+    <table>
+        <tr>
+            <td>
+                <b>File Name</b>
+            </td>
+            <td>
+
+                <input type="file" name="FileName" value="@UrunDosya.FileName" />
+
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <b>Dosya Baslik</b>
+            </td>
+
+            <td>
+                <input type="text" name="DosyaBaslik" value="@UrunDosya.DosyaBaslik" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Dosya Bilgi</b>
+            </td>
+            <td>
+                <input type="file" name="DosyaBilgi" value="@UrunDosya.DosyaBilgi" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Dosya Tipi</b>
+            </td>
+            <td>
+                <input type="text" name="DosyaTipi" value="@UrunDosya.DosyaTipi" />
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Dizilis Sira</b>
+            </td>
+            <td>
+                <input type="number" name="DizilisSira" value="@UrunDosya.DizilisSira" />
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <b>Varsayilan mi</b>
+            </td>
+            <td>
+                <input type="radio" name="Varsayilanmi" value="false" checked="@(UrunDosya.Varsayilanmi == false)" />
+                <input type="radio" name="Varsayilanmi" value="true" checked="@(UrunDosya.Varsayilanmi  == true)" />
+
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <b>Urun</b>
+            </td>
+            <td>
+                <select name="PosId">
+
+
+                    @foreach (var urunler in ViewBag.Urunler as List<AlisverisSepeti.Models.Urunler>)
+                    {
+                    <option value="@urunler.UrunId" @if (UrunDosya.UrunId !=0) { if (urunler.UrunId= =UrunDosya.UrunId) { @("selected") } }>@urunler.UrunKodu</option>
+                    }
+                </select>
+            </td>
+        </tr>
+
+        <tr>
+            <td colspan="2">
+                <center><input type="submit" value="@ViewBag.SubmitButtonValue" /></center>
+            </td>
+        </tr>
+
+
+    </table>
+
+
+</form>
