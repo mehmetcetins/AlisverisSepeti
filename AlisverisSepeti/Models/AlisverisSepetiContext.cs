@@ -34,6 +34,7 @@ namespace AlisverisSepeti.Models
         public virtual DbSet<Opsiyontipleri> Opsiyontipleris { get; set; }
         public virtual DbSet<Poslar> Poslars { get; set; }
         public virtual DbSet<Stokdurum> Stokdurums { get; set; }
+        public virtual DbSet<Urundosyalar> Urundosyalars { get; set; }
         public virtual DbSet<Urunler> Urunlers { get; set; }
         public virtual DbSet<UrunlerDil> UrunlerDils { get; set; }
         public virtual DbSet<Urunopsiyonlar> Urunopsiyonlars { get; set; }
@@ -466,6 +467,38 @@ namespace AlisverisSepeti.Models
                     .HasForeignKey(d => d.GuncelleyenId)
                     .OnDelete(DeleteBehavior.Cascade)
                     .HasConstraintName("lnk_users_stokdurum_2");
+            });
+
+            modelBuilder.Entity<Urundosyalar>(entity =>
+            {
+                entity.HasKey(e => e.UrunDosyaId)
+                    .HasName("PRIMARY");
+
+                entity.ToTable("urundosyalar");
+
+                entity.HasIndex(e => e.UrunId, "lnk_urunler_urundosyalar");
+
+                entity.Property(e => e.UrunDosyaId).HasColumnName("UrunDosyaID");
+
+                entity.Property(e => e.DosyaBaslik).HasMaxLength(100);
+
+                entity.Property(e => e.DosyaBilgi).HasMaxLength(200);
+
+                entity.Property(e => e.DosyaTipi)
+                    .IsRequired()
+                    .HasMaxLength(5);
+
+                entity.Property(e => e.FileName)
+                    .IsRequired()
+                    .HasMaxLength(63);
+
+                entity.Property(e => e.UrunId).HasColumnName("UrunID");
+
+                entity.HasOne(d => d.Urun)
+                    .WithMany(p => p.Urundosyalars)
+                    .HasForeignKey(d => d.UrunId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("lnk_urunler_urundosyalar");
             });
 
             modelBuilder.Entity<Urunler>(entity =>
