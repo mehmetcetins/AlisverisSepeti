@@ -182,7 +182,7 @@ namespace AlisverisSepeti.Admin
                         TempData["error"] = "Kayıt Bulunamadi.";
                         return new EmptyResult();
                     }
-                    context.SaveChanges();
+                    context.SaveChangesAsync();
                 }
                 catch (DbUpdateException e)
                 {

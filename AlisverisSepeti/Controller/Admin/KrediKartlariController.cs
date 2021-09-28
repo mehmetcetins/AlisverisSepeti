@@ -259,9 +259,8 @@ namespace AlisverisSepeti.Admin
                         return new EmptyResult();
                     }
                     
-                    context.SaveChanges();
-                    TempData["success"] = "Başarıyla Silindi.";
-                    return new EmptyResult();
+                    context.SaveChangesAsync();
+                    
                 }
                 catch (DbUpdateException e)
                 {
@@ -269,7 +268,8 @@ namespace AlisverisSepeti.Admin
                     return new EmptyResult();
                 }
             }
-            
+            TempData["success"] = "Başarıyla Silindi.";
+            return new EmptyResult();
         }
         #endregion
     }
