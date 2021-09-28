@@ -1,0 +1,128 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    Layout = "~/Views/Layouts/Admin/AdminLayout.cshtml";
+    var UrunlerDil = ViewBag.UrunlerDil as AlisverisSepeti.Models.UrunlerDil;
+}
+
+
+<table>
+    <tbody>
+        <tr>
+            <td>
+                <b>Ürün Adi</b>
+            </td>
+            <td>
+                @UrunlerDil.UrunAdi
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Urun Bilgisi</b>
+
+            </td>
+
+            <td>
+                @UrunlerDil.UrunBilgisi
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Urun Bilgisi Kısa Açıklama</b>
+
+            </td>
+
+            <td>
+                @UrunlerDil.UrunKisaAciklama
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Urun Bilgisi Text</b>
+
+            </td>
+
+            <td>
+                @UrunlerDil.UrunBilgisiText
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Page Title</b>
+            </td>
+            <td>
+                @UrunlerDil.PageTitle
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Page Labels</b>
+            </td>
+            <td>
+                @UrunlerDil.PageLabels
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Page Keywords</b>
+            </td>
+            <td>
+                @UrunlerDil.PageKeywords
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Page Description</b>
+            </td>
+            <td>
+                @UrunlerDil.PageDescription
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Dil Adi</b>
+            </td>
+            <td>
+                @UrunlerDil.Dil.DilAdi
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Bölge Dil Adi</b>
+            </td>
+            <td>
+                @UrunlerDil.Dil.BolgeDilAdi
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Dil Kodu</b>
+            </td>
+            <td>
+                @UrunlerDil.Dil.DilKodu
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Doviz Kodu</b>
+            </td>
+            <td>
+               
+                @UrunlerDil.Dil.DovizKodu
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <a class="sil" href="/admin/UrunlerDil/Delete/@UrunlerDil.UrunDilId">Sil</a>
+                <a href="/admin/UrunlerDil/UrunlerDilForm/Update/@UrunlerDil.UrunDilId">Duzenle</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+@Html.Partial("~/Views/AdminPanel/Urunler/Detail.cshtml",new ViewDataDictionary(this.ViewData) { {"Urunler",UrunlerDil.Urun } })

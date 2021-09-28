@@ -1,0 +1,115 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    Layout = "~/Views/Layouts/Admin/AdminLayout.cshtml";
+    var UrunDil = ViewBag.UrunlerDil as AlisverisSepeti.Models.UrunlerDil;
+}
+<form method="POST" enctype="multipart/form-data">
+    <table>
+        <tr>
+            <td>
+                <b>Ürün Adi</b>
+            </td>
+            <td>
+
+                <input type="text" name="UrunAdi" value="@UrunDil.UrunAdi" />
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Ürün Bilgisi</b>
+            </td>
+            <td>
+                <input type="text" name="UrunBilgisi" value="@UrunDil.UrunBilgisi" />
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Ürün Bilgisi Kısa Açıklama</b>
+            </td>
+            <td>
+                <input type="text" name="UrunKisaAciklama" value="@UrunDil.UrunKisaAciklama" />
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Urun Bilgisi Text</b>
+            </td>
+            <td>
+                <textarea name="UrunBilgisiText">@UrunDil.UrunBilgisiText</textarea>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Page Title</b>
+            </td>
+            <td>
+                <input type="text" name="PageTitle" value="@UrunDil.PageTitle" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Page Labels</b>
+            </td>
+            <td>
+                <input type="text" name="PageLabels" value="@UrunDil.PageLabels" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Page Keywords</b>
+            </td>
+            <td>
+                <input type="text" name="PageKeywords" value="@UrunDil.PageKeywords" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Page Description</b>
+            </td>
+            <td>
+                <textarea name="PageDescription">@UrunDil.PageDescription</textarea>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Dil</b>
+            </td>
+            <td>
+                <select name="DilId">
+                    @foreach (var urun in ViewBag.Diller as List<AlisverisSepeti.Models.Diller>)
+                    {
+                        <option value="@urun.DilId" @if (UrunDil.DilId != 0) { if (UrunDil.DilId == urun.DilId) { @("selected") } }>@urun.DilAdi</option>
+                    }
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Urun</b>
+            </td>
+            <td>
+                <select name="UrunId">
+                    @foreach (var urun in ViewBag.Urunler as List<AlisverisSepeti.Models.Urunler>)
+                    {
+                        <option value="@urun.UrunId" @if (UrunDil.UrunId != 0) { if (UrunDil.UrunId == urun.UrunId) { @("selected") } }>@urun.UrunKodu</option>
+                    }
+                </select>
+            </td>
+        </tr>
+
+        <tr>
+            <td colspan="2">
+                <center><input type="submit" value="@ViewBag.SubmitButtonValue" /></center>
+            </td>
+        </tr>
+
+
+    </table>
+
+
+</form>
