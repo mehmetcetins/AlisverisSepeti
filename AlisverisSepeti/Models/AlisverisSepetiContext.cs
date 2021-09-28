@@ -585,11 +585,13 @@ namespace AlisverisSepeti.Models
                 entity.HasOne(d => d.Dil)
                     .WithMany(p => p.UrunlerDils)
                     .HasForeignKey(d => d.DilId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("lnk_diller_urunler_dil");
 
                 entity.HasOne(d => d.Urun)
                     .WithMany(p => p.UrunlerDils)
                     .HasForeignKey(d => d.UrunId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("lnk_urunler_urunler_dil");
             });
 
