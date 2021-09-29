@@ -18,7 +18,12 @@ namespace AlisverisSepeti.Admin
         {
             using (var context = new Models.AlisverisSepetiContext())
             {
-                ViewBag.OzellikGrup = context.Ozellikgrups.AsNoTracking().Include(grup => grup.EkleyenNavigation).ToList();
+                ViewBag.OzellikGrup = context.Ozellikgrups
+                    .AsNoTracking()
+                    .Include(grup => grup.EkleyenNavigation)
+                    .Include(grup => grup.OzellikgrupDils.Where(grupdil => grupdil.Dil.Varsayilanmi == true ))
+                    .ToList();
+
             }
             return View(IndexCS);
         }
