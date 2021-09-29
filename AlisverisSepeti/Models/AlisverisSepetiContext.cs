@@ -32,6 +32,7 @@ namespace AlisverisSepeti.Models
         public virtual DbSet<Markalar> Markalars { get; set; }
         public virtual DbSet<Odemesecenekleri> Odemesecenekleris { get; set; }
         public virtual DbSet<Opsiyontipleri> Opsiyontipleris { get; set; }
+        public virtual DbSet<Ozellikgrup> Ozellikgrups { get; set; }
         public virtual DbSet<Poslar> Poslars { get; set; }
         public virtual DbSet<Stokdurum> Stokdurums { get; set; }
         public virtual DbSet<Urundosyalar> Urundosyalars { get; set; }
@@ -397,6 +398,29 @@ namespace AlisverisSepeti.Models
                     .IsRequired()
                     .HasMaxLength(50)
                     .HasColumnName("ismi");
+            });
+
+            modelBuilder.Entity<Ozellikgrup>(entity =>
+            {
+                entity.ToTable("ozellikgrup");
+
+                entity.Property(e => e.OzellikGrupId).HasColumnName("OzellikGrupID");
+
+                entity.Property(e => e.EklenmeTarihi)
+                    .IsRequired()
+                    .HasMaxLength(30);
+
+                entity.Property(e => e.Ekleyen)
+                    .IsRequired()
+                    .HasMaxLength(30);
+
+                entity.Property(e => e.EkleyenId).HasColumnName("EkleyenID");
+
+                entity.Property(e => e.GuncellenmeTarihi).HasMaxLength(30);
+
+                entity.Property(e => e.Guncelleyen).HasMaxLength(30);
+
+                entity.Property(e => e.GuncelleyenId).HasColumnName("GuncelleyenID");
             });
 
             modelBuilder.Entity<Poslar>(entity =>
