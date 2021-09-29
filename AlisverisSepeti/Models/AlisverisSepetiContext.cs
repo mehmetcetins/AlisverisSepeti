@@ -36,6 +36,7 @@ namespace AlisverisSepeti.Models
         public virtual DbSet<OzellikgrupDil> OzellikgrupDils { get; set; }
         public virtual DbSet<Poslar> Poslars { get; set; }
         public virtual DbSet<Stokdurum> Stokdurums { get; set; }
+        public virtual DbSet<StokdurumDil> StokdurumDils { get; set; }
         public virtual DbSet<Urundosyalar> Urundosyalars { get; set; }
         public virtual DbSet<Urunler> Urunlers { get; set; }
         public virtual DbSet<UrunlerDil> UrunlerDils { get; set; }
@@ -541,6 +542,39 @@ namespace AlisverisSepeti.Models
                     .HasForeignKey(d => d.GuncelleyenId)
                     .OnDelete(DeleteBehavior.Cascade)
                     .HasConstraintName("lnk_users_stokdurum_2");
+            });
+
+            modelBuilder.Entity<StokdurumDil>(entity =>
+            {
+                entity.ToTable("stokdurum_dil");
+
+                entity.HasIndex(e => e.DilId, "lnk_diller_stokdurum_dil");
+
+                entity.HasIndex(e => e.StokDurumId, "lnk_stokdurum_stokdurum_dil");
+
+                entity.Property(e => e.StokDurumDilId).HasColumnName("StokDurumDilID");
+
+                entity.Property(e => e.DilId).HasColumnName("DilID");
+
+                entity.Property(e => e.StokDurum)
+                    .IsRequired()
+                    .HasMaxLength(30);
+
+                entity.Property(e => e.StokDurumAciklama).HasColumnType("tinytext");
+
+                entity.Property(e => e.StokDurumId).HasColumnName("StokDurumID");
+
+                entity.HasOne(d => d.Dil)
+                    .WithMany(p => p.StokdurumDils)
+                    .HasForeignKey(d => d.DilId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("lnk_diller_stokdurum_dil");
+
+                entity.HasOne(d => d.StokDurumNavigation)
+                    .WithMany(p => p.StokdurumDils)
+                    .HasForeignKey(d => d.StokDurumId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("lnk_stokdurum_stokdurum_dil");
             });
 
             modelBuilder.Entity<Urundosyalar>(entity =>
