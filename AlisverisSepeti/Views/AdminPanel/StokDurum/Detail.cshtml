@@ -11,6 +11,18 @@
     <tbody>
         <tr>
             <td>
+                <b>Stok Durumu</b>
+            </td>
+            <td>
+                @if (StokDurum.StokdurumDils != null && StokDurum.StokdurumDils.Count > 0)
+                {
+                    @StokDurum.StokdurumDils.First().StokDurum;
+                }
+
+            </td>
+        </tr>
+        <tr>
+            <td>
                 <b>Ekleyen</b>
             </td>
             <td>
@@ -33,7 +45,7 @@
                 <b>Güncelleyen</b>
             </td>
             <td>
-                @if(StokDurum.GuncelleyenNavigation == null)
+                @if (StokDurum.GuncelleyenNavigation == null)
                 {
                     @("-")
                 }

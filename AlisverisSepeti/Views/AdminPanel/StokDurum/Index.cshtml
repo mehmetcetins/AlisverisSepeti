@@ -9,6 +9,7 @@
 <table cellspacing="0" border="1" cellpadding="10">
     <thead>
         <tr>
+            <th>Stok Durumu</th>
             <th>Ekleyen</th>
             <th>Eklenme Tarihi</th>
             <th>Stok Durum Kod</th>
@@ -21,7 +22,9 @@
         @foreach (var StokDurum in ViewBag.StokDurum as List<AlisverisSepeti.Models.Stokdurum>)
         {
         <tr>
-            
+            <td>@if (StokDurum.StokdurumDils != null && StokDurum.StokdurumDils.Count > 0) {
+                @StokDurum.StokdurumDils.First().StokDurum;
+            }</td>
             <td><a href="@Context.Request.Path/@StokDurum.StokDurumId">@StokDurum.EkleyenNavigation.KullaniciIsim</a></td>
             <td>@StokDurum.EklenmeTarihi</td>
             <td>@StokDurum.StokDurumKod</td>
