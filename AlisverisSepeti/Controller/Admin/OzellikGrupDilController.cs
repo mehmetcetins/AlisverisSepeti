@@ -94,7 +94,22 @@ namespace AlisverisSepeti.Admin
                         ViewBag.error = e.Message;
                         return View(FormCS);
                     }
-                    if (context.OzellikgrupDils.AsNoTracking().Any(grupdil => grupdil.OzellikGrupAdi == ozellikgrupDil.OzellikGrupAdi && grupdil.DilId == ozellikgrupDil.DilId))
+                    if (context.OzellikgrupDils.AsNoTracking().Any(
+                        grupdil => 
+                        (
+                            (
+                            grupdil.OzellikGrupAdi == ozellikgrupDil.OzellikGrupAdi 
+                            &&
+                            grupdil.DilId == ozellikgrupDil.DilId
+                            )
+                            ||
+                            (
+                            grupdil.OzellikGrupId == ozellikgrupDil.OzellikGrupId
+                            &&
+                            grupdil.DilId == ozellikgrupDil.DilId
+                            )
+                        )
+                        ))
                     {
                         ViewBag.error = "Aynı Dilde Bu İsimde Grup Adı Bulunmakta.";
                         return View(FormCS);
@@ -169,11 +184,21 @@ namespace AlisverisSepeti.Admin
                     if (context.OzellikgrupDils.AsNoTracking().Any(
                         grupdil =>
                         (
-                        grupdil.OzellikGrupAdi == ozellikgrupDil.OzellikGrupAdi
-                        &&
-                        grupdil.DilId == ozellikgrupDil.DilId
-                        &&
-                        grupdil.OzellikGrupDilId != id
+                            (
+                                (
+                                    grupdil.OzellikGrupAdi == ozellikgrupDil.OzellikGrupAdi
+                                    &&
+                                    grupdil.DilId == ozellikgrupDil.DilId
+                                )
+                                ||
+                                (
+                                    grupdil.OzellikGrupId == ozellikgrupDil.OzellikGrupId
+                                    &&
+                                    grupdil.DilId == ozellikgrupDil.DilId
+                                )
+                            )
+                            &&
+                                grupdil.OzellikGrupDilId != id
                         )
                         ))
                     {
