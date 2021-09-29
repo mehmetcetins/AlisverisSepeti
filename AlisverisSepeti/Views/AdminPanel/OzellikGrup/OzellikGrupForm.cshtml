@@ -1,0 +1,34 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    Layout = "~/Views/Layouts/Admin/AdminLayout.cshtml";
+    var OzellikGrup = ViewBag.OzellikGrup as AlisverisSepeti.Models.Ozellikgrup;
+}
+<form method="POST" enctype="multipart/form-data">
+    <table>
+        <tr>
+            <td>
+                <b>Diziliş Sıra</b>
+            </td>
+            <td>
+
+                <input type="text" name="DizilisSira" value="@OzellikGrup.DizilisSira" />
+
+            </td>
+        </tr>
+        
+        
+
+
+        <tr>
+            <td colspan="2">
+                <center><input type="submit" value="@ViewBag.SubmitButtonValue" /></center>
+            </td>
+        </tr>
+
+
+    </table>
+
+
+</form>

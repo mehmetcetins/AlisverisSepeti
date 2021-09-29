@@ -1,0 +1,39 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    Layout = "~/Views/Layouts/Admin/AdminLayout.cshtml";
+}
+
+<a href="@Context.Request.Path/OzellikGrupForm/Add/">Ekle</a>
+<table cellspacing="0" border="1" cellpadding="10">
+    <thead>
+        <tr>
+            <th>Ekleyen</th>
+            <th>Eklenme Tarihi</th>
+            <th>Dizilis Sira</th>
+           
+            
+            <th>İşlemler</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var OzellikGrup in ViewBag.OzellikGrup as List<AlisverisSepeti.Models.Ozellikgrup>)
+        {
+        <tr>
+            
+            <td><a href="@Context.Request.Path/@OzellikGrup.OzellikGrupId">@OzellikGrup.EkleyenNavigation.KullaniciIsim</a></td>
+            <td>@OzellikGrup.EklenmeTarihi</td>
+            <td>@OzellikGrup.DizilisSira</td>
+
+            <td>
+                <a class="sil" href="@Context.Request.Path/Delete/@OzellikGrup.OzellikGrupId">Sil</a>
+                <a href="@Context.Request.Path/OzellikGrupForm/Update/@OzellikGrup.OzellikGrupId">Düzenle</a>
+            </td>
+        </tr>
+
+
+
+        }
+    </tbody>
+</table>

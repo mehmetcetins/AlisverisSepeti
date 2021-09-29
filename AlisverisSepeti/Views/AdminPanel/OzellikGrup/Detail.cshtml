@@ -1,0 +1,73 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    Layout = "~/Views/Layouts/Admin/AdminLayout.cshtml";
+    var OzellikGrup = ViewBag.OzellikGrup as AlisverisSepeti.Models.Ozellikgrup;
+}
+
+
+<table>
+    <tbody>
+        <tr>
+            <td>
+                <b>Ekleyen</b>
+            </td>
+            <td>
+                @OzellikGrup.EkleyenNavigation.KullaniciIsim
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Eklenme Tarihi</b>
+
+            </td>
+
+            <td>
+                @OzellikGrup.EklenmeTarihi
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Güncelleyen</b>
+
+            </td>
+
+            <td>
+                @if (OzellikGrup.GuncelleyenNavigation != null)
+                {
+                    @OzellikGrup.GuncelleyenNavigation.KullaniciIsim
+                }
+            else
+            {
+                @("-")
+            }
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Güncellenme Tarihi</b>
+            </td>
+            <td>
+                @OzellikGrup.GuncellenmeTarihi
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Diziliş Sıra</b>
+            </td>
+            <td>
+                @OzellikGrup.DizilisSira
+            </td>
+        </tr>
+        
+        <tr>
+            <td>
+                <a class="sil" href="/admin/OzellikGrup/Delete/@OzellikGrup.OzellikGrupId">Sil</a>
+                <a href="/admin/OzellikGrup/OzellikGrupForm/Update/@OzellikGrup.OzellikGrupId">Duzenle</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
