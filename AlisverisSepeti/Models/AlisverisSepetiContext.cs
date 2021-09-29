@@ -404,6 +404,10 @@ namespace AlisverisSepeti.Models
             {
                 entity.ToTable("ozellikgrup");
 
+                entity.HasIndex(e => e.EkleyenId, "lnk_users_ozellikgrup");
+
+                entity.HasIndex(e => e.GuncelleyenId, "lnk_users_ozellikgrup_2");
+
                 entity.Property(e => e.OzellikGrupId).HasColumnName("OzellikGrupID");
 
                 entity.Property(e => e.EklenmeTarihi)
@@ -421,6 +425,18 @@ namespace AlisverisSepeti.Models
                 entity.Property(e => e.Guncelleyen).HasMaxLength(30);
 
                 entity.Property(e => e.GuncelleyenId).HasColumnName("GuncelleyenID");
+
+                entity.HasOne(d => d.EkleyenNavigation)
+                    .WithMany(p => p.OzellikgrupEkleyenNavigations)
+                    .HasForeignKey(d => d.EkleyenId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("lnk_users_ozellikgrup");
+
+                entity.HasOne(d => d.GuncelleyenNavigation)
+                    .WithMany(p => p.OzellikgrupGuncelleyenNavigations)
+                    .HasForeignKey(d => d.GuncelleyenId)
+                    .OnDelete(DeleteBehavior.Cascade)
+                    .HasConstraintName("lnk_users_ozellikgrup_2");
             });
 
             modelBuilder.Entity<Poslar>(entity =>

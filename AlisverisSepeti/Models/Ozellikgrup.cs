@@ -15,5 +15,8 @@ namespace AlisverisSepeti.Models
         public string Ekleyen { get; set; }
         public string Guncelleyen { get; set; }
         public int? DizilisSira { get; set; }
+
+        public virtual User EkleyenNavigation { get; set; }
+        public virtual User GuncelleyenNavigation { get; set; }
     }
 }

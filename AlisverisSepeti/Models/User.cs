@@ -9,6 +9,8 @@ namespace AlisverisSepeti.Models
     {
         public User()
         {
+            OzellikgrupEkleyenNavigations = new HashSet<Ozellikgrup>();
+            OzellikgrupGuncelleyenNavigations = new HashSet<Ozellikgrup>();
             StokdurumEkleyenNavigations = new HashSet<Stokdurum>();
             StokdurumGuncelleyenNavigations = new HashSet<Stokdurum>();
             UrunlerEkleyenNavigations = new HashSet<Urunler>();
@@ -23,6 +25,8 @@ namespace AlisverisSepeti.Models
         public string Durum { get; set; }
         public string DurumTxt { get; set; }
 
+        public virtual ICollection<Ozellikgrup> OzellikgrupEkleyenNavigations { get; set; }
+        public virtual ICollection<Ozellikgrup> OzellikgrupGuncelleyenNavigations { get; set; }
         public virtual ICollection<Stokdurum> StokdurumEkleyenNavigations { get; set; }
         public virtual ICollection<Stokdurum> StokdurumGuncelleyenNavigations { get; set; }
         public virtual ICollection<Urunler> UrunlerEkleyenNavigations { get; set; }
