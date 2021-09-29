@@ -41,6 +41,7 @@ namespace AlisverisSepeti.Admin
                         .Where(grup => grup.OzellikGrupId == id)
                         .Include(grup => grup.EkleyenNavigation)
                         .Include(grup => grup.GuncelleyenNavigation)
+                        .Include(grup => grup.OzellikgrupDils.Where(grupdil => grupdil.Dil.Varsayilanmi == true))
                         .First();
                 }
                 catch (InvalidOperationException)

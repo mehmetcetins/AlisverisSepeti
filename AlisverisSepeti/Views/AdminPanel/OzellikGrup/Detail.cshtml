@@ -10,6 +10,15 @@
 <table>
     <tbody>
         <tr>
+            <td><b>Grup Adi</b></td>
+            <td>
+                @if (OzellikGrup.OzellikgrupDils != null && OzellikGrup.OzellikgrupDils.Count > 0)
+                {
+                    @OzellikGrup.OzellikgrupDils.First().OzellikGrupAdi
+                }
+            </td>
+        </tr>
+        <tr>
             <td>
                 <b>Ekleyen</b>
             </td>
