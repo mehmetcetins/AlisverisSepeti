@@ -29,7 +29,7 @@
         </tr>
         <tr>
             <td>
-                <b>Açıklama</b>
+                <b>Dil</b>
             </td>
             <td>
                 <select name="DilId">
@@ -37,14 +37,7 @@
                     @foreach (var dil in ViewBag.Diller as List<AlisverisSepeti.Models.Diller>)
                     {
                         <option value="@dil.DilId"
-                                @if(OzellikGrupDil.DilId != 0)
-                                {
-                                    @if (OzellikGrupDil.DilId == dil.DilId)
-                                    {
-                                        @("selected")
-                                    }
-                                }
-                                >
+                                @if (OzellikGrupDil.DilId != 0) { @if (OzellikGrupDil.DilId == dil.DilId) { @("selected")  }  }>
                             @dil.DilKodu
                         </option>
 
@@ -52,7 +45,24 @@
                 </select>
             </td>
         </tr>
+        <tr>
+            <td>
+                <b>Grup</b>
+            </td>
+            <td>
+                <select name="OzellikGrupId">
 
+                    @foreach (var grup in ViewBag.OzellikGrup as List<AlisverisSepeti.Models.Ozellikgrup>)
+                    {
+                        <option value="@grup.OzellikGrupId"
+                                @if (OzellikGrupDil.OzellikGrupId != 0) { @if (OzellikGrupDil.OzellikGrupId == grup.OzellikGrupId) { @("selected")  }  }>
+                            @grup.Ekleyen
+                        </option>
+
+                    }
+                </select>
+            </td>
+        </tr>
 
 
 
