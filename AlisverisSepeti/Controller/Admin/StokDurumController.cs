@@ -20,7 +20,11 @@ namespace AlisverisSepeti.Admin
         {
             using (var context = new Models.AlisverisSepetiContext())
             {
-                ViewBag.StokDurum = context.Stokdurums.AsNoTracking().Include(stok=> stok.EkleyenNavigation).ToList();
+                ViewBag.StokDurum = context.Stokdurums
+                    .AsNoTracking()
+                    .Include(stok=> stok.EkleyenNavigation)
+                    .Include(stok => stok.StokdurumDils.Where(stokdil => stokdil.Dil.Varsayilanmi == true))
+                    .ToList();
             }
             return View(IndexCS);
         }
@@ -34,7 +38,13 @@ namespace AlisverisSepeti.Admin
             {
                 try
                 {
-                    ViewBag.StokDurum = context.Stokdurums.AsNoTracking().Where(stok => stok.StokDurumId == id).Include(stok=> stok.EkleyenNavigation).Include(stok=> stok.GuncelleyenNavigation).First();
+                    ViewBag.StokDurum = context.Stokdurums
+                        .AsNoTracking()
+                        .Where(stok => stok.StokDurumId == id)
+                        .Include(stok=> stok.EkleyenNavigation)
+                        .Include(stok=> stok.GuncelleyenNavigation)
+                        .Include(stok => stok.StokdurumDils.Where(stokdil => stokdil.Dil.Varsayilanmi == true))
+                        .First();
                 }
                 catch (InvalidOperationException)
                 {
