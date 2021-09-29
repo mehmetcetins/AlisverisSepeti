@@ -33,6 +33,7 @@ namespace AlisverisSepeti.Models
         public virtual DbSet<Odemesecenekleri> Odemesecenekleris { get; set; }
         public virtual DbSet<Opsiyontipleri> Opsiyontipleris { get; set; }
         public virtual DbSet<Ozellikgrup> Ozellikgrups { get; set; }
+        public virtual DbSet<OzellikgrupDil> OzellikgrupDils { get; set; }
         public virtual DbSet<Poslar> Poslars { get; set; }
         public virtual DbSet<Stokdurum> Stokdurums { get; set; }
         public virtual DbSet<Urundosyalar> Urundosyalars { get; set; }
@@ -437,6 +438,39 @@ namespace AlisverisSepeti.Models
                     .HasForeignKey(d => d.GuncelleyenId)
                     .OnDelete(DeleteBehavior.Cascade)
                     .HasConstraintName("lnk_users_ozellikgrup_2");
+            });
+
+            modelBuilder.Entity<OzellikgrupDil>(entity =>
+            {
+                entity.ToTable("ozellikgrup_dil");
+
+                entity.HasIndex(e => e.DilId, "lnk_diller_ozellikgrup_dil");
+
+                entity.HasIndex(e => e.OzellikGrupId, "lnk_ozellikgrup_ozellikgrup_dil");
+
+                entity.Property(e => e.OzellikGrupDilId).HasColumnName("OzellikGrupDilID");
+
+                entity.Property(e => e.DilId).HasColumnName("DilID");
+
+                entity.Property(e => e.OzellikGrupAciklama).HasColumnType("tinytext");
+
+                entity.Property(e => e.OzellikGrupAdi)
+                    .IsRequired()
+                    .HasMaxLength(20);
+
+                entity.Property(e => e.OzellikGrupId).HasColumnName("OzellikGrupID");
+
+                entity.HasOne(d => d.Dil)
+                    .WithMany(p => p.OzellikgrupDils)
+                    .HasForeignKey(d => d.DilId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("lnk_diller_ozellikgrup_dil");
+
+                entity.HasOne(d => d.OzellikGrup)
+                    .WithMany(p => p.OzellikgrupDils)
+                    .HasForeignKey(d => d.OzellikGrupId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("lnk_ozellikgrup_ozellikgrup_dil");
             });
 
             modelBuilder.Entity<Poslar>(entity =>

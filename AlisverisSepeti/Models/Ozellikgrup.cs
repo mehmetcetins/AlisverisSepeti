@@ -7,6 +7,11 @@ namespace AlisverisSepeti.Models
 {
     public partial class Ozellikgrup
     {
+        public Ozellikgrup()
+        {
+            OzellikgrupDils = new HashSet<OzellikgrupDil>();
+        }
+
         public int OzellikGrupId { get; set; }
         public int EkleyenId { get; set; }
         public int? GuncelleyenId { get; set; }
@@ -18,5 +23,6 @@ namespace AlisverisSepeti.Models
 
         public virtual User EkleyenNavigation { get; set; }
         public virtual User GuncelleyenNavigation { get; set; }
+        public virtual ICollection<OzellikgrupDil> OzellikgrupDils { get; set; }
     }
 }
