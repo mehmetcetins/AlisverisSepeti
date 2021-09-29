@@ -1,0 +1,79 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    Layout = "~/Views/Layouts/Admin/AdminLayout.cshtml";
+    var StokDurumDil = ViewBag.StokDurumDil as AlisverisSepeti.Models.StokdurumDil;
+}
+<form method="POST" enctype="multipart/form-data">
+    <table>
+        <tr>
+            <td>
+                <b>Stok Durum</b>
+            </td>
+            <td>
+
+                <input type="text" name="StokDurum" value="@StokDurumDil.StokDurum" />
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Açıklama</b>
+            </td>
+            <td>
+
+                <textarea name="StokDurumAciklama">@StokDurumDil.StokDurumAciklama</textarea>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Dil</b>
+            </td>
+            <td>
+                <select name="DilId">
+
+                    @foreach (var dil in ViewBag.Diller as List<AlisverisSepeti.Models.Diller>)
+                    {
+                        <option value="@dil.DilId"
+                                @if (StokDurumDil.DilId != 0) { @if (StokDurumDil.DilId == dil.DilId) { @("selected")  }  }>
+                            @dil.DilKodu
+                        </option>
+
+                    }
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Stok</b>
+            </td>
+            <td>
+                <select name="StokDurumId">
+
+                    @foreach (var stokdurum in ViewBag.StokDurum as List<AlisverisSepeti.Models.Stokdurum>)
+                    {
+                        <option value="@stokdurum.StokDurumId"
+                                @if (StokDurumDil.StokDurumId != 0) { @if (StokDurumDil.StokDurumId == stokdurum.StokDurumId ) { @("selected")  }  }>
+                            @stokdurum.StokDurumKod
+                        </option>
+
+                    }
+                </select>
+            </td>
+        </tr>
+
+
+
+        <tr>
+            <td colspan="2">
+                <center><input type="submit" value="@ViewBag.SubmitButtonValue" /></center>
+            </td>
+        </tr>
+
+
+    </table>
+
+
+</form>
