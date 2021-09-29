@@ -56,4 +56,4 @@
         </tr>
     </tbody>
 </table>
-@Html.PartialAsync("~/Views/AdminPanel/StokDurum/Detail.cshtml",new ViewDataDictionary(this.ViewData) { { "StokDurum",StokDurumDil.StokDurumNavigation } })
+@Html.Partial("~/Views/AdminPanel/StokDurum/Detail.cshtml", new ViewDataDictionary(this.ViewData) { { "StokDurum", StokDurumDil.StokDurumNavigation } })
