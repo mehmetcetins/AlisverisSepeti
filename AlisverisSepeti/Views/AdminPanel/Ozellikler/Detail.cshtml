@@ -1,0 +1,77 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    Layout = "~/Views/Layouts/Admin/AdminLayout.cshtml";
+    var Ozellikler = ViewBag.Ozellikler as AlisverisSepeti.Models.Ozellikler;
+}
+
+
+<table>
+    <tbody>
+        <tr>
+            <td><b>Birim</b></td>
+            <td> @Ozellikler.Birim
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Degisken Tipi</b>
+            </td>
+            <td>
+                @Ozellikler.OzellikTipiNavigation.DegiskenTipiNavigation.DegiskenAdi
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Ozellik Tipi</b>
+
+            </td>
+
+            <td>
+                @Ozellikler.OzellikTipiNavigation.OzellikTipi
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Ozellik Grup</b>
+
+            </td>
+
+            <td>
+                @Ozellikler.OzellikGrup.OzellikgrupDils.First().OzellikGrupAdi
+        </tr>
+        <tr>
+            <td>
+                <b>EklenmeTarihi</b>
+            </td>
+            <td>
+                @Ozellikler.EklenmeTarihi
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Güncellenme Tarihi</b>
+            </td>
+            <td>
+                @Ozellikler.GuncellenmeTarihi
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Diziliş Sıra</b>
+            </td>
+            <td>
+                @Ozellikler.DizilisSira
+            </td>
+        </tr>
+        
+        <tr>
+            <td>
+                <a class="sil" href="/admin/Ozellikler/Delete/@Ozellikler.OzellikId">Sil</a>
+                <a href="/admin/Ozellikler/OzelliklerForm/Update/@Ozellikler.OzellikId">Duzenle</a>
+            </td>
+        </tr>
+    </tbody>
+</table>

@@ -1,0 +1,70 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    Layout = "~/Views/Layouts/Admin/AdminLayout.cshtml";
+    var Ozellikler = ViewBag.Ozellikler as AlisverisSepeti.Models.Ozellikler;
+}
+<form method="POST" enctype="multipart/form-data">
+    <table>
+        <tr>
+            <td>
+                <b>Birim</b>
+            </td>
+            <td>
+
+                <input type="text" name="Birim" value="@Ozellikler.Birim" />
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Ozellik Tipi</b>
+            </td>
+            <td>
+                <select name="OzellikTipId">
+                    @foreach (var tip in ViewBag.OzellikTipleri as List<AlisverisSepeti.Models.Ozelliktipleri>)
+                    {
+                        <option value="@tip.OzellikTipiId" @(Ozellikler.OzellikTipiId != 0 && Ozellikler.OzellikTipiId == tip.OzellikTipiId ? "selected" : "" )>@tip.OzellikTipi</option>
+                    }
+                </select>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Ozellik Grup</b>
+            </td>
+            <td>
+                <select name="OzellikGrupId">
+                    @foreach (var grup in ViewBag.OzellikGrup as List<AlisverisSepeti.Models.Ozellikgrup>)
+                    {
+                        <option value="@grup.OzellikGrupId" @(Ozellikler.OzellikGrupId != 0 && Ozellikler.OzellikGrupId == grup.OzellikGrupId ? "selected" : "" )>@grup.OzellikgrupDils.First().OzellikGrupAdi</option>
+                    }
+                </select>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Diziliş Sıra</b>
+            </td>
+            <td>
+
+                <input type="number" name="DizilisSira" value="@Ozellikler.DizilisSira" />
+
+            </td>
+        </tr>
+
+
+        <tr>
+            <td colspan="2">
+                <center><input type="submit" value="@ViewBag.SubmitButtonValue" /></center>
+            </td>
+        </tr>
+
+
+    </table>
+
+
+</form>
