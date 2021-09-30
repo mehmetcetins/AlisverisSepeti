@@ -34,6 +34,7 @@ namespace AlisverisSepeti.Models
         public virtual DbSet<Opsiyontipleri> Opsiyontipleris { get; set; }
         public virtual DbSet<Ozellikgrup> Ozellikgrups { get; set; }
         public virtual DbSet<OzellikgrupDil> OzellikgrupDils { get; set; }
+        public virtual DbSet<Ozelliktipleri> Ozelliktipleris { get; set; }
         public virtual DbSet<Poslar> Poslars { get; set; }
         public virtual DbSet<Stokdurum> Stokdurums { get; set; }
         public virtual DbSet<StokdurumDil> StokdurumDils { get; set; }
@@ -472,6 +473,30 @@ namespace AlisverisSepeti.Models
                     .HasForeignKey(d => d.OzellikGrupId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("lnk_ozellikgrup_ozellikgrup_dil");
+            });
+
+            modelBuilder.Entity<Ozelliktipleri>(entity =>
+            {
+                entity.HasKey(e => e.OzellikTipiId)
+                    .HasName("PRIMARY");
+
+                entity.ToTable("ozelliktipleri");
+
+                entity.HasIndex(e => e.DegiskenTipi, "lnk_degiskentipleri_ozelliktipleri");
+
+                entity.Property(e => e.OzellikTipiId).HasColumnName("OzellikTipiID");
+
+                entity.Property(e => e.Durum).HasMaxLength(5);
+
+                entity.Property(e => e.OzellikTipi).HasMaxLength(15);
+
+                entity.Property(e => e.Tanim).HasMaxLength(21);
+
+                entity.HasOne(d => d.DegiskenTipiNavigation)
+                    .WithMany(p => p.Ozelliktipleris)
+                    .HasForeignKey(d => d.DegiskenTipi)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("lnk_degiskentipleri_ozelliktipleri");
             });
 
             modelBuilder.Entity<Poslar>(entity =>
