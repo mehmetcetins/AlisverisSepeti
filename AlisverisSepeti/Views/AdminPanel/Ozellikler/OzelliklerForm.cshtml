@@ -22,7 +22,7 @@
                 <b>Ozellik Tipi</b>
             </td>
             <td>
-                <select name="OzellikTipId">
+                <select name="OzellikTipiId">
                     @foreach (var tip in ViewBag.OzellikTipleri as List<AlisverisSepeti.Models.Ozelliktipleri>)
                     {
                         <option value="@tip.OzellikTipiId" @(Ozellikler.OzellikTipiId != 0 && Ozellikler.OzellikTipiId == tip.OzellikTipiId ? "selected" : "" )>@tip.OzellikTipi</option>
