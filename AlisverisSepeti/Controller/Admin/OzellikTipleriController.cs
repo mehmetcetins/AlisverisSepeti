@@ -12,6 +12,7 @@ namespace AlisverisSepeti.Admin
     {
         private readonly string IndexCS = "~/Views/AdminPanel/OzellikTipleri/Index.cshtml";
         private readonly string FormCS = "~/Views/AdminPanel/OzellikTipleri/OzellikTipleriForm.cshtml";
+        
         [NonAction]
         public void extras()
         {
@@ -52,6 +53,7 @@ namespace AlisverisSepeti.Admin
             }
             else
             {
+                List<string> errorList = new List<string>();
                 using (var context = new Models.AlisverisSepetiContext())
                 {
                     ViewBag.SubmitButtonValue = "Ekle";
@@ -65,12 +67,14 @@ namespace AlisverisSepeti.Admin
                     catch (InvalidOperationException)
                     {
                         ViewBag.error = "Degisken Tipi Bulunamadi.";
-                        return View(FormCS);
+                        errorList.Add("Degisken Tipi Bulunamadi.");
+                        
                     }
                     if(context.Ozelliktipleris.AsNoTracking().Any(tip => tip.OzellikTipi == ozelliktipleri.OzellikTipi))
                     {
                         ViewBag.error = "Aynı Özellik Tipinde Kayıt Bulunuyor.";
-                        return View(FormCS);
+                        errorList.Add("Aynı Özellik Tipinde Kayıt Bulunuyor.");
+                        
                     }
                     else
                     {
@@ -78,17 +82,21 @@ namespace AlisverisSepeti.Admin
                         {
                             context.Ozelliktipleris.Add(ozelliktipleri);
                             context.SaveChanges();
+                            TempData["success"] = "Başarıyla Eklendi.";
+                            return RedirectToAction("Index");
                         }
                         catch(DbUpdateException e)
                         {
                             ViewBag.error = e.InnerException.Message;
-                            return View(FormCS);
+                            errorList.Add(e.InnerException.Message);
+                            
                         }
                     }
                 }
+                ViewBag.errorList = errorList;
             }
-            TempData["success"] = "Başarıyla Eklendi.";
-            return RedirectToAction("Index");
+            
+            return View(FormCS);
         }
         #endregion
         #region Update
@@ -117,6 +125,7 @@ namespace AlisverisSepeti.Admin
             }
             else
             {
+                List<string> errorList = new List<string>();
                 using (var context = new Models.AlisverisSepetiContext())
                 {
                     ViewBag.SubmitButtonValue = "Güncelle";
@@ -141,12 +150,12 @@ namespace AlisverisSepeti.Admin
                     catch (InvalidOperationException)
                     {
                         ViewBag.error = "Degisken Tipi Bulunamadi.";
-                        return View(FormCS);
+                        errorList.Add("Degisken Tipi Bulunamadi.");
                     }
                     if (context.Ozelliktipleris.AsNoTracking().Any(tip => tip.OzellikTipi == ozelliktipleri.OzellikTipi && ozelliktipleri.OzellikTipiId != id))
                     {
                         ViewBag.error = "Aynı Özellik Tipinde Kayıt Bulunuyor.";
-                        return View(FormCS);
+                        errorList.Add("Aynı Özellik Tipinde Kayıt Bulunuyor.");
                     }
                     else
                     {
@@ -155,17 +164,19 @@ namespace AlisverisSepeti.Admin
                             ozelliktipleri.OzellikTipiId = id;
                             context.Ozelliktipleris.Update(ozelliktipleri);
                             context.SaveChanges();
+                            TempData["success"] = "Başarıyla Güncellendi.";
+                            return RedirectToAction("Index");
                         }
                         catch (DbUpdateException e)
                         {
                             ViewBag.error = e.InnerException.Message;
-                            return View(FormCS);
+                            errorList.Add(e.InnerException.Message);
                         }
                     }
                 }
+                ViewBag.errorList = errorList;
             }
-            TempData["success"] = "Başarıyla Güncellendi.";
-            return RedirectToAction("Index");
+            return View(FormCS);
         }
         #endregion
         #region Delete

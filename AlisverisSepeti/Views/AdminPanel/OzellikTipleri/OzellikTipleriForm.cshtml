@@ -5,6 +5,15 @@
     Layout = "~/Views/Layouts/Admin/AdminLayout.cshtml";
     var OzellikTipleri = ViewBag.OzellikTipleri as AlisverisSepeti.Models.Ozelliktipleri;
 }
+@if(ViewBag.errorList != null && ViewBag.errorList.Count > 0)
+            {
+            <ul>
+                @foreach (var error in ViewBag.errorList as List<string>)
+                {
+                    <li>@error</li>
+                }
+            </ul>
+            }
 <form method="POST" enctype="multipart/form-data">
     <table>
         <tr>
