@@ -26,7 +26,7 @@
                     @foreach (var degisken in ViewBag.DegiskenTipleri as List<AlisverisSepeti.Models.Degiskentipleri>)
                     {
                         <option value="@degisken.Id"
-                                @(OzellikTipleri.DegiskenTipi != 0 && OzellikTipleri.DegiskenTipi == degisken.Id ? "selected")>
+                                @((OzellikTipleri.DegiskenTipi != 0 && OzellikTipleri.DegiskenTipi == degisken.Id) ? "selected":"")>
                             @degisken.DegiskenAdi
                         </option>
                     }
@@ -61,10 +61,10 @@
                 <b>Liste</b>
             </td>
             <td>
-                <label for="1">Evet</label>
-                <input type="radio" id="1" name="Liste" value="false" checked="@(OzellikTipleri.Liste == false ? "checked" )" />
-                <label for="1">Evet</label>
-                <input type="radio" id="2" name="Liste" value="true" checked="@(OzellikTipleri.Liste == true ? "checked" )" />
+                <label for="1">Hayır</label>
+                <input type="radio" id="1" name="Liste" value="false" @(OzellikTipleri.Liste == false ? "checked" :"" ) />
+                <label for="2">Evet</label>
+                <input type="radio" id="2" name="Liste" value="true" @(OzellikTipleri.Liste == true ? "checked" :"" ) />
 
             </td>
         </tr>
