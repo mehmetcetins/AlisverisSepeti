@@ -1,0 +1,59 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    Layout = "~/Views/Layouts/Admin/AdminLayout.cshtml";
+    var OzelliklerDil = ViewBag.OzelliklerDil as AlisverisSepeti.Models.OzelliklerDil;
+}
+
+
+<table>
+    <tbody>
+        <tr>
+            <td>
+                <b>Ozellik Adi</b>
+            </td>
+            <td>
+                @OzelliklerDil.OzellikAdi
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Açıklama</b>
+
+            </td>
+
+            <td>
+                @OzelliklerDil.OzellikAciklama
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Dil</b>
+
+            </td>
+
+            <td>
+                @OzelliklerDil.Dil.DilKodu
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Dil Logo</b>
+            </td>
+            <td>
+                <img src="~/Public/images/Diller/@OzelliklerDil.Dil.DilLogo" width="200"/>
+            </td>
+        </tr>
+       
+        <tr>
+            <td>
+                <a class="sil" href="/admin/OzelliklerDil/Delete/@OzelliklerDil.OzellikDilId">Sil</a>
+                <a href="/admin/OzelliklerDil/OzelliklerDilForm/Update/@OzelliklerDil.OzellikDilId">Duzenle</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+@Html.Partial("~/Views/AdminPanel/Ozellikler/Detail.cshtml", new ViewDataDictionary(this.ViewData) { { "Ozellikler", OzelliklerDil.Ozellik} })

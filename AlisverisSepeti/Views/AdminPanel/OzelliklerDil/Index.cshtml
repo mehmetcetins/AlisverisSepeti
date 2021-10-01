@@ -1,0 +1,39 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    Layout = "~/Views/Layouts/Admin/AdminLayout.cshtml";
+}
+
+<a href="@Context.Request.Path/OzelliklerDilForm/Add/">Ekle</a>
+<table cellspacing="0" border="1" cellpadding="10">
+    <thead>
+        <tr>
+            <th>Stok Durumu</th>
+            <th>Dil</th>
+            <th>Birim</th>
+            <th>Degisken Adi</th>
+            <th>İşlemler</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var OzelliklerDil in ViewBag.OzelliklerDil as List<AlisverisSepeti.Models.OzelliklerDil>)
+        {
+        <tr>
+            
+            <td><a href="@Context.Request.Path/@OzelliklerDil.OzellikDilId">@OzelliklerDil.OzellikAdi</a></td>
+            <td>@OzelliklerDil.Dil.DilKodu</td>
+            <td>@OzelliklerDil.Ozellik.Birim</td>
+            <td>@OzelliklerDil.Ozellik.OzellikTipiNavigation.DegiskenTipiNavigation.DegiskenAdi</td>
+
+            <td>
+                <a class="sil" href="@Context.Request.Path/Delete/@OzelliklerDil.OzellikDilId">Sil</a>
+                <a href="@Context.Request.Path/OzelliklerDilForm/Update/@OzelliklerDil.OzellikDilId">Düzenle</a>
+            </td>
+        </tr>
+
+
+
+        }
+    </tbody>
+</table>
