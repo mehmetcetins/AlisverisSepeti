@@ -9,6 +9,7 @@ namespace AlisverisSepeti.Models
     {
         public Ozellikler()
         {
+            Ozellikdegerleris = new HashSet<Ozellikdegerleri>();
             OzelliklerDils = new HashSet<OzelliklerDil>();
         }
 
@@ -24,6 +25,7 @@ namespace AlisverisSepeti.Models
 
         public virtual Ozellikgrup OzellikGrup { get; set; }
         public virtual Ozelliktipleri OzellikTipiNavigation { get; set; }
+        public virtual ICollection<Ozellikdegerleri> Ozellikdegerleris { get; set; }
         public virtual ICollection<OzelliklerDil> OzelliklerDils { get; set; }
     }
 }

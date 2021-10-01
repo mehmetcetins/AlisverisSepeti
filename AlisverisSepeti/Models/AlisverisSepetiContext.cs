@@ -32,6 +32,7 @@ namespace AlisverisSepeti.Models
         public virtual DbSet<Markalar> Markalars { get; set; }
         public virtual DbSet<Odemesecenekleri> Odemesecenekleris { get; set; }
         public virtual DbSet<Opsiyontipleri> Opsiyontipleris { get; set; }
+        public virtual DbSet<Ozellikdegerleri> Ozellikdegerleris { get; set; }
         public virtual DbSet<Ozellikgrup> Ozellikgrups { get; set; }
         public virtual DbSet<OzellikgrupDil> OzellikgrupDils { get; set; }
         public virtual DbSet<Ozellikler> Ozelliklers { get; set; }
@@ -403,6 +404,32 @@ namespace AlisverisSepeti.Models
                     .IsRequired()
                     .HasMaxLength(50)
                     .HasColumnName("ismi");
+            });
+
+            modelBuilder.Entity<Ozellikdegerleri>(entity =>
+            {
+                entity.HasKey(e => e.OzellikDegerId)
+                    .HasName("PRIMARY");
+
+                entity.ToTable("ozellikdegerleri");
+
+                entity.HasIndex(e => e.OzellikId, "lnk_ozellikler_ozellikdegerleri");
+
+                entity.Property(e => e.OzellikDegerId).HasColumnName("OzellikDegerID");
+
+                entity.Property(e => e.EklenmeTarihi)
+                    .IsRequired()
+                    .HasMaxLength(30);
+
+                entity.Property(e => e.GuncellenmeTarihi).HasMaxLength(30);
+
+                entity.Property(e => e.OzellikId).HasColumnName("OzellikID");
+
+                entity.HasOne(d => d.Ozellik)
+                    .WithMany(p => p.Ozellikdegerleris)
+                    .HasForeignKey(d => d.OzellikId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("lnk_ozellikler_ozellikdegerleri");
             });
 
             modelBuilder.Entity<Ozellikgrup>(entity =>
