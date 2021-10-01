@@ -9,6 +9,7 @@ namespace AlisverisSepeti.Models
     {
         public Diller()
         {
+            OzellikdegerleriDils = new HashSet<OzellikdegerleriDil>();
             OzellikgrupDils = new HashSet<OzellikgrupDil>();
             OzelliklerDils = new HashSet<OzelliklerDil>();
             StokdurumDils = new HashSet<StokdurumDil>();
@@ -24,6 +25,7 @@ namespace AlisverisSepeti.Models
         public bool Aktifmi { get; set; }
         public bool? Varsayilanmi { get; set; }
 
+        public virtual ICollection<OzellikdegerleriDil> OzellikdegerleriDils { get; set; }
         public virtual ICollection<OzellikgrupDil> OzellikgrupDils { get; set; }
         public virtual ICollection<OzelliklerDil> OzelliklerDils { get; set; }
         public virtual ICollection<StokdurumDil> StokdurumDils { get; set; }

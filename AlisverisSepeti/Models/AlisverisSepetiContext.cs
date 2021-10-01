@@ -33,6 +33,7 @@ namespace AlisverisSepeti.Models
         public virtual DbSet<Odemesecenekleri> Odemesecenekleris { get; set; }
         public virtual DbSet<Opsiyontipleri> Opsiyontipleris { get; set; }
         public virtual DbSet<Ozellikdegerleri> Ozellikdegerleris { get; set; }
+        public virtual DbSet<OzellikdegerleriDil> OzellikdegerleriDils { get; set; }
         public virtual DbSet<Ozellikgrup> Ozellikgrups { get; set; }
         public virtual DbSet<OzellikgrupDil> OzellikgrupDils { get; set; }
         public virtual DbSet<Ozellikler> Ozelliklers { get; set; }
@@ -430,6 +431,40 @@ namespace AlisverisSepeti.Models
                     .HasForeignKey(d => d.OzellikId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("lnk_ozellikler_ozellikdegerleri");
+            });
+
+            modelBuilder.Entity<OzellikdegerleriDil>(entity =>
+            {
+                entity.HasKey(e => e.OzellikDegerDilId)
+                    .HasName("PRIMARY");
+
+                entity.ToTable("ozellikdegerleri_dil");
+
+                entity.HasIndex(e => e.DilId, "lnk_diller_ozellikdegerleri_dil");
+
+                entity.HasIndex(e => e.OzellikDegerId, "lnk_ozellikdegerleri_ozellikdegerleri_dil");
+
+                entity.Property(e => e.OzellikDegerDilId).HasColumnName("OzellikDegerDilID");
+
+                entity.Property(e => e.DilId).HasColumnName("DilID");
+
+                entity.Property(e => e.OzellikDeger)
+                    .IsRequired()
+                    .HasMaxLength(30);
+
+                entity.Property(e => e.OzellikDegerId).HasColumnName("OzellikDegerID");
+
+                entity.HasOne(d => d.Dil)
+                    .WithMany(p => p.OzellikdegerleriDils)
+                    .HasForeignKey(d => d.DilId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("lnk_diller_ozellikdegerleri_dil");
+
+                entity.HasOne(d => d.OzellikDegerNavigation)
+                    .WithMany(p => p.OzellikdegerleriDils)
+                    .HasForeignKey(d => d.OzellikDegerId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("lnk_ozellikdegerleri_ozellikdegerleri_dil");
             });
 
             modelBuilder.Entity<Ozellikgrup>(entity =>
