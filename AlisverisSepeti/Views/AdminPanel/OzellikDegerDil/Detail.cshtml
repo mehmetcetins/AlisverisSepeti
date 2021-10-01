@@ -1,0 +1,50 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    Layout = "~/Views/Layouts/Admin/AdminLayout.cshtml";
+    var OzellikDegerDil = ViewBag.OzellikDegerDil as AlisverisSepeti.Models.OzellikdegerleriDil;
+}
+
+
+<table>
+    <tbody>
+       
+        <tr>
+            <td>
+                <b>Ozellik Deger</b>
+            </td>
+            <td>
+                @OzellikDegerDil.OzellikDeger
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Dil</b>
+
+            </td>
+
+            <td>
+                @OzellikDegerDil.Dil.DilKodu
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Dil Logo</b>
+            </td>
+            <td>
+                <img src="~/Public/images/Diller/@OzellikDegerDil.Dil.DilLogo" width="200"/>
+            </td>
+        </tr>
+       
+        <tr>
+            <td>
+                <a class="sil" href="/admin/OzellikDegerDil/Delete/@OzellikDegerDil.OzellikDegerDilId">Sil</a>
+                <a href="/admin/OzellikDegerDil/OzellikDegerDilForm/Update/@OzellikDegerDil.OzellikDegerDilId">Duzenle</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+@Html.Partial("~/Views/AdminPanel/OzellikDegerleri/Detail.cshtml", new ViewDataDictionary(this.ViewData) { { "OzellikDegerleri", OzellikDegerDil.OzellikDegerNavigation } })
