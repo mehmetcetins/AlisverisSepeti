@@ -35,6 +35,7 @@ namespace AlisverisSepeti.Models
         public virtual DbSet<Ozellikgrup> Ozellikgrups { get; set; }
         public virtual DbSet<OzellikgrupDil> OzellikgrupDils { get; set; }
         public virtual DbSet<Ozellikler> Ozelliklers { get; set; }
+        public virtual DbSet<OzelliklerDil> OzelliklerDils { get; set; }
         public virtual DbSet<Ozelliktipleri> Ozelliktipleris { get; set; }
         public virtual DbSet<Poslar> Poslars { get; set; }
         public virtual DbSet<Stokdurum> Stokdurums { get; set; }
@@ -520,6 +521,42 @@ namespace AlisverisSepeti.Models
                     .HasForeignKey(d => d.OzellikTipiId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("lnk_ozelliktipleri_ozellikler");
+            });
+
+            modelBuilder.Entity<OzelliklerDil>(entity =>
+            {
+                entity.HasKey(e => e.OzellikDilId)
+                    .HasName("PRIMARY");
+
+                entity.ToTable("ozellikler_dil");
+
+                entity.HasIndex(e => e.DilId, "lnk_diller_ozellikler_dil");
+
+                entity.HasIndex(e => e.OzellikId, "lnk_ozellikler_ozellikler_dil");
+
+                entity.Property(e => e.OzellikDilId).HasColumnName("OzellikDilID");
+
+                entity.Property(e => e.DilId).HasColumnName("DilID");
+
+                entity.Property(e => e.OzellikAciklama).HasColumnType("tinytext");
+
+                entity.Property(e => e.OzellikAdi)
+                    .IsRequired()
+                    .HasMaxLength(20);
+
+                entity.Property(e => e.OzellikId).HasColumnName("OzellikID");
+
+                entity.HasOne(d => d.Dil)
+                    .WithMany(p => p.OzelliklerDils)
+                    .HasForeignKey(d => d.DilId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("lnk_diller_ozellikler_dil");
+
+                entity.HasOne(d => d.Ozellik)
+                    .WithMany(p => p.OzelliklerDils)
+                    .HasForeignKey(d => d.OzellikId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("lnk_ozellikler_ozellikler_dil");
             });
 
             modelBuilder.Entity<Ozelliktipleri>(entity =>
