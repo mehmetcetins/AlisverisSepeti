@@ -19,7 +19,12 @@
                     {
                         <option value="@ozellik.OzellikId"
                                 @if (OzellikDegerleri.OzellikId != 0) { @if (OzellikDegerleri.OzellikId == ozellik.OzellikId) { @("selected")  }  }>
-                            @ozellik.OzelliklerDils.First().OzellikAdi
+                            @if(ozellik.OzelliklerDils.Count > 0)
+                                @ozellik.OzelliklerDils.First().OzellikAdi
+                            else
+                            {
+                                @("Ozellik Adi Yok")
+                            }
                         </option>
 
                     }
