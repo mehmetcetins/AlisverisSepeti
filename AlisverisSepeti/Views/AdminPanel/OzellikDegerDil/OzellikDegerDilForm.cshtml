@@ -13,7 +13,7 @@
             </td>
             <td>
 
-                <input type="text" name="StokDurum" value="@OzellikDegerDil.OzellikDeger" />
+                <input type="text" name="OzellikDeger" value="@OzellikDegerDil.OzellikDeger" />
 
             </td>
         </tr>
@@ -47,7 +47,14 @@
                     {
                         <option value="@ozellikdeger.OzellikDegerId"
                                 @if (OzellikDegerDil.OzellikDegerId != 0) { @if (OzellikDegerDil.OzellikDegerId == ozellikdeger.OzellikDegerId ) { @("selected")  }  }>
-                            @ozellikdeger.Ozellik.OzelliklerDils.First().OzellikAdi
+                            @if (ozellikdeger.Ozellik.OzelliklerDils.Count > 0)
+                            {
+                                @ozellikdeger.Ozellik.OzelliklerDils.First().OzellikAdi
+                            }
+                            else
+                            {
+                                @("Ozellik Adi Yok")
+                            }
                         </option>
 
                     }
