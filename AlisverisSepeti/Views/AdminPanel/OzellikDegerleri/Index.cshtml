@@ -21,7 +21,18 @@
         {
         <tr>
             
-            <td><a href="@Context.Request.Path/@OzellikDegerleri.OzellikDegerId">@OzellikDegerleri.Ozellik.OzelliklerDils.First().OzellikAdi</a></td>
+            <td>
+                <a href="@Context.Request.Path/@OzellikDegerleri.OzellikDegerId">
+                @if (OzellikDegerleri.Ozellik.OzelliklerDils.Count > 0)
+                {
+                    @OzellikDegerleri.Ozellik.OzelliklerDils.First().OzellikAdi
+                }
+                else
+                {
+                    @("Ozellik Adi Yok.")
+                }
+                </a>
+            </td>
             <td>@OzellikDegerleri.Ozellik.Birim</td>
             <td>@OzellikDegerleri.Ozellik.OzellikTipiNavigation.DegiskenTipiNavigation.DegiskenAdi</td>
 
