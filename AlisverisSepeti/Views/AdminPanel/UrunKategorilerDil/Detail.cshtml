@@ -1,0 +1,72 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    Layout = "~/Views/Layouts/Admin/AdminLayout.cshtml";
+    var UrunKategorilerDil = ViewBag.UrunKategorilerDil as AlisverisSepeti.Models.UrunkategorilerDil;
+}
+
+
+<table>
+    <tbody>
+        <tr>
+            <td>
+                <b>Kategori Adi</b>
+            </td>
+            <td>
+                @UrunKategorilerDil.KategoriAdi
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Kategori Açıklama</b>
+
+            </td>
+
+            <td>
+                @UrunKategorilerDil.KategoriAciklama
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Page Title</b>
+            </td>
+            <td>
+                @UrunKategorilerDil.PageTitle
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Page Labels</b>
+            </td>
+            <td>
+                @UrunKategorilerDil.PageLabels
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Page Keywords</b>
+            </td>
+            <td>
+                @UrunKategorilerDil.PageKeywords
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Page Description</b>
+            </td>
+            <td>
+                @UrunKategorilerDil.PageDescription
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <a class="sil" href="/admin/UrunKategorilerDil/Delete/@UrunKategorilerDil.KategoriId">Sil</a>
+                <a href="/admin/UrunKategorilerDil/UrunKategorilerDilForm/Update/@UrunKategorilerDil.KategoriId">Duzenle</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+@Html.Partial("~/Views/AdminPanel/UrunKategoriler/Detail.cshtml",new ViewDataDictionary(this.ViewData) { {"UrunKategoriler",UrunKategorilerDil.Kategori } });
