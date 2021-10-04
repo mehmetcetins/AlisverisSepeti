@@ -23,6 +23,7 @@
             </td>
             <td>
                 <select name="PkategoriId">
+                    <option value="0">Üst Kategori Yok</option>
                     @foreach (var Kategoriler in ViewBag.Kategoriler as List<AlisverisSepeti.Models.Urunkategoriler>)
                     {
                         <option value="@Kategoriler.KategoriId">@Kategoriler.KategoriAdi</option>
@@ -60,7 +61,11 @@
 
             </td>
         </tr>
-        
+        <tr>
+            <td colspan="2">
+                <center><input type="submit" value="@ViewBag.SubmitButtonValue" /></center>
+            </td>
+        </tr>
 
 
     </table>
