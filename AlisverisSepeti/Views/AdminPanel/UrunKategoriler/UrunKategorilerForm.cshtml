@@ -48,10 +48,21 @@
             </td>
 
             <td>
-                <input type="radio" name="Aktifmi" checked="@(UrunKategori.Aktifmi == false)" />
-                <input type="radio" name="Aktifmi" checked="@(UrunKategori.Aktifmi == true)" />
+                <input type="radio" name="Aktifmi" value="False" checked="@(UrunKategori.Aktifmi == false)" />
+                <input type="radio" name="Aktifmi" value="True" checked="@(UrunKategori.Aktifmi == true)" />
             </td>
         </tr>
+        @if (UrunKategori.Silindimi == true)
+        {
+            <tr>
+                <td><b>Silindi mi?</b></td>
+                <td>
+                    <input type="radio" name="Silindimi" value="False" checked="@(UrunKategori.Silindimi == false)" />
+                    <input type="radio" name="Silindimi" value="True" checked="@(UrunKategori.Silindimi == true)" />
+                </td>
+            </tr>
+        }
+
         <tr>
             <td>
                 <b>Dizilis Sira</b>
