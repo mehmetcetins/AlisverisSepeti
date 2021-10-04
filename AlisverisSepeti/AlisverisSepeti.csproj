@@ -26,6 +26,7 @@
     <Folder Include="Public\images\HavaleBankalari\" />
     <Folder Include="Public\images\Kargolar\" />
     <Folder Include="Public\images\KrediKartlari\" />
+    <Folder Include="Public\images\UrunKategoriler\" />
     <Folder Include="Public\images\UrunDosya\" />
     <Folder Include="Public\images\StokDurum\" />
   </ItemGroup>

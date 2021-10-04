@@ -1,0 +1,142 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    Layout = "~/Views/Layouts/Admin/AdminLayout.cshtml";
+    var UrunKategoriler = ViewBag.UrunKategoriler as AlisverisSepeti.Models.Urunkategoriler;
+}
+
+
+<table>
+    <tbody>
+        <tr>
+            <td>
+                <b>Ekleyen</b>
+            </td>
+            <td>
+                @UrunKategoriler.EkleyenNavigation.KullaniciIsim
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Eklenme Tarihi</b>
+
+            </td>
+
+            <td>
+                @UrunKategoriler.EklenmeTarihi
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Güncelleyen</b>
+
+            </td>
+
+            <td>
+                @if (UrunKategoriler.GuncelleyenNavigation == null)
+                {
+                    @("-")
+                }
+                else
+                {
+                    @UrunKategoriler.GuncelleyenNavigation.KullaniciIsim
+                }
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Güncellenme Tarihi</b>
+            </td>
+            <td>
+                @UrunKategoriler.GuncellenmeTarihi
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Kategori Adi</b>
+            </td>
+            <td>
+                @UrunKategoriler.KategoriAdi
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Kategori Logo</b>
+            </td>
+            <td>
+                <img src="~/Public/images/UrunKategoriler/@UrunKategoriler.KategoriLogo" alt="Kategori Logo" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Üst Kategori Adi</b>
+            </td>
+            <td>
+
+                @if (UrunKategoriler.InversePkategori == null)
+                {
+                    @("-")
+                }
+                else
+                {
+                    @UrunKategoriler.InversePkategori.KategoriAdi
+                }
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Derinlik</b>
+            </td>
+            <td>
+                @UrunKategoriler.Depth
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Üst Kategori Sayısı</b>
+            </td>
+            <td>
+                @UrunKategoriler.Lineage
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Aktif mi</b>
+            </td>
+            <td>
+                @UrunKategoriler.Aktifmi
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Silindi mi</b>
+            </td>
+            <td>
+                @UrunKategoriler.Silindimi
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Diziliş Sıra</b>
+            </td>
+            <td>
+                @UrunKategoriler.DizilisSira
+
+            </td>
+        </tr>
+        
+
+        <tr>
+            <td>
+                <a class="sil" href="/admin/UrunKategoriler/Delete/@UrunKategoriler.KategoriId">Sil</a>
+                <a href="/admin/KrediKartlari/UrunKategorilerForm/Update/@UrunKategoriler.KategoriId">Duzenle</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
