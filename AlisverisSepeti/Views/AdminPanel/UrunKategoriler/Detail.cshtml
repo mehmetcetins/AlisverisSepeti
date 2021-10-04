@@ -75,13 +75,13 @@
             </td>
             <td>
 
-                @if (UrunKategoriler.InversePkategori == null)
+                @if (UrunKategoriler.Pkategori == null)
                 {
                     @("-")
                 }
                 else
                 {
-                    @UrunKategoriler.InversePkategori.KategoriAdi
+                    @UrunKategoriler.Pkategori.KategoriAdi
                 }
             </td>
         </tr>
@@ -135,7 +135,7 @@
         <tr>
             <td>
                 <a class="sil" href="/admin/UrunKategoriler/Delete/@UrunKategoriler.KategoriId">Sil</a>
-                <a href="/admin/KrediKartlari/UrunKategorilerForm/Update/@UrunKategoriler.KategoriId">Duzenle</a>
+                <a href="/admin/UrunKategoriler/UrunKategorilerForm/Update/@UrunKategoriler.KategoriId">Duzenle</a>
             </td>
         </tr>
     </tbody>
