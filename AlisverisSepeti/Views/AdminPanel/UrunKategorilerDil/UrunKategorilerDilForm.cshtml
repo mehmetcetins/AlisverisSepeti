@@ -37,6 +37,24 @@
         </tr>
         <tr>
             <td>
+                <b>Dil</b>
+            </td>
+            <td>
+                <select name="DilId">
+                    @foreach (var dil in ViewBag.Diller as List<AlisverisSepeti.Models.Diller>)
+                    {
+                        <option value="@dil.DilId"
+                                @(UrunKategorilerDil.DilId != 0 && dil.DilId == UrunKategorilerDil.DilId ? "selected" : "" )>
+                            @dil.DilKodu
+                        </option>
+
+                    }
+                </select>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
                 <b>Kategori Açıklama</b>
             </td>
             <td>
