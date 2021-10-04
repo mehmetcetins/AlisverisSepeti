@@ -788,11 +788,12 @@ namespace AlisverisSepeti.Models
 
                 entity.ToTable("urunkategoriler");
 
-                entity.HasIndex(e => e.PkategoriId, "lnk_urunkategoriler_urunkategoriler");
-
                 entity.HasIndex(e => e.EkleyenId, "lnk_users_urunkategoriler");
 
                 entity.HasIndex(e => e.GuncelleyenId, "lnk_users_urunkategoriler_2");
+
+                entity.HasIndex(e => e.PkategoriId, "unique_PKategoriID")
+                    .IsUnique();
 
                 entity.Property(e => e.KategoriId).HasColumnName("KategoriID");
 
@@ -835,9 +836,8 @@ namespace AlisverisSepeti.Models
                     .HasConstraintName("lnk_users_urunkategoriler_2");
 
                 entity.HasOne(d => d.Pkategori)
-                    .WithMany(p => p.InversePkategori)
-                    .HasForeignKey(d => d.PkategoriId)
-                    .OnDelete(DeleteBehavior.Cascade)
+                    .WithOne(p => p.InversePkategori)
+                    .HasForeignKey<Urunkategoriler>(d => d.PkategoriId)
                     .HasConstraintName("lnk_urunkategoriler_urunkategoriler");
             });
 
