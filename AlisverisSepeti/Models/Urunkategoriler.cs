@@ -7,6 +7,11 @@ namespace AlisverisSepeti.Models
 {
     public partial class Urunkategoriler
     {
+        public Urunkategoriler()
+        {
+            UrunkategorilerDils = new HashSet<UrunkategorilerDil>();
+        }
+
         public int KategoriId { get; set; }
         public int? PkategoriId { get; set; }
         public int EkleyenId { get; set; }
@@ -28,5 +33,6 @@ namespace AlisverisSepeti.Models
         public virtual User GuncelleyenNavigation { get; set; }
         public virtual Urunkategoriler Pkategori { get; set; }
         public virtual Urunkategoriler InversePkategori { get; set; }
+        public virtual ICollection<UrunkategorilerDil> UrunkategorilerDils { get; set; }
     }
 }

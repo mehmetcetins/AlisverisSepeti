@@ -44,6 +44,7 @@ namespace AlisverisSepeti.Models
         public virtual DbSet<StokdurumDil> StokdurumDils { get; set; }
         public virtual DbSet<Urundosyalar> Urundosyalars { get; set; }
         public virtual DbSet<Urunkategoriler> Urunkategorilers { get; set; }
+        public virtual DbSet<UrunkategorilerDil> UrunkategorilerDils { get; set; }
         public virtual DbSet<Urunler> Urunlers { get; set; }
         public virtual DbSet<UrunlerDil> UrunlerDils { get; set; }
         public virtual DbSet<Urunopsiyonlar> Urunopsiyonlars { get; set; }
@@ -839,6 +840,50 @@ namespace AlisverisSepeti.Models
                     .WithOne(p => p.InversePkategori)
                     .HasForeignKey<Urunkategoriler>(d => d.PkategoriId)
                     .HasConstraintName("lnk_urunkategoriler_urunkategoriler");
+            });
+
+            modelBuilder.Entity<UrunkategorilerDil>(entity =>
+            {
+                entity.HasKey(e => e.KategoriDilId)
+                    .HasName("PRIMARY");
+
+                entity.ToTable("urunkategoriler_dil");
+
+                entity.HasIndex(e => e.DilId, "lnk_diller_urunkategoriler_dil");
+
+                entity.HasIndex(e => e.KategoriId, "lnk_urunkategoriler_urunkategoriler_dil");
+
+                entity.Property(e => e.KategoriDilId).HasColumnName("KategoriDilID");
+
+                entity.Property(e => e.DilId).HasColumnName("DilID");
+
+                entity.Property(e => e.KategoriAciklama).HasColumnType("tinytext");
+
+                entity.Property(e => e.KategoriAdi)
+                    .IsRequired()
+                    .HasMaxLength(30);
+
+                entity.Property(e => e.KategoriId).HasColumnName("KategoriID");
+
+                entity.Property(e => e.PageDescription).HasColumnType("tinytext");
+
+                entity.Property(e => e.PageKeywords).HasColumnType("tinytext");
+
+                entity.Property(e => e.PageLabels).HasColumnType("tinytext");
+
+                entity.Property(e => e.PageTitle).HasMaxLength(50);
+
+                entity.HasOne(d => d.Dil)
+                    .WithMany(p => p.UrunkategorilerDils)
+                    .HasForeignKey(d => d.DilId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("lnk_diller_urunkategoriler_dil");
+
+                entity.HasOne(d => d.Kategori)
+                    .WithMany(p => p.UrunkategorilerDils)
+                    .HasForeignKey(d => d.KategoriId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("lnk_urunkategoriler_urunkategoriler_dil");
             });
 
             modelBuilder.Entity<Urunler>(entity =>
