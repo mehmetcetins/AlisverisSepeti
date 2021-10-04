@@ -29,7 +29,16 @@
             <td><a href="@Context.Request.Path/@UrunKategori.KategoriId">@UrunKategori.EkleyenNavigation.KullaniciIsim</a></td>
             
             <td>@UrunKategori.KategoriAdi</td>
-            <td>@UrunKategori.InversePkategori.KategoriAdi</td>
+            <td>
+                @if (UrunKategori.InversePkategori != null)
+                {
+                    @UrunKategori.InversePkategori.KategoriAdi
+                }
+                else
+                {
+                    @("-")
+                }
+            </td>
             <td>@UrunKategori.Depth</td>
             <td>@UrunKategori.Lineage</td>
             <td>@UrunKategori.Silindimi</td>
