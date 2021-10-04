@@ -10,6 +10,7 @@
     <thead>
         <tr>
             <th>Kategori Adı</th>
+            <th>Urun Kategori Adı</th>
             <th>Page Title</th>
             <th>Page Keywords</th>
             <th>Page Labels</th>
@@ -22,7 +23,7 @@
         <tr>
             
             <td><a href="@Context.Request.Path/@UrunKategoriDil.KategoriDilId">@UrunKategoriDil.KategoriAdi</a></td>
-            
+            <td>@UrunKategoriDil.Kategori.KategoriAdi</td>
             <td>@UrunKategoriDil.PageTitle</td>
             <td>@UrunKategoriDil.PageKeywords</td>
             <td>@UrunKategoriDil.PageLabels</td>
