@@ -805,15 +805,15 @@ namespace AlisverisSepeti.Models
 
                 entity.Property(e => e.EkleyenId).HasColumnName("EkleyenID");
 
-                entity.Property(e => e.GuncellenmeTarihi)
-                    .IsRequired()
-                    .HasMaxLength(30);
+                entity.Property(e => e.GuncellenmeTarihi).HasMaxLength(30);
 
                 entity.Property(e => e.Guncelleyen).HasMaxLength(50);
 
                 entity.Property(e => e.GuncelleyenId).HasColumnName("GuncelleyenID");
 
-                entity.Property(e => e.KategoriAdi).HasMaxLength(30);
+                entity.Property(e => e.KategoriAdi)
+                    .IsRequired()
+                    .HasMaxLength(30);
 
                 entity.Property(e => e.KategoriLogo).HasMaxLength(50);
 
