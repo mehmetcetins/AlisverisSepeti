@@ -16,7 +16,7 @@
             <th>Nesil</th>
             <th>Silindi mi </th>
             <th>Aktif mi</th>
-           
+            <th>Eklenme Tarihi</th>
             
             <th>İşlemler</th>
         </tr>
@@ -30,9 +30,9 @@
             
             <td>@UrunKategori.KategoriAdi</td>
             <td>
-                @if (UrunKategori.InversePkategori != null)
+                @if (UrunKategori.Pkategori != null)
                 {
-                    @UrunKategori.InversePkategori.KategoriAdi
+                    @UrunKategori.Pkategori.KategoriAdi
                 }
                 else
                 {
