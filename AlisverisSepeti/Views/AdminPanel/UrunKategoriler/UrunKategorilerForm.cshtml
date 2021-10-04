@@ -19,6 +19,21 @@
         </tr>
         <tr>
             <td>
+                <b>Üst Kategori</b>
+            </td>
+            <td>
+                <select name="PkategoriId">
+                    @foreach (var Kategoriler in ViewBag.Kategoriler as List<AlisverisSepeti.Models.Urunkategoriler>)
+                    {
+                        <option value="@Kategoriler.KategoriId">@Kategoriler.KategoriAdi</option>
+
+                    }
+                </select>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
                 <b>Kategori Logo</b>
             </td>
             <td>
