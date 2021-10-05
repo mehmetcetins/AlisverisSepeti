@@ -1,0 +1,78 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    Layout = "~/Views/Layouts/Admin/AdminLayout.cshtml";
+    var UrunOzellikler = ViewBag.UrunOzellikler as AlisverisSepeti.Models.Urunozellikleri;
+}
+
+
+<table>
+    <tbody>
+        <tr>
+            <td>
+                <b>Ozellik Adi</b>
+            </td>
+            <td>
+                @UrunOzellikler.OzellikAdi
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Değer</b>
+            </td>
+            <td>
+                @UrunOzellikler.Deger
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Eklenme Tarihi</b>
+
+            </td>
+
+            <td>
+                @UrunOzellikler.OzellikAciklama
+            </td>
+        </tr>
+        
+        <tr>
+            <td>
+                <b>@UrunOzellikler.OzellikTipi</b>
+            </td>
+            <td>
+                @UrunOzellikler.DegiskenTipi
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Degisken Tipi</b>
+            </td>
+            <td>
+                @UrunOzellikler.DegiskenTipi
+            </td>
+        </tr>
+        
+        <tr>
+            <td>
+                <b>Diziliş Sıra</b>
+            </td>
+            <td>
+                @UrunOzellikler.DizilisSira
+
+            </td>
+        </tr>
+
+
+        <tr>
+            <td>
+                <a class="sil" href="/admin/UrunOzellikler/Delete/@UrunOzellikler.UrunOzellikId">Sil</a>
+                <a href="/admin/UrunOzellikler/UrunOzelliklerForm/Update/@UrunOzellikler.UrunOzellikId">Duzenle</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+@Html.Partial("~/Views/AdminPanel/Urunler/Detail.cshtml",new ViewDataDictionary(this.ViewData) { {"Urunler", UrunOzellikler.Urun } })
+@Html.Partial("~/Views/AdminPanel/Ozellikler/Detail.cshtml",new ViewDataDictionary(this.ViewData) { {"Ozellikler", UrunOzellikler.Ozellik } })

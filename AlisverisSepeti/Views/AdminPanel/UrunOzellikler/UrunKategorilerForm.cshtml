@@ -1,0 +1,113 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    Layout = "~/Views/Layouts/Admin/AdminLayout.cshtml";
+    var UrunOzellikler = ViewBag.UrunOzellikler as AlisverisSepeti.Models.Urunozellikleri;
+}
+<form method="POST" enctype="multipart/form-data">
+    <table>
+        <tr>
+            <td>
+                <b>Ozellik Adi</b>
+            </td>
+            <td>
+
+                <input type="text" name="OzellikAdi" value="@UrunOzellikler.OzellikAdi" />
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Ozellik Açıklama</b>
+            </td>
+            <td>
+                <input type="text" name="OzellikAciklama" value="@UrunOzellikler.OzellikAciklama" />
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Değer</b>
+            </td>
+            <td>
+                <input type="text" name="Deger" value="@UrunOzellikler.Deger" />
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Ozellik Tipi</b>
+            </td>
+            <td>
+                <input type="text" name="OzellikTipi" value="@UrunOzellikler.OzellikTipi" />
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Değişken Tipi</b>
+            </td>
+            <td>
+                <input type="text" name="DegiskenTipi" value="@UrunOzellikler.DegiskenTipi" />
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Dizilis Sira</b>
+            </td>
+            <td>
+                <input type="number" name="DizilisSira" value="@UrunOzellikler.DizilisSira" />
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Ozellik</b>
+            </td>
+            <td>
+                <select name="OzellikId">
+                    @foreach (var ozellik in ViewBag.Ozellikler as List<AlisverisSepeti.Models.Ozellikler>)
+                    {
+                        <option value="@ozellik.OzellikId"
+                                @(UrunOzellikler.OzellikId != 0 && ozellik.OzellikId == UrunOzellikler.OzellikId ? "selected" : "" )>
+                            @ozellik.OzelliklerDils.First().OzellikAdi
+                        </option>
+
+                    }
+                </select>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Ozellik</b>
+            </td>
+            <td>
+                <select name="UrunId">
+                    @foreach (var urun in ViewBag.Urunler as List<AlisverisSepeti.Models.Urunler>)
+                    {
+                        <option value="@urun.UrunId"
+                                @(UrunOzellikler.UrunId != 0 && urun.UrunId == UrunOzellikler.UrunId ? "selected" : "" )>
+                            @urun.UrunlerDils.First().UrunAdi;
+                        </option>
+
+                    }
+                </select>
+
+            </td>
+        </tr>
+
+
+        <tr>
+            <td colspan="2">
+                <center><input type="submit" value="@ViewBag.SubmitButtonValue" /></center>
+            </td>
+        </tr>
+
+
+    </table>
+
+
+</form>
