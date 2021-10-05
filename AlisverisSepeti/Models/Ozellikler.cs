@@ -11,6 +11,7 @@ namespace AlisverisSepeti.Models
         {
             Ozellikdegerleris = new HashSet<Ozellikdegerleri>();
             OzelliklerDils = new HashSet<OzelliklerDil>();
+            Urunozellikleris = new HashSet<Urunozellikleri>();
         }
 
         public int OzellikId { get; set; }
@@ -27,5 +28,6 @@ namespace AlisverisSepeti.Models
         public virtual Ozelliktipleri OzellikTipiNavigation { get; set; }
         public virtual ICollection<Ozellikdegerleri> Ozellikdegerleris { get; set; }
         public virtual ICollection<OzelliklerDil> OzelliklerDils { get; set; }
+        public virtual ICollection<Urunozellikleri> Urunozellikleris { get; set; }
     }
 }

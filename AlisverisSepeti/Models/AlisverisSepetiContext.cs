@@ -48,6 +48,7 @@ namespace AlisverisSepeti.Models
         public virtual DbSet<Urunler> Urunlers { get; set; }
         public virtual DbSet<UrunlerDil> UrunlerDils { get; set; }
         public virtual DbSet<Urunopsiyonlar> Urunopsiyonlars { get; set; }
+        public virtual DbSet<Urunozellikleri> Urunozellikleris { get; set; }
         public virtual DbSet<Uruntipleri> Uruntipleris { get; set; }
         public virtual DbSet<User> Users { get; set; }
 
@@ -1034,6 +1035,50 @@ namespace AlisverisSepeti.Models
                     .HasForeignKey(d => d.OpsiyonTipi)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("lnk_opsiyontipleri_urunopsiyonlar");
+            });
+
+            modelBuilder.Entity<Urunozellikleri>(entity =>
+            {
+                entity.HasKey(e => e.UrunOzellikId)
+                    .HasName("PRIMARY");
+
+                entity.ToTable("urunozellikleri");
+
+                entity.HasIndex(e => e.OzellikId, "lnk_ozellikler_urunozellikleri");
+
+                entity.HasIndex(e => e.UrunId, "lnk_urunler_urunozellikleri");
+
+                entity.Property(e => e.UrunOzellikId).HasColumnName("UrunOzellikID");
+
+                entity.Property(e => e.Deger)
+                    .IsRequired()
+                    .HasMaxLength(30);
+
+                entity.Property(e => e.DegiskenTipi).HasMaxLength(20);
+
+                entity.Property(e => e.OzellikAciklama).HasColumnType("tinytext");
+
+                entity.Property(e => e.OzellikAdi)
+                    .IsRequired()
+                    .HasMaxLength(20);
+
+                entity.Property(e => e.OzellikId).HasColumnName("OzellikID");
+
+                entity.Property(e => e.OzellikTipi).HasMaxLength(20);
+
+                entity.Property(e => e.UrunId).HasColumnName("UrunID");
+
+                entity.HasOne(d => d.Ozellik)
+                    .WithMany(p => p.Urunozellikleris)
+                    .HasForeignKey(d => d.OzellikId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("lnk_ozellikler_urunozellikleri");
+
+                entity.HasOne(d => d.Urun)
+                    .WithMany(p => p.Urunozellikleris)
+                    .HasForeignKey(d => d.UrunId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("lnk_urunler_urunozellikleri");
             });
 
             modelBuilder.Entity<Uruntipleri>(entity =>
