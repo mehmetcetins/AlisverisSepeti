@@ -22,6 +22,8 @@ namespace AlisverisSepeti.Admin
                 ViewBag.Kategoriler = context.Urunkategorilers.AsNoTracking().ToList();
             }
         }
+        #region Index
+
         public IActionResult Index()
         {
             using (var context = new Models.AlisverisSepetiContext())
@@ -34,6 +36,9 @@ namespace AlisverisSepeti.Admin
             }
             return View(IndexCS);
         }
+        #endregion
+        #region Detail
+
         [HttpGet("{id:int}")]
         public IActionResult Detail(int id)
         {
@@ -59,6 +64,10 @@ namespace AlisverisSepeti.Admin
             }
             return View(DetailCS);
         }
+        #endregion
+        #region Form
+        #region Get.Add
+
         [HttpGet("UrunKategorilerDilForm/Add")]
         public IActionResult Add()
         {
@@ -67,6 +76,9 @@ namespace AlisverisSepeti.Admin
             ViewBag.SubmitButtonValue = "Ekle";
             return View(FormCS);
         }
+        #endregion
+        #region Post.Add
+
         [HttpPost("UrunKategorilerDilForm/Add")]
         public IActionResult Add(Models.UrunkategorilerDil urunkategorilerDil)
         {
@@ -130,6 +142,9 @@ namespace AlisverisSepeti.Admin
             TempData["success"] = "Başarıyla Eklendi.";
             return RedirectToAction("Index");
         }
+        #endregion
+        #region Get.Update
+
         [HttpGet("UrunKategorilerDilForm/Update/{id:int}")]
         public IActionResult Update(int id)
         {
@@ -149,6 +164,9 @@ namespace AlisverisSepeti.Admin
             ViewBag.SubmitButtonValue = "Güncelle";
             return View(FormCS);
         }
+        #endregion
+        #region Post.Update
+
         [HttpPost("UrunKategorilerDilForm/Update/{id:int}")]
         public IActionResult Update (int id ,Models.UrunkategorilerDil urunkategorilerDil)
         {
@@ -219,6 +237,10 @@ namespace AlisverisSepeti.Admin
             TempData["success"] = "Başarıyla Güncellendi.";
             return RedirectToAction("Index");
         }
+        #endregion
+
+        #endregion
+        #region Delete
 
         [HttpDelete("Delete/{id:int}")]
         public IActionResult Delete(int id)
@@ -248,5 +270,6 @@ namespace AlisverisSepeti.Admin
             TempData["success"] = "Başarıyla Silindi.";
             return new EmptyResult();
         }
+        #endregion
     }
 }
