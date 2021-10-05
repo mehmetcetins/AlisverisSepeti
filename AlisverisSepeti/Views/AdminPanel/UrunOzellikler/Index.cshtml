@@ -22,11 +22,18 @@
         {
         <tr>
             
-            <td><a href="@Context.Request.Path/@UrunOzellikler.UrunOzellikId">@UrunOzellikler.Urun.UrunlerDils.First().UrunAdi</a></td>
+            <td><a href="@Context.Request.Path/@UrunOzellikler.UrunOzellikId">@
+                @if (UrunOzellikler.Urun.UrunlerDils.Count > 0)
+                { UrunOzellikler.Urun.UrunlerDils.First().UrunAdi}
+                else
+                {
+                    @("Urun Adi Yok")
+                }
+                </a></td>
             
-            <td>@UrunOzellikler.Ozellik.OzelliklerDils.First().OzellikAdi</td>
-            <td>@UrunOzellikler.Ozellik.OzellikTipiNavigation.OzellikTipi</td>
-            <td>@UrunOzellikler.Ozellik.OzellikTipiNavigation.DegiskenTipiNavigation.DegiskenAdi</td>
+            <td>@UrunOzellikler.OzellikAdi</td>
+            <td>@UrunOzellikler.OzellikTipi</td>
+            <td>@UrunOzellikler.DegiskenTipi</td>
             <td>@UrunOzellikler.DizilisSira</td>
 
             <td>
