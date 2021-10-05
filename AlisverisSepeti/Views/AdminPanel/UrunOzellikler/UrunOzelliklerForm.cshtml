@@ -70,10 +70,18 @@
                 <select name="OzellikId">
                     @foreach (var ozellik in ViewBag.Ozellikler as List<AlisverisSepeti.Models.Ozellikler>)
                     {
-                        <option value="@ozellik.OzellikId"
-                                @(UrunOzellikler.OzellikId != 0 && ozellik.OzellikId == UrunOzellikler.OzellikId ? "selected" : "" )>
+                    <option value="@ozellik.OzellikId"
+                            @(UrunOzellikler.OzellikId != 0 && ozellik.OzellikId == UrunOzellikler.OzellikId ? "selected" : "" )>
+                        @if (ozellik.OzelliklerDils.Count > 0)
+                        {
                             @ozellik.OzelliklerDils.First().OzellikAdi
-                        </option>
+
+                        }
+                        else
+                        {
+                            @("Ozellik Adi Yok")
+                        }
+                    </option>
 
                     }
                 </select>
@@ -82,16 +90,24 @@
         </tr>
         <tr>
             <td>
-                <b>Ozellik</b>
+                <b>Urun</b>
             </td>
             <td>
                 <select name="UrunId">
                     @foreach (var urun in ViewBag.Urunler as List<AlisverisSepeti.Models.Urunler>)
                     {
-                        <option value="@urun.UrunId"
-                                @(UrunOzellikler.UrunId != 0 && urun.UrunId == UrunOzellikler.UrunId ? "selected" : "" )>
+                    <option value="@urun.UrunId"
+                            @(UrunOzellikler.UrunId != 0 && urun.UrunId == UrunOzellikler.UrunId ? "selected" : "" )>
+                        @if (urun.UrunlerDils.Count > 0)
+                        {
                             @urun.UrunlerDils.First().UrunAdi;
-                        </option>
+
+                        }
+                        else
+                        {
+                            @("Urun Adi Yok")
+                        }
+                    </option>
 
                     }
                 </select>
