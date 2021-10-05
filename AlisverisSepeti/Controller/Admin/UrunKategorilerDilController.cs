@@ -29,6 +29,7 @@ namespace AlisverisSepeti.Admin
                 ViewBag.UrunKategorilerDil = context.UrunkategorilerDils
                     .AsNoTracking()
                     .Include(kategoridil => kategoridil.Kategori)
+                    .Include(kategoridil => kategoridil.Dil)
                     .ToList();
             }
             return View(IndexCS);

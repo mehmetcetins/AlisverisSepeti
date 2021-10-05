@@ -22,10 +22,11 @@
         @foreach (var UrunKategoriDil in ViewBag.UrunKategorilerDil as List<AlisverisSepeti.Models.UrunkategorilerDil>)
         {
         <tr>
-            
+
             <td><a href="@Context.Request.Path/@UrunKategoriDil.KategoriDilId">@UrunKategoriDil.KategoriAdi</a></td>
-            <td>@UrunKategoriDil.Kategori.KategoriAdi</td>
             <td>@UrunKategoriDil.Dil.DilKodu</td>
+
+            <td>@UrunKategoriDil.Kategori.KategoriAdi</td>
             <td>@UrunKategoriDil.PageTitle</td>
             <td>@UrunKategoriDil.PageKeywords</td>
             <td>@UrunKategoriDil.PageLabels</td>
