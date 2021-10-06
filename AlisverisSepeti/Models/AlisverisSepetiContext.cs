@@ -49,6 +49,7 @@ namespace AlisverisSepeti.Models
         public virtual DbSet<UrunlerDil> UrunlerDils { get; set; }
         public virtual DbSet<Urunopsiyonlar> Urunopsiyonlars { get; set; }
         public virtual DbSet<Urunozellikleri> Urunozellikleris { get; set; }
+        public virtual DbSet<Urunsekilleri> Urunsekilleris { get; set; }
         public virtual DbSet<Uruntipleri> Uruntipleris { get; set; }
         public virtual DbSet<User> Users { get; set; }
 
@@ -1079,6 +1080,60 @@ namespace AlisverisSepeti.Models
                     .HasForeignKey(d => d.UrunId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("lnk_urunler_urunozellikleri");
+            });
+
+            modelBuilder.Entity<Urunsekilleri>(entity =>
+            {
+                entity.HasKey(e => e.UrunSekilId)
+                    .HasName("PRIMARY");
+
+                entity.ToTable("urunsekilleri");
+
+                entity.HasIndex(e => e.EkleyenId, "lnk_users_urunsekilleri");
+
+                entity.HasIndex(e => e.GuncelleyenId, "lnk_users_urunsekilleri_2");
+
+                entity.HasIndex(e => e.SilenId, "lnk_users_urunsekilleri_3");
+
+                entity.Property(e => e.EklenmeTarihi)
+                    .IsRequired()
+                    .HasMaxLength(30);
+
+                entity.Property(e => e.Ekleyen)
+                    .IsRequired()
+                    .HasMaxLength(20);
+
+                entity.Property(e => e.EkleyenId).HasColumnName("EkleyenID");
+
+                entity.Property(e => e.GuncellenmeTarihi).HasMaxLength(30);
+
+                entity.Property(e => e.Guncelleyen).HasMaxLength(20);
+
+                entity.Property(e => e.GuncelleyenId).HasColumnName("GuncelleyenID");
+
+                entity.Property(e => e.Silen).HasMaxLength(20);
+
+                entity.Property(e => e.SilenId).HasColumnName("SilenID");
+
+                entity.Property(e => e.UrunSekilAdi)
+                    .IsRequired()
+                    .HasMaxLength(20);
+
+                entity.HasOne(d => d.EkleyenNavigation)
+                    .WithMany(p => p.UrunsekilleriEkleyenNavigations)
+                    .HasForeignKey(d => d.EkleyenId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("lnk_users_urunsekilleri");
+
+                entity.HasOne(d => d.GuncelleyenNavigation)
+                    .WithMany(p => p.UrunsekilleriGuncelleyenNavigations)
+                    .HasForeignKey(d => d.GuncelleyenId)
+                    .HasConstraintName("lnk_users_urunsekilleri_2");
+
+                entity.HasOne(d => d.SilenNavigation)
+                    .WithMany(p => p.UrunsekilleriSilenNavigations)
+                    .HasForeignKey(d => d.SilenId)
+                    .HasConstraintName("lnk_users_urunsekilleri_3");
             });
 
             modelBuilder.Entity<Uruntipleri>(entity =>
