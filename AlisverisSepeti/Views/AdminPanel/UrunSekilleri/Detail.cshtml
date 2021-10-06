@@ -1,0 +1,118 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    Layout = "~/Views/Layouts/Admin/AdminLayout.cshtml";
+    var UrunSekiller = ViewBag.UrunSekiller as AlisverisSepeti.Models.Urunsekilleri;
+}
+
+
+<table>
+    <tbody>
+        <tr>
+            <td>
+                <b>Ekleyen</b>
+            </td>
+            <td>
+                @UrunSekiller.EkleyenNavigation.KullaniciIsim
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Eklenme Tarihi</b>
+
+            </td>
+
+            <td>
+                @UrunSekiller.EklenmeTarihi
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Güncelleyen</b>
+
+            </td>
+
+            <td>
+                @if (UrunSekiller.GuncelleyenNavigation == null)
+                {
+                    @("-")
+                }
+                else
+                {
+                    @UrunSekiller.GuncelleyenNavigation.KullaniciIsim
+                }
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Güncellenme Tarihi</b>
+            </td>
+            <td>
+                @UrunSekiller.GuncellenmeTarihi
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Silen</b>
+
+            </td>
+
+            <td>
+                @if (UrunSekiller.SilenNavigation == null)
+                {
+                    @("-")
+                }
+                else
+                {
+                    @UrunSekiller.SilenNavigation.KullaniciIsim
+                }
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Şekil Adı</b>
+            </td>
+            <td>
+                @UrunSekiller.UrunSekilAdi
+            </td>
+        </tr>
+        
+        <tr>
+            <td>
+                <b>Aktif mi</b>
+            </td>
+            <td>
+                @UrunSekiller.Aktifmi
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Silindi mi</b>
+            </td>
+            <td>
+                @UrunSekiller.Silindimi
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Diziliş Sıra</b>
+            </td>
+            <td>
+                @UrunSekiller.DizilisSira
+
+            </td>
+        </tr>
+
+
+        <tr>
+            <td>
+                <a class="sil" href="/admin/UrunSekiller/Delete/@UrunSekiller.UrunSekilId">Sil</a>
+                <a href="/admin/UrunSekiller/UrunSekillerForm/Update/@UrunSekiller.UrunSekilId">Duzenle</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
