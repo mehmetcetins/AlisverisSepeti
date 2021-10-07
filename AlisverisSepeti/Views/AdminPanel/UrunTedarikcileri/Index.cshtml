@@ -25,8 +25,27 @@
             
             <td><a href="@Context.Request.Path/@UrunTedarikciler.UrunTedarikciId">@UrunTedarikciler.User.KullaniciIsim</a></td>
             
-            <td>@UrunTedarikciler.Urun.UrunlerDils.First().UrunAdi</td>
-            <td>@UrunTedarikciler.StokDurum.StokdurumDils.First().StokDurum</td>
+            <td>
+                @if (UrunTedarikciler.Urun.UrunlerDils.Count > 0)
+                {
+                    @UrunTedarikciler.Urun.UrunlerDils.First().UrunAdi
+
+                }
+                else
+                {
+                    @("Urun Adi Yok")
+                }
+            </td>
+            <td>
+                @if (UrunTedarikciler.StokDurum.StokdurumDils.Count > 0)
+                {
+                    @UrunTedarikciler.StokDurum.StokdurumDils.First().StokDurum
+                }
+                else
+                {
+                    @("Stok Durum Adi Yok")
+                }
+            </td>
             <td>@UrunTedarikciler.Fiyat</td>
             <td>@UrunTedarikciler.Kdvdahilmi</td>
             <td>@UrunTedarikciler.Kdvoran</td>
