@@ -1,0 +1,104 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    Layout = "~/Views/Layouts/Admin/AdminLayout.cshtml";
+    var UrunTedarikciler = ViewBag.UrunTedarikciler as AlisverisSepeti.Models.Uruntedarikcileri;
+}
+<form method="POST" enctype="multipart/form-data">
+    <table>
+        <tr>
+            <td>
+                <b>Fiyat</b>
+            </td>
+            <td>
+
+                <input type="number" step="any" name="Fiyat" value="@UrunTedarikciler.Fiyat" />
+
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <b>KDV Dahil mi</b>
+            </td>
+
+            <td>
+                <input type="radio" name="Kdvdahilmi" value="False" checked="@(UrunTedarikciler.Kdvdahilmi == false)" />
+                <input type="radio" name="Kdvdahilmi" value="True" checked="@(UrunTedarikciler.Kdvdahilmi == true)" />
+            </td>
+        </tr>
+
+
+        <tr>
+            <td>
+                <b>KDV Oran</b>
+            </td>
+            <td>
+                <input type="number" step="0.01" name="Kdvoran" value="@UrunTedarikciler.Kdvoran" />
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Urun</b>
+            </td>
+            <td>
+                <select name="UrunId">
+                    @foreach (var urun in ViewBag.Urunler as List<AlisverisSepeti.Models.Urunler>)
+                    {
+                        <option value="@urun.UrunId"
+                                @(UrunTedarikciler.UrunId != 0 && urun.UrunId == UrunTedarikciler.UrunId ? "selected" : "" )>
+                            @if (urun.UrunlerDils.Count > 0)
+                            {
+                                @urun.UrunlerDils.First().UrunAdi
+
+                            }
+                            else
+                            {
+                                @("Urun Adi Yok")
+                            }
+                        </option>
+
+                    }
+                </select>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Urun</b>
+            </td>
+            <td>
+                <select name="UrunId">
+                    @foreach (var stokdurum in ViewBag.StokDurum as List<AlisverisSepeti.Models.Stokdurum>)
+                    {
+                        <option value="@stokdurum.StokDurumId"
+                                @(UrunTedarikciler.StokDurumId != 0 && stokdurum.StokDurumId == UrunTedarikciler.StokDurumId ? "selected" : "" )>
+                            @if (stokdurum.StokdurumDils.Count > 0)
+                            {
+                                @stokdurum.StokdurumDils.First().StokDurum
+
+                            }
+                            else
+                            {
+                                @("Stok Durum Adi Yok")
+                            }
+                        </option>
+
+                    }
+                </select>
+
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <center><input type="submit" value="@ViewBag.SubmitButtonValue" /></center>
+            </td>
+        </tr>
+
+
+    </table>
+
+
+</form>

@@ -1,0 +1,60 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    Layout = "~/Views/Layouts/Admin/AdminLayout.cshtml";
+    var UrunTedarikciler = ViewBag.UrunTedarikciler as AlisverisSepeti.Models.Uruntedarikcileri;
+}
+
+
+<table>
+    <tbody>
+        <tr>
+            <td>
+                <b>Tedarikçi</b>
+            </td>
+            <td>
+                @UrunTedarikciler.User.KullaniciIsim
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Fiyat</b>
+
+            </td>
+
+            <td>
+                @UrunTedarikciler.Fiyat
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>KDV Oran</b>
+
+            </td>
+
+            <td>
+                @UrunTedarikciler.Kdvoran
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>KDV Dahil mi</b>
+            </td>
+            <td>
+                @UrunTedarikciler.Kdvdahilmi
+            </td>
+        </tr>
+        
+
+        <tr>
+            <td>
+                <a class="sil" href="/admin/UrunTedarikciler/Delete/@UrunTedarikciler.UrunTedarikciId">Sil</a>
+                <a href="/admin/UrunTedarikciler/UrunTedarikcilerForm/Update/@UrunTedarikciler.UrunTedarikciId">Duzenle</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+@Html.Partial("~/Views/AdminPanel/Urunler/Detail.cshtml",new ViewDataDictionary(this.ViewData) { {"Urunler",UrunTedarikciler.Urun } })
+@Html.Partial("~/Views/StokDurum/Urunler/Detail.cshtml",new ViewDataDictionary(this.ViewData) { {"Urunler",UrunTedarikciler.StokDurum } })
