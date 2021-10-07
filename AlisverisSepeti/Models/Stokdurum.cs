@@ -11,6 +11,7 @@ namespace AlisverisSepeti.Models
         {
             StokdurumDils = new HashSet<StokdurumDil>();
             Urunlers = new HashSet<Urunler>();
+            Uruntedarikcileris = new HashSet<Uruntedarikcileri>();
         }
 
         public int StokDurumId { get; set; }
@@ -28,5 +29,6 @@ namespace AlisverisSepeti.Models
         public virtual User GuncelleyenNavigation { get; set; }
         public virtual ICollection<StokdurumDil> StokdurumDils { get; set; }
         public virtual ICollection<Urunler> Urunlers { get; set; }
+        public virtual ICollection<Uruntedarikcileri> Uruntedarikcileris { get; set; }
     }
 }

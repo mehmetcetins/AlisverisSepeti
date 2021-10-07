@@ -1143,6 +1143,8 @@ namespace AlisverisSepeti.Models
 
                 entity.ToTable("uruntedarikcileri");
 
+                entity.HasIndex(e => e.StokDurumId, "lnk_stokdurum_uruntedarikcileri");
+
                 entity.HasIndex(e => e.UrunId, "lnk_urunler_uruntedarikcileri");
 
                 entity.HasIndex(e => e.UserId, "lnk_users_uruntedarikcileri");
@@ -1155,9 +1157,17 @@ namespace AlisverisSepeti.Models
                     .HasColumnName("KDVOran")
                     .HasDefaultValueSql("'0.18'");
 
+                entity.Property(e => e.StokDurumId).HasColumnName("StokDurumID");
+
                 entity.Property(e => e.UrunId).HasColumnName("UrunID");
 
                 entity.Property(e => e.UserId).HasColumnName("UserID");
+
+                entity.HasOne(d => d.StokDurum)
+                    .WithMany(p => p.Uruntedarikcileris)
+                    .HasForeignKey(d => d.StokDurumId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("lnk_stokdurum_uruntedarikcileri");
 
                 entity.HasOne(d => d.Urun)
                     .WithMany(p => p.Uruntedarikcileris)
