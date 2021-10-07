@@ -50,6 +50,7 @@ namespace AlisverisSepeti.Models
         public virtual DbSet<Urunopsiyonlar> Urunopsiyonlars { get; set; }
         public virtual DbSet<Urunozellikleri> Urunozellikleris { get; set; }
         public virtual DbSet<Urunsekilleri> Urunsekilleris { get; set; }
+        public virtual DbSet<Uruntedarikcileri> Uruntedarikcileris { get; set; }
         public virtual DbSet<Uruntipleri> Uruntipleris { get; set; }
         public virtual DbSet<User> Users { get; set; }
 
@@ -1133,6 +1134,42 @@ namespace AlisverisSepeti.Models
                     .WithMany(p => p.UrunsekilleriSilenNavigations)
                     .HasForeignKey(d => d.SilenId)
                     .HasConstraintName("lnk_users_urunsekilleri_3");
+            });
+
+            modelBuilder.Entity<Uruntedarikcileri>(entity =>
+            {
+                entity.HasKey(e => e.UrunTedarikciId)
+                    .HasName("PRIMARY");
+
+                entity.ToTable("uruntedarikcileri");
+
+                entity.HasIndex(e => e.UrunId, "lnk_urunler_uruntedarikcileri");
+
+                entity.HasIndex(e => e.UserId, "lnk_users_uruntedarikcileri");
+
+                entity.Property(e => e.UrunTedarikciId).HasColumnName("UrunTedarikciID");
+
+                entity.Property(e => e.Kdvdahilmi).HasColumnName("KDVDahilmi");
+
+                entity.Property(e => e.Kdvoran)
+                    .HasColumnName("KDVOran")
+                    .HasDefaultValueSql("'0.18'");
+
+                entity.Property(e => e.UrunId).HasColumnName("UrunID");
+
+                entity.Property(e => e.UserId).HasColumnName("UserID");
+
+                entity.HasOne(d => d.Urun)
+                    .WithMany(p => p.Uruntedarikcileris)
+                    .HasForeignKey(d => d.UrunId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("lnk_urunler_uruntedarikcileri");
+
+                entity.HasOne(d => d.User)
+                    .WithMany(p => p.Uruntedarikcileris)
+                    .HasForeignKey(d => d.UserId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("lnk_users_uruntedarikcileri");
             });
 
             modelBuilder.Entity<Uruntipleri>(entity =>

@@ -20,6 +20,7 @@ namespace AlisverisSepeti.Models
             UrunsekilleriEkleyenNavigations = new HashSet<Urunsekilleri>();
             UrunsekilleriGuncelleyenNavigations = new HashSet<Urunsekilleri>();
             UrunsekilleriSilenNavigations = new HashSet<Urunsekilleri>();
+            Uruntedarikcileris = new HashSet<Uruntedarikcileri>();
         }
 
         public int UserId { get; set; }
@@ -41,5 +42,6 @@ namespace AlisverisSepeti.Models
         public virtual ICollection<Urunsekilleri> UrunsekilleriEkleyenNavigations { get; set; }
         public virtual ICollection<Urunsekilleri> UrunsekilleriGuncelleyenNavigations { get; set; }
         public virtual ICollection<Urunsekilleri> UrunsekilleriSilenNavigations { get; set; }
+        public virtual ICollection<Uruntedarikcileri> Uruntedarikcileris { get; set; }
     }
 }
