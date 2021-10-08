@@ -13,7 +13,9 @@
             <td>
                 <b>Değer</b>
             </td>
-            
+            <td>
+                @UrunOpsiyonDegerleri.OpsiyonDeger
+            </td>
         <tr>
             <td>
                 <a class="sil" href="/admin/UrunOpsiyonDegerleri/Delete/@UrunOpsiyonDegerleri.UrunOdid">Sil</a>
@@ -23,3 +25,4 @@
     </tbody>
 </table>
 @Html.Partial("~/Views/AdminPanel/Urunler/Detail.cshtml", new ViewDataDictionary(this.ViewData) { { "Urunler", UrunOpsiyonDegerleri.Urun} })
+@Html.Partial("~/Views/AdminPanel/UrunOpsiyonlar/Index.cshtml", new ViewDataDictionary(this.ViewData) { { "UrunOpsiyonlar", new List<AlisverisSepeti.Models.Urunopsiyonlar>() { UrunOpsiyonDegerleri.UrunOpsiyon } } })
