@@ -33,6 +33,7 @@ namespace AlisverisSepeti.Admin
                     .AsNoTracking()
                     .Include(deger => deger.Ozellik.OzelliklerDils.Where(ozellikdil => ozellikdil.Dil.Varsayilanmi == true))
                     .Include(deger => deger.Ozellik.OzellikTipiNavigation.DegiskenTipiNavigation)
+                    .Include(deger=> deger.OzellikdegerleriDils.Where(degerdil => degerdil.Dil.Varsayilanmi == true))
                     .ToList();
             }
             return View(IndexCS);

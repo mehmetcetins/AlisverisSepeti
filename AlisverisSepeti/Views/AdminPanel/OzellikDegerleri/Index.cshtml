@@ -12,7 +12,7 @@
             <th>Ozellik Adi</th>
             <th>Birim</th>
             <th>Degisken Tipi</th>
-            <!--<th>Deger</th> degerdil eklenince açılacak-->
+            <th>Deger</th>
             <th>İşlemler</th>
         </tr>
     </thead>
@@ -35,8 +35,18 @@
             </td>
             <td>@OzellikDegerleri.Ozellik.Birim</td>
             <td>@OzellikDegerleri.Ozellik.OzellikTipiNavigation.DegiskenTipiNavigation.DegiskenAdi</td>
-
+            <td>@if (OzellikDegerleri.OzellikdegerleriDils.Count > 0) 
+                {
+                    @OzellikDegerleri.OzellikdegerleriDils.First().OzellikDeger
+                }
+                else
+                {
+                    @("Ozellik Degeri Yok")
+                }
+            </td>
+   
             <td>
+   
                 <a class="sil" href="@Context.Request.Path/Delete/@OzellikDegerleri.OzellikDegerId">Sil</a>
                 <a href="@Context.Request.Path/OzellikDegerleriForm/Update/@OzellikDegerleri.OzellikDegerId">Düzenle</a>
             </td>

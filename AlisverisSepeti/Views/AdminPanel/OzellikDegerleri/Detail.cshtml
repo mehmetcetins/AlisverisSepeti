@@ -10,6 +10,20 @@
 <table>
     <tbody>
         <tr>
+            <td><b>Değer</b></td>
+            <td>
+                @if(OzellikDegerleri.OzellikdegerleriDils.Count > 0)
+                {
+
+                    @OzellikDegerleri.OzellikdegerleriDils.First().OzellikDeger
+                }
+                else
+                {
+                    @("Ozellik Degeri Yok")
+                }
+            </td>
+        </tr>
+        <tr>
             <td>
                 <b>Eklenme Tarihi</b>
             </td>
