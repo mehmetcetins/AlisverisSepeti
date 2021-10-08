@@ -11,6 +11,7 @@ namespace AlisverisSepeti.Models
         {
             Urundosyalars = new HashSet<Urundosyalar>();
             UrunlerDils = new HashSet<UrunlerDil>();
+            Urunopsiyondegerleris = new HashSet<Urunopsiyondegerleri>();
             Urunozellikleris = new HashSet<Urunozellikleri>();
             Uruntedarikcileris = new HashSet<Uruntedarikcileri>();
         }
@@ -41,6 +42,7 @@ namespace AlisverisSepeti.Models
         public virtual Uruntipleri UrunTipiNavigation { get; set; }
         public virtual ICollection<Urundosyalar> Urundosyalars { get; set; }
         public virtual ICollection<UrunlerDil> UrunlerDils { get; set; }
+        public virtual ICollection<Urunopsiyondegerleri> Urunopsiyondegerleris { get; set; }
         public virtual ICollection<Urunozellikleri> Urunozellikleris { get; set; }
         public virtual ICollection<Uruntedarikcileri> Uruntedarikcileris { get; set; }
     }

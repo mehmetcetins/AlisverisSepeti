@@ -7,6 +7,11 @@ namespace AlisverisSepeti.Models
 {
     public partial class Urunopsiyonlar
     {
+        public Urunopsiyonlar()
+        {
+            Urunopsiyondegerleris = new HashSet<Urunopsiyondegerleri>();
+        }
+
         public int Id { get; set; }
         public string OpsiyonAdi { get; set; }
         public int OpsiyonTipi { get; set; }
@@ -15,5 +20,6 @@ namespace AlisverisSepeti.Models
 
         public virtual Degiskentipleri Degisken { get; set; }
         public virtual Opsiyontipleri OpsiyonTipiNavigation { get; set; }
+        public virtual ICollection<Urunopsiyondegerleri> Urunopsiyondegerleris { get; set; }
     }
 }
