@@ -1,0 +1,25 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    Layout = "~/Views/Layouts/Admin/AdminLayout.cshtml";
+    var UrunOpsiyonDegerleri = ViewBag.UrunOpsiyonDegerleri as AlisverisSepeti.Models.Urunopsiyondegerleri;
+}
+
+
+<table>
+    <tbody>
+        <tr>
+            <td>
+                <b>Değer</b>
+            </td>
+            
+        <tr>
+            <td>
+                <a class="sil" href="/admin/UrunOpsiyonDegerleri/Delete/@UrunOpsiyonDegerleri.UrunOdid">Sil</a>
+                <a href="/admin/UrunOpsiyonDegerleri/UrunOpsiyonDegerleriForm/Update/@UrunOpsiyonDegerleri.UrunOdid">Duzenle</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+@Html.Partial("~/Views/AdminPanel/Urunler/Detail.cshtml", new ViewDataDictionary(this.ViewData) { { "Urunler", UrunOpsiyonDegerleri.Urun} })

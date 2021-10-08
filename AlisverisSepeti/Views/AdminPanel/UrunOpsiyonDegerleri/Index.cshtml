@@ -1,0 +1,47 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    Layout = "~/Views/Layouts/Admin/AdminLayout.cshtml";
+}
+
+<a href="@Context.Request.Path/UrunOpsiyonDegerleriForm/Add/">Ekle</a>
+<table cellspacing="0" border="1" cellpadding="10">
+    <thead>
+        <tr>
+            <th>Urun Adi</th>
+            <th>Değer</th>
+            <th>Urun Opsiyonu</th>
+            <th>İşlemler</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var UrunOpsiyonDegerleri in ViewBag.UrunOpsiyonDegerleri as List<AlisverisSepeti.Models.Urunopsiyondegerleri>)
+        {
+        <tr>
+            
+            <td>
+                <a href="@Context.Request.Path/@UrunOpsiyonDegerleri.UrunOdid">
+                @if (UrunOpsiyonDegerleri.Urun.UrunlerDils.Count > 0)
+                {
+                    @UrunOpsiyonDegerleri.Urun.UrunlerDils.First().UrunAdi
+                }
+                else
+                {
+                    @("Urun Adi Yok.")
+                }
+                </a>
+            </td>
+            <td>@UrunOpsiyonDegerleri.OpsiyonDeger</td>
+            <td>@UrunOpsiyonDegerleri.UrunOpsiyon.OpsiyonAdi</td>
+            <td>
+                <a class="sil" href="@Context.Request.Path/Delete/@UrunOpsiyonDegerleri.UrunOdid">Sil</a>
+                <a href="@Context.Request.Path/UrunOpsiyonDegerleriForm/Update/@UrunOpsiyonDegerleri.UrunOdid">Düzenle</a>
+            </td>
+        </tr>
+
+
+
+        }
+    </tbody>
+</table>

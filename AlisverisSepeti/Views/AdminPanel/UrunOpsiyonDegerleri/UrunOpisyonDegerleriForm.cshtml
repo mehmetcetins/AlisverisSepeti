@@ -1,0 +1,70 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    Layout = "~/Views/Layouts/Admin/AdminLayout.cshtml";
+    var UrunOpsiyonDegerleri = ViewBag.UrunOpsiyonDegerleri as AlisverisSepeti.Models.Urunopsiyondegerleri;
+}
+<form method="POST" enctype="multipart/form-data">
+    <table>
+
+        <tr>
+            <td>
+                <b>Urun</b>
+            </td>
+            <td>
+                <select name="UrunId">
+
+                    @foreach (var urun in ViewBag.Urunler as List<AlisverisSepeti.Models.Urunler>)
+                    {
+                        <option value="@urun.UrunId"
+                                @if (UrunOpsiyonDegerleri.UrunId != 0) { @if (UrunOpsiyonDegerleri.UrunId == urun.UrunId) { @("selected") } }>
+                            @if (urun.UrunlerDils.Count > 0)
+                                @urun.UrunlerDils.First().UrunAdi
+                                else
+                                {
+                                    @("Urun Adi Yok")
+                                }
+                        </option>
+
+                    }
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Opsiyon</b>
+            </td>
+            <td>
+                <select name="OpsiyonId">
+
+                    @foreach (var opsiyon in ViewBag.Opsiyonlar as List<AlisverisSepeti.Models.Urunopsiyonlar>)
+                    {
+                    <option value="@opsiyon.Id"
+                            @if (UrunOpsiyonDegerleri.UrunOpsiyonId != 0) { @if (UrunOpsiyonDegerleri.UrunOpsiyonId == opsiyon.Id) { @("selected") } }>
+                        @opsiyon.OpsiyonAdi
+                    </option>
+
+                    }
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td><b>Değer</b></td>
+            <td><input type="text" name="OpsiyonDeger" value="@UrunOpsiyonDegerleri.OpsiyonDeger" /></td>
+        </tr>
+
+
+
+
+        <tr>
+            <td colspan="2">
+                <center><input type="submit" value="@ViewBag.SubmitButtonValue" /></center>
+            </td>
+        </tr>
+
+
+    </table>
+
+
+</form>
