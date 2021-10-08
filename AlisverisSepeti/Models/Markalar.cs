@@ -10,6 +10,7 @@ namespace AlisverisSepeti.Models
         public Markalar()
         {
             Urunlers = new HashSet<Urunler>();
+            Urunmarkalars = new HashSet<Urunmarkalar>();
         }
 
         public int MarkaId { get; set; }
@@ -21,5 +22,6 @@ namespace AlisverisSepeti.Models
         public string MarkaBanner { get; set; }
 
         public virtual ICollection<Urunler> Urunlers { get; set; }
+        public virtual ICollection<Urunmarkalar> Urunmarkalars { get; set; }
     }
 }

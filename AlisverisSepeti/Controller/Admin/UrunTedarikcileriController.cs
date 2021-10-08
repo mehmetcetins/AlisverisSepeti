@@ -146,7 +146,7 @@ namespace AlisverisSepeti.Admin
             return View(FormCS);
         }
         #endregion
-        #region Post.Udate
+        #region Post.Update
         [HttpPost("UrunTedarikcilerForm/Update/{id:int}")]
         public IActionResult Update(int id,Models.Uruntedarikcileri uruntedarikcileri)
         {

@@ -17,6 +17,9 @@ namespace AlisverisSepeti.Models
             UrunkategorilerGuncelleyenNavigations = new HashSet<Urunkategoriler>();
             UrunlerEkleyenNavigations = new HashSet<Urunler>();
             UrunlerGuncelleyenNavigations = new HashSet<Urunler>();
+            UrunmarkalarEkleyenNavigations = new HashSet<Urunmarkalar>();
+            UrunmarkalarGuncelleyenNavigations = new HashSet<Urunmarkalar>();
+            UrunmarkalarSilenNavigations = new HashSet<Urunmarkalar>();
             UrunsekilleriEkleyenNavigations = new HashSet<Urunsekilleri>();
             UrunsekilleriGuncelleyenNavigations = new HashSet<Urunsekilleri>();
             UrunsekilleriSilenNavigations = new HashSet<Urunsekilleri>();
@@ -39,6 +42,9 @@ namespace AlisverisSepeti.Models
         public virtual ICollection<Urunkategoriler> UrunkategorilerGuncelleyenNavigations { get; set; }
         public virtual ICollection<Urunler> UrunlerEkleyenNavigations { get; set; }
         public virtual ICollection<Urunler> UrunlerGuncelleyenNavigations { get; set; }
+        public virtual ICollection<Urunmarkalar> UrunmarkalarEkleyenNavigations { get; set; }
+        public virtual ICollection<Urunmarkalar> UrunmarkalarGuncelleyenNavigations { get; set; }
+        public virtual ICollection<Urunmarkalar> UrunmarkalarSilenNavigations { get; set; }
         public virtual ICollection<Urunsekilleri> UrunsekilleriEkleyenNavigations { get; set; }
         public virtual ICollection<Urunsekilleri> UrunsekilleriGuncelleyenNavigations { get; set; }
         public virtual ICollection<Urunsekilleri> UrunsekilleriSilenNavigations { get; set; }
