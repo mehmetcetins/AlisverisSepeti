@@ -20,7 +20,6 @@ namespace AlisverisSepeti.Models
         public string GuncellenmeTarihi { get; set; }
         public bool Silindimi { get; set; }
         public bool Aktifmi { get; set; }
-        public int MarkalarId { get; set; }
 
         public virtual User EkleyenNavigation { get; set; }
         public virtual User GuncelleyenNavigation { get; set; }

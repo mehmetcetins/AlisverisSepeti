@@ -1023,8 +1023,6 @@ namespace AlisverisSepeti.Models
 
                 entity.ToTable("urunmarkalar");
 
-                entity.HasIndex(e => e.MarkalarId, "index_markalar_id");
-
                 entity.HasIndex(e => e.MarkaId, "lnk_markalar_urunmarkalar");
 
                 entity.HasIndex(e => e.EkleyenId, "lnk_users_urunmarkalar");
@@ -1052,8 +1050,6 @@ namespace AlisverisSepeti.Models
                 entity.Property(e => e.GuncelleyenId).HasColumnName("GuncelleyenID");
 
                 entity.Property(e => e.MarkaId).HasColumnName("MarkaID");
-
-                entity.Property(e => e.MarkalarId).HasColumnName("markalar_id");
 
                 entity.Property(e => e.Silen).HasMaxLength(20);
 
