@@ -1,0 +1,191 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    Layout = "~/Views/Layouts/Admin/AdminLayout.cshtml";
+    var Siparisler = ViewBag.Siparisler as AlisverisSepeti.Models.Siparisler;
+}
+
+
+<table>
+    <tbody>
+        <tr>
+            <td>
+                <b>Sipariş Tarihi</b>
+            </td>
+            <td>
+                @Siparisler.SiparisTarihi
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Ekleyen</b>
+            </td>
+            <td>
+                @Siparisler.EkleyenNavigation.KullaniciIsim
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Eklenme Tarihi</b>
+            </td>
+            <td>
+                @Siparisler.EklenmeTarihi
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Güncelleyen</b>
+            </td>
+            <td>
+                @if (Siparisler.GuncelleyenNavigation == null)
+                {
+                    @("-")
+                }
+                else
+                {
+                    @Siparisler.GuncelleyenNavigation.KullaniciIsim
+                }
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Güncellenme Tarihi</b>
+            </td>
+            <td>
+                @Siparisler.GuncellemeTarihi
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Sevk Eden</b>
+            </td>
+            <td>
+                @if (Siparisler.SevkEdenNavigation == null)
+                {
+                    @("-")
+                }
+                else
+                {
+                    @Siparisler.SevkEdenNavigation.KullaniciIsim
+                }
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Sevk Şekli</b>
+            </td>
+            <td>
+                @if (Siparisler.SevkSekliNavigation == null)
+                {
+                    @("-")
+                }
+                else
+                {
+                    @Siparisler.SevkSekliNavigation.GonderimSekli
+                }
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Sevk Tarihi</b>
+            </td>
+            <td>
+                @Siparisler.SevkTarihi
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Gonderim Sekli</b>
+            </td>
+            <td>
+                @Siparisler.GonderimSekliNavigation.GonderimSekli
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Havale Banka Adi</b>
+            </td>
+            <td>
+                @Siparisler.HavaleBanka.BankaAdi
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Odemeyi Dogrulayan</b>
+            </td>
+            <td>
+                @if (Siparisler.OdemeDogrulayanNavigation == null)
+                {
+                    @("-")
+                }
+                else
+                {
+                    @Siparisler.OdemeDogrulayanNavigation.KullaniciIsim
+                }
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Odeme Şekli</b>
+            </td>
+            <td>
+                @Siparisler.OdemeSekliNavigation.OdemeSekli
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Odeme Geldi mi</b>
+            </td>
+            <td>
+                @Siparisler.OdemeGeldimi
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Sipariş Kalem Adet</b>
+            </td>
+            <td>
+                @Siparisler.SiparisKalemAdet
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Sipariş Toplam</b>
+            </td>
+            <td>
+                @Siparisler.SiparisToplami
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Urun Adet</b>
+            </td>
+            <td>
+                @Siparisler.UrunAdet
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <a class="sil" href="/admin/Siparisler/Delete/@Siparisler.SiparisId">Sil</a>
+                <a href="/admin/Siparisler/SiparislerForm/Update/@Siparisler.SiparisId">Duzenle</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
