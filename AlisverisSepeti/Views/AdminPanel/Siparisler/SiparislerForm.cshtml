@@ -12,35 +12,12 @@
                 <b>Gonderim Sekli</b>
             </td>
             <td>
-                @Siparisler.GonderimSekliNavigation.GonderimSekli
-
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <b>Havale Banka Adi</b>
-            </td>
-            <td>
-                @Siparisler.HavaleBanka.BankaAdi
-
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <b>Odeme Şekli</b>
-            </td>
-            <td>
-                @Siparisler.OdemeSekliNavigation.OdemeSekli
-
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <b>Odeme Geldi mi</b>
-            </td>
-            <td>
-                @Siparisler.OdemeGeldimi
-
+                <select name="GonderimSekliId">
+                    @foreach (var gonderim in ViewBag.GonderimSekilleri as List<AlisverisSepeti.Models.Gonderimsekilleri>)
+                    {
+                        <option value="@gonderim.GonderimId" @if (Siparisler.GonderimSekliId != 0) { if (Siparisler.HavaleBankaId == gonderim.GonderimId) { @("selected") } }>@gonderim.GonderimSekli</option>
+                    }
+                </select>
             </td>
         </tr>
         <tr>
