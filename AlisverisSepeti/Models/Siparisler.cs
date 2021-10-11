@@ -10,7 +10,7 @@ namespace AlisverisSepeti.Models
         public int SiparisId { get; set; }
         public int UserId { get; set; }
         public int EkleyenId { get; set; }
-        public int GuncelleyenId { get; set; }
+        public int? GuncelleyenId { get; set; }
         public int GonderimSekliId { get; set; }
         public int OdemeSekliId { get; set; }
         public int? SevkEdenId { get; set; }

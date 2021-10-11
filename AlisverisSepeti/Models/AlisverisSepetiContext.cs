@@ -786,7 +786,6 @@ namespace AlisverisSepeti.Models
                 entity.HasOne(d => d.GuncelleyenNavigation)
                     .WithMany(p => p.SiparislerGuncelleyenNavigations)
                     .HasForeignKey(d => d.GuncelleyenId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("lnk_users_siparisler_2");
 
                 entity.HasOne(d => d.HavaleBanka)
