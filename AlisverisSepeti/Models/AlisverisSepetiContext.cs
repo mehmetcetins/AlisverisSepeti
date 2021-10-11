@@ -753,7 +753,8 @@ namespace AlisverisSepeti.Models
 
                 entity.Property(e => e.SiparisKalemAdet)
                     .IsRequired()
-                    .HasMaxLength(3);
+                    .HasMaxLength(3)
+                    .HasDefaultValueSql("'0'");
 
                 entity.Property(e => e.SiparisTarihi)
                     .IsRequired()
@@ -765,7 +766,8 @@ namespace AlisverisSepeti.Models
 
                 entity.Property(e => e.UrunAdet)
                     .IsRequired()
-                    .HasMaxLength(3);
+                    .HasMaxLength(3)
+                    .HasDefaultValueSql("'0'");
 
                 entity.Property(e => e.UserId).HasColumnName("UserID");
 
