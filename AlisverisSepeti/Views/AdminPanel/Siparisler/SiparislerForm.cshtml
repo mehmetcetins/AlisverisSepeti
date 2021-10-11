@@ -15,7 +15,7 @@
                 <select name="GonderimSekliId">
                     @foreach (var gonderim in ViewBag.GonderimSekilleri as List<AlisverisSepeti.Models.Gonderimsekilleri>)
                     {
-                        <option value="@gonderim.GonderimId" @if (Siparisler.GonderimSekliId != 0) { if (Siparisler.HavaleBankaId == gonderim.GonderimId) { @("selected") } }>@gonderim.GonderimSekli</option>
+                        <option value="@gonderim.GonderimId" @if (Siparisler.GonderimSekliId != 0) { if (Siparisler.GonderimSekliId == gonderim.GonderimId) { @("selected") } }>@gonderim.GonderimSekli</option>
                     }
                 </select>
             </td>

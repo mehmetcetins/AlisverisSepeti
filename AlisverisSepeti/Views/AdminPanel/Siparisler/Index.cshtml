@@ -27,7 +27,7 @@
             <td><a href="@Context.Request.Path/@siparis.SiparisId">@siparis.SiparisTarihi</a></td>
             
             <td>@siparis.OdemeSekliNavigation.OdemeSekli</td>
-            <td>@siparis.SevkSekliNavigation.GonderimSekli</td>
+            <td>@(siparis.SevkSekliNavigation!=null ? siparis.SevkSekliNavigation.GonderimSekli: "")</td>
             <td>@siparis.SiparisToplami</td>
             <td>@siparis.UrunAdet</td>
 
