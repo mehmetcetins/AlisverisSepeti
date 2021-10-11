@@ -1,0 +1,83 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    Layout = "~/Views/Layouts/Admin/AdminLayout.cshtml";
+    var Siparisler = ViewBag.Siparisler as AlisverisSepeti.Models.Siparisler;
+}
+<form method="POST" enctype="multipart/form-data">
+    <table>
+        <tr>
+            <td>
+                <b>Gonderim Sekli</b>
+            </td>
+            <td>
+                @Siparisler.GonderimSekliNavigation.GonderimSekli
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Havale Banka Adi</b>
+            </td>
+            <td>
+                @Siparisler.HavaleBanka.BankaAdi
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Odeme Şekli</b>
+            </td>
+            <td>
+                @Siparisler.OdemeSekliNavigation.OdemeSekli
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Odeme Geldi mi</b>
+            </td>
+            <td>
+                @Siparisler.OdemeGeldimi
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Havale Bankası</b>
+            </td>
+            <td>
+                <select name="HavaleBankaId">
+                    @foreach (var havale in ViewBag.HavaleBankalari as List<AlisverisSepeti.Models.Havalebankalari> )
+                    {
+                        <option value="@havale.HavaleBankaId" @if (Siparisler.HavaleBankaId != 0) { if (Siparisler.HavaleBankaId == havale.HavaleBankaId) { @("selected") } }>@havale.BankaAdi</option>
+                    }
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Odeme Sekli</b>
+            </td>
+            <td>
+                <select name="OdemeSekliId">
+                    @foreach (var odemesekli in ViewBag.OdemeSekilleri as List<AlisverisSepeti.Models.Odemesecenekleri>)
+                    {
+                        <option value="@odemesekli.Id" @if (Siparisler.OdemeSekliId != 0) { if (Siparisler.OdemeSekliId == odemesekli.Id) { @("selected") } }>@odemesekli.OdemeSekli</option>
+                    }
+                </select>
+            </td>
+        </tr>
+
+        <tr>
+            <td colspan="2">
+                <center><input type="submit" value="@ViewBag.SubmitButtonValue" /></center>
+            </td>
+        </tr>
+
+
+    </table>
+
+
+</form>
