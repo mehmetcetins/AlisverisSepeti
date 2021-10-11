@@ -33,7 +33,6 @@ namespace AlisverisSepeti.Models
         public string SevkEden { get; set; }
         public string SevkSekli { get; set; }
         public bool OdemeGeldimi { get; set; }
-        public int GonderimsekilleriId { get; set; }
 
         public virtual User EkleyenNavigation { get; set; }
         public virtual Gonderimsekilleri GonderimSekliNavigation { get; set; }

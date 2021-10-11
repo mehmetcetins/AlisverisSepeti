@@ -685,8 +685,6 @@ namespace AlisverisSepeti.Models
 
                 entity.ToTable("siparisler");
 
-                entity.HasIndex(e => e.GonderimsekilleriId, "index_gonderimsekilleri_id");
-
                 entity.HasIndex(e => e.GonderimSekliId, "lnk_gonderimsekilleri_siparisler");
 
                 entity.HasIndex(e => e.SevkSekliId, "lnk_gonderimsekilleri_siparisler_2");
@@ -722,8 +720,6 @@ namespace AlisverisSepeti.Models
                     .HasMaxLength(20);
 
                 entity.Property(e => e.GonderimSekliId).HasColumnName("GonderimSekliID");
-
-                entity.Property(e => e.GonderimsekilleriId).HasColumnName("gonderimsekilleri_id");
 
                 entity.Property(e => e.GuncellemeTarihi).HasMaxLength(30);
 
