@@ -40,6 +40,7 @@ namespace AlisverisSepeti.Models
         public virtual DbSet<OzelliklerDil> OzelliklerDils { get; set; }
         public virtual DbSet<Ozelliktipleri> Ozelliktipleris { get; set; }
         public virtual DbSet<Poslar> Poslars { get; set; }
+        public virtual DbSet<Siparisler> Siparislers { get; set; }
         public virtual DbSet<Stokdurum> Stokdurums { get; set; }
         public virtual DbSet<StokdurumDil> StokdurumDils { get; set; }
         public virtual DbSet<Urundosyalar> Urundosyalars { get; set; }
@@ -675,6 +676,153 @@ namespace AlisverisSepeti.Models
                 entity.Property(e => e.PosBankaAdi)
                     .IsRequired()
                     .HasMaxLength(50);
+            });
+
+            modelBuilder.Entity<Siparisler>(entity =>
+            {
+                entity.HasKey(e => e.SiparisId)
+                    .HasName("PRIMARY");
+
+                entity.ToTable("siparisler");
+
+                entity.HasIndex(e => e.GonderimsekilleriId, "index_gonderimsekilleri_id");
+
+                entity.HasIndex(e => e.GonderimSekliId, "lnk_gonderimsekilleri_siparisler");
+
+                entity.HasIndex(e => e.SevkSekliId, "lnk_gonderimsekilleri_siparisler_2");
+
+                entity.HasIndex(e => e.HavaleBankaId, "lnk_havalebankalari_siparisler");
+
+                entity.HasIndex(e => e.OdemeSekliId, "lnk_odemesecenekleri_siparisler");
+
+                entity.HasIndex(e => e.EkleyenId, "lnk_users_siparisler");
+
+                entity.HasIndex(e => e.GuncelleyenId, "lnk_users_siparisler_2");
+
+                entity.HasIndex(e => e.SevkEdenId, "lnk_users_siparisler_3");
+
+                entity.HasIndex(e => e.UserId, "lnk_users_siparisler_4");
+
+                entity.HasIndex(e => e.OdemeDogrulayanId, "lnk_users_siparisler_5");
+
+                entity.Property(e => e.SiparisId).HasColumnName("SiparisID");
+
+                entity.Property(e => e.EklenmeTarihi)
+                    .IsRequired()
+                    .HasMaxLength(30);
+
+                entity.Property(e => e.Ekleyen)
+                    .IsRequired()
+                    .HasMaxLength(20);
+
+                entity.Property(e => e.EkleyenId).HasColumnName("EkleyenID");
+
+                entity.Property(e => e.GonderimSekli)
+                    .IsRequired()
+                    .HasMaxLength(20);
+
+                entity.Property(e => e.GonderimSekliId).HasColumnName("GonderimSekliID");
+
+                entity.Property(e => e.GonderimsekilleriId).HasColumnName("gonderimsekilleri_id");
+
+                entity.Property(e => e.GuncellemeTarihi).HasMaxLength(30);
+
+                entity.Property(e => e.Guncelleyen).HasMaxLength(20);
+
+                entity.Property(e => e.GuncelleyenId).HasColumnName("GuncelleyenID");
+
+                entity.Property(e => e.HavaleBankaAdi).HasMaxLength(20);
+
+                entity.Property(e => e.HavaleBankaId).HasColumnName("HavaleBankaID");
+
+                entity.Property(e => e.OdemeDogrulayan).HasMaxLength(20);
+
+                entity.Property(e => e.OdemeDogrulayanId).HasColumnName("OdemeDogrulayanID");
+
+                entity.Property(e => e.OdemeSekli)
+                    .IsRequired()
+                    .HasMaxLength(20);
+
+                entity.Property(e => e.OdemeSekliId).HasColumnName("OdemeSekliID");
+
+                entity.Property(e => e.SevkEden).HasMaxLength(20);
+
+                entity.Property(e => e.SevkEdenId).HasColumnName("SevkEdenID");
+
+                entity.Property(e => e.SevkSekli).HasMaxLength(20);
+
+                entity.Property(e => e.SevkSekliId).HasColumnName("SevkSekliID");
+
+                entity.Property(e => e.SevkTarihi).HasMaxLength(30);
+
+                entity.Property(e => e.SiparisKalemAdet)
+                    .IsRequired()
+                    .HasMaxLength(3);
+
+                entity.Property(e => e.SiparisTarihi)
+                    .IsRequired()
+                    .HasMaxLength(30);
+
+                entity.Property(e => e.SiparisToplami)
+                    .IsRequired()
+                    .HasMaxLength(5);
+
+                entity.Property(e => e.UrunAdet)
+                    .IsRequired()
+                    .HasMaxLength(3);
+
+                entity.Property(e => e.UserId).HasColumnName("UserID");
+
+                entity.HasOne(d => d.EkleyenNavigation)
+                    .WithMany(p => p.SiparislerEkleyenNavigations)
+                    .HasForeignKey(d => d.EkleyenId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("lnk_users_siparisler");
+
+                entity.HasOne(d => d.GonderimSekliNavigation)
+                    .WithMany(p => p.SiparislerGonderimSekliNavigations)
+                    .HasForeignKey(d => d.GonderimSekliId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("lnk_gonderimsekilleri_siparisler");
+
+                entity.HasOne(d => d.GuncelleyenNavigation)
+                    .WithMany(p => p.SiparislerGuncelleyenNavigations)
+                    .HasForeignKey(d => d.GuncelleyenId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("lnk_users_siparisler_2");
+
+                entity.HasOne(d => d.HavaleBanka)
+                    .WithMany(p => p.Siparislers)
+                    .HasForeignKey(d => d.HavaleBankaId)
+                    .OnDelete(DeleteBehavior.Cascade)
+                    .HasConstraintName("lnk_havalebankalari_siparisler");
+
+                entity.HasOne(d => d.OdemeDogrulayanNavigation)
+                    .WithMany(p => p.SiparislerOdemeDogrulayanNavigations)
+                    .HasForeignKey(d => d.OdemeDogrulayanId)
+                    .HasConstraintName("lnk_users_siparisler_5");
+
+                entity.HasOne(d => d.OdemeSekliNavigation)
+                    .WithMany(p => p.Siparislers)
+                    .HasForeignKey(d => d.OdemeSekliId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("lnk_odemesecenekleri_siparisler");
+
+                entity.HasOne(d => d.SevkEdenNavigation)
+                    .WithMany(p => p.SiparislerSevkEdenNavigations)
+                    .HasForeignKey(d => d.SevkEdenId)
+                    .HasConstraintName("lnk_users_siparisler_3");
+
+                entity.HasOne(d => d.SevkSekliNavigation)
+                    .WithMany(p => p.SiparislerSevkSekliNavigations)
+                    .HasForeignKey(d => d.SevkSekliId)
+                    .HasConstraintName("lnk_gonderimsekilleri_siparisler_2");
+
+                entity.HasOne(d => d.User)
+                    .WithMany(p => p.SiparislerUsers)
+                    .HasForeignKey(d => d.UserId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("lnk_users_siparisler_4");
             });
 
             modelBuilder.Entity<Stokdurum>(entity =>

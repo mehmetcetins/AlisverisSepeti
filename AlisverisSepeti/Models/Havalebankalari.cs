@@ -7,6 +7,11 @@ namespace AlisverisSepeti.Models
 {
     public partial class Havalebankalari
     {
+        public Havalebankalari()
+        {
+            Siparislers = new HashSet<Siparisler>();
+        }
+
         public int HavaleBankaId { get; set; }
         public string BankaAdi { get; set; }
         public string SubeKodu { get; set; }
@@ -18,5 +23,7 @@ namespace AlisverisSepeti.Models
         public string DovizKodu { get; set; }
         public bool Ydaktifmi { get; set; }
         public string BankaLogo { get; set; }
+
+        public virtual ICollection<Siparisler> Siparislers { get; set; }
     }
 }
