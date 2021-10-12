@@ -694,8 +694,6 @@ namespace AlisverisSepeti.Models
 
                 entity.Property(e => e.SiparisKalemId).HasColumnName("SiparisKalemID");
 
-                entity.Property(e => e.Id).HasMaxLength(0);
-
                 entity.Property(e => e.PurunAdi)
                     .HasMaxLength(41)
                     .HasColumnName("PUrunAdi");

@@ -18,7 +18,6 @@ namespace AlisverisSepeti.Models
         public float WeightDesi { get; set; }
         public float Vergi { get; set; }
         public float Toplam { get; set; }
-        public string Id { get; set; }
 
         public virtual Urunler Purun { get; set; }
         public virtual Siparisler Siparis { get; set; }
