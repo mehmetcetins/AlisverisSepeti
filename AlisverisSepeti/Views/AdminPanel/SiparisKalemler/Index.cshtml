@@ -22,7 +22,7 @@
         {
         <tr>
             
-            <td><a href="@Context.Request.Path/@SiparisKalemler.SiparisKalemId">@SiparisKalemler.Urun.UrunlerDils.First().UrunAdi</a></td>
+            <td><a href="@Context.Request.Path/@SiparisKalemler.SiparisKalemId">@(SiparisKalemler.Urun.UrunlerDils.Count > 0?SiparisKalemler.Urun.UrunlerDils.First().UrunAdi : "Ürün Adi Yok")</a></td>
             
             <td>
                 @if (SiparisKalemler.Purun != null && SiparisKalemler.Purun.UrunlerDils.Count > 0)
