@@ -1,0 +1,112 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    Layout = "~/Views/Layouts/Admin/AdminLayout.cshtml";
+    var SiparisKalemler= ViewBag.SiparisKalemler as AlisverisSepeti.Models.Sipariskalemler;
+}
+
+<form method="POST" enctype="multipart/form-data">
+    <table>
+        <tr>
+            <td>
+                <b>Urun Adi</b>
+            </td>
+            <td>
+                    <select name="UrunId">
+                        @foreach (var Urunler in ViewBag.Urunler as List<AlisverisSepeti.Models.Urunler>)
+                        {
+                            <option value="@Urunler.UrunId" @(SiparisKalemler.UrunId == Urunler.UrunId ? "selected" : "")>
+                                @(Urunler.UrunlerDils.Count > 0 ? Urunler.UrunlerDils.First().UrunAdi : "Ürün Adi Yok")
+                            </option>
+                        }
+                    </select>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>P Urun Adi</b>
+
+            </td>
+
+            <td>
+                <select name="PurunId">
+                    @foreach (var Urunler in ViewBag.Urunler as List<AlisverisSepeti.Models.Urunler>)
+                    {
+                        <option value="@Urunler.UrunId" @(SiparisKalemler.PurunId == Urunler.UrunId ? "selected" : "")>
+                            @(Urunler.UrunlerDils.Count > 0 ? Urunler.UrunlerDils.First().UrunAdi : "Ürün Adi Yok")
+                        </option>
+                    }
+                </select>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Adet</b>
+
+            </td>
+
+            <td>
+                <input type="number" name="Adet" value="@SiparisKalemler.Adet" />
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Birim Fiyat</b>
+            </td>
+            <td>
+                
+                <input type="number" step="any" name="BirimFiyat" value="@SiparisKalemler.BirimFiyat" />
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <b>Vergi Oranı</b>
+            </td>
+            <td>
+                <input type="number" step="any" name="VergiOran" value="@SiparisKalemler.VergiOran" />
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Vergi</b>
+            </td>
+            <td>
+
+                <input type="number" step="any" name="Vergi" value="@SiparisKalemler.Vergi" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Weight</b>
+            </td>
+            <td>
+                <input type="number" step="any" name="WeightDesi" value="@SiparisKalemler.WeightDesi" />
+                
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Toplam</b>
+            </td>
+            <td>
+                <input type="number" step="any" name="Toplam" value="@SiparisKalemler.Toplam" />
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <center><input type="submit" value="@ViewBag.SubmitButtonValue" /></center>
+            </td>
+        </tr>
+
+
+    </table>
+
+
+</form>

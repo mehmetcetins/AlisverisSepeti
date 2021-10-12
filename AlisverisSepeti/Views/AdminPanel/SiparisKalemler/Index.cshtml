@@ -1,0 +1,49 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    Layout = "~/Views/Layouts/Admin/AdminLayout.cshtml";
+}
+
+<a href="@Context.Request.Path/SiparisKalemlerForm/Add/">Ekle</a>
+<table cellspacing="0" border="1" cellpadding="10">
+    <thead>
+        <tr>
+            <th>Ürün Adı</th>
+            <th>P Ürün Adi</th>
+            <th>Toplam</th>
+            
+            
+            <th>İşlemler</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var SiparisKalemler in ViewBag.SiparisKalemler as List<AlisverisSepeti.Models.Sipariskalemler>)
+        {
+        <tr>
+            
+            <td><a href="@Context.Request.Path/@SiparisKalemler.SiparisKalemId">@SiparisKalemler.Urun.UrunlerDils.First().UrunAdi</a></td>
+            
+            <td>
+                @if (SiparisKalemler.Purun != null && SiparisKalemler.Purun.UrunlerDils.Count > 0)
+                {
+                    @SiparisKalemler.Purun.UrunlerDils.First().UrunAdi;
+                }
+                else
+                {
+                    @("-")
+                }
+            </td>
+            <td>@SiparisKalemler.Toplam</td>
+
+            <td>
+                <a class="sil" href="@Context.Request.Path/Delete/@SiparisKalemler.SiparisKalemId">Sil</a>
+                <a href="@Context.Request.Path/SiparisKalemlerForm/Update/@SiparisKalemler.SiparisKalemId">Düzenle</a>
+            </td>
+        </tr>
+
+
+
+        }
+    </tbody>
+</table>

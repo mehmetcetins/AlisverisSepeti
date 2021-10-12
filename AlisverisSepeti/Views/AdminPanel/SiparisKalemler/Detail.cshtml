@@ -1,0 +1,91 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    Layout = "~/Views/Layouts/Admin/AdminLayout.cshtml";
+    var SiparisKalemler = ViewBag.SiparisKalemler as AlisverisSepeti.Models.Sipariskalemler;
+}
+
+
+<table>
+    <tbody>
+        <tr>
+            <td>
+                <b>Urun Adi</b>
+            </td>
+            <td>
+                @(SiparisKalemler.Urun.UrunlerDils.Count > 0 ? SiparisKalemler.Urun.UrunlerDils.First().UrunAdi : "-" )
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>P Urun Adi</b>
+
+            </td>
+
+            <td>
+                @(SiparisKalemler.Purun.UrunlerDils.Count > 0 ? SiparisKalemler.Purun.UrunlerDils.First().UrunAdi : "-" )
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Adet</b>
+
+            </td>
+
+            <td>
+                @SiparisKalemler.Adet
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Birim Fiyat</b>
+            </td>
+            <td>
+                @SiparisKalemler.BirimFiyat
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <b>Vergi Oranı</b>
+            </td>
+            <td>
+                @SiparisKalemler.VergiOran
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Vergi</b>
+            </td>
+            <td>
+
+                @SiparisKalemler.Vergi
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Weight</b>
+            </td>
+            <td>
+                @SiparisKalemler.WeightDesi
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Toplam</b>
+            </td>
+            <td>
+                @SiparisKalemler.Toplam
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <a class="sil" href="/admin/SiparisKalemler/Delete/@SiparisKalemler.SiparisKalemId">Sil</a>
+                <a href="/admin/SiparisKalemler/SiparisKalemlerForm/Update/@SiparisKalemler.SiparisKalemId">Duzenle</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
