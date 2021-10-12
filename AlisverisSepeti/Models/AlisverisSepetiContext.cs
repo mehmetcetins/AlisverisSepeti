@@ -40,6 +40,7 @@ namespace AlisverisSepeti.Models
         public virtual DbSet<OzelliklerDil> OzelliklerDils { get; set; }
         public virtual DbSet<Ozelliktipleri> Ozelliktipleris { get; set; }
         public virtual DbSet<Poslar> Poslars { get; set; }
+        public virtual DbSet<Sipariskalemler> Sipariskalemlers { get; set; }
         public virtual DbSet<Siparisler> Siparislers { get; set; }
         public virtual DbSet<Stokdurum> Stokdurums { get; set; }
         public virtual DbSet<StokdurumDil> StokdurumDils { get; set; }
@@ -676,6 +677,51 @@ namespace AlisverisSepeti.Models
                 entity.Property(e => e.PosBankaAdi)
                     .IsRequired()
                     .HasMaxLength(50);
+            });
+
+            modelBuilder.Entity<Sipariskalemler>(entity =>
+            {
+                entity.HasKey(e => e.SiparisKalemId)
+                    .HasName("PRIMARY");
+
+                entity.ToTable("sipariskalemler");
+
+                entity.HasIndex(e => e.SiparisId, "lnk_siparisler_sipariskalemler");
+
+                entity.HasIndex(e => e.UrunId, "lnk_urunler_sipariskalemler");
+
+                entity.HasIndex(e => e.PurunId, "lnk_urunler_sipariskalemler_2");
+
+                entity.Property(e => e.SiparisKalemId).HasColumnName("SiparisKalemID");
+
+                entity.Property(e => e.Id).HasMaxLength(0);
+
+                entity.Property(e => e.PurunAdi)
+                    .HasMaxLength(20)
+                    .HasColumnName("PUrunAdi");
+
+                entity.Property(e => e.PurunId).HasColumnName("PUrunID");
+
+                entity.Property(e => e.SiparisId).HasColumnName("SiparisID");
+
+                entity.Property(e => e.UrunId).HasColumnName("UrunID");
+
+                entity.HasOne(d => d.Purun)
+                    .WithMany(p => p.SipariskalemlerPuruns)
+                    .HasForeignKey(d => d.PurunId)
+                    .HasConstraintName("lnk_urunler_sipariskalemler_2");
+
+                entity.HasOne(d => d.Siparis)
+                    .WithMany(p => p.Sipariskalemlers)
+                    .HasForeignKey(d => d.SiparisId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("lnk_siparisler_sipariskalemler");
+
+                entity.HasOne(d => d.Urun)
+                    .WithMany(p => p.SipariskalemlerUruns)
+                    .HasForeignKey(d => d.UrunId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("lnk_urunler_sipariskalemler");
             });
 
             modelBuilder.Entity<Siparisler>(entity =>

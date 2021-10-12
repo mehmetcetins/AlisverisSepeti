@@ -9,6 +9,8 @@ namespace AlisverisSepeti.Models
     {
         public Urunler()
         {
+            SipariskalemlerPuruns = new HashSet<Sipariskalemler>();
+            SipariskalemlerUruns = new HashSet<Sipariskalemler>();
             Urundosyalars = new HashSet<Urundosyalar>();
             UrunlerDils = new HashSet<UrunlerDil>();
             Urunopsiyondegerleris = new HashSet<Urunopsiyondegerleri>();
@@ -40,6 +42,8 @@ namespace AlisverisSepeti.Models
         public virtual Markalar Marka { get; set; }
         public virtual Stokdurum StokDurum { get; set; }
         public virtual Uruntipleri UrunTipiNavigation { get; set; }
+        public virtual ICollection<Sipariskalemler> SipariskalemlerPuruns { get; set; }
+        public virtual ICollection<Sipariskalemler> SipariskalemlerUruns { get; set; }
         public virtual ICollection<Urundosyalar> Urundosyalars { get; set; }
         public virtual ICollection<UrunlerDil> UrunlerDils { get; set; }
         public virtual ICollection<Urunopsiyondegerleri> Urunopsiyondegerleris { get; set; }

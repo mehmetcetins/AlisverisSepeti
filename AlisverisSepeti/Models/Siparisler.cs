@@ -7,6 +7,11 @@ namespace AlisverisSepeti.Models
 {
     public partial class Siparisler
     {
+        public Siparisler()
+        {
+            Sipariskalemlers = new HashSet<Sipariskalemler>();
+        }
+
         public int SiparisId { get; set; }
         public int UserId { get; set; }
         public int EkleyenId { get; set; }
@@ -43,5 +48,6 @@ namespace AlisverisSepeti.Models
         public virtual User SevkEdenNavigation { get; set; }
         public virtual Gonderimsekilleri SevkSekliNavigation { get; set; }
         public virtual User User { get; set; }
+        public virtual ICollection<Sipariskalemler> Sipariskalemlers { get; set; }
     }
 }
