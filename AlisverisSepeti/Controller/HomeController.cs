@@ -9,7 +9,7 @@ namespace AlisverisSepeti
     
     public class HomeController : Controller
     {
-        [Route("/")]
+        [Route("/ss")]
         public IActionResult Index()
         {
             return View();
