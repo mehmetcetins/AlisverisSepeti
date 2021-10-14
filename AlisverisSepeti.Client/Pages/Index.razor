@@ -1,7 +1,13 @@
 ﻿@page "/"
-
-<h1>Hello, world!</h1>
-
-Welcome to your new app.
-
-<SurveyPrompt Title="How is Blazor working for you?" />
+@inject HttpClient Http
+<h1>
+    asda
+    @id
+</h1>
+@code {
+    private string id;
+    protected override async Task OnInitializedAsync()
+    {
+        id = await Http.GetFromJsonAsync<string>("/maymun/1");
+    }
+}

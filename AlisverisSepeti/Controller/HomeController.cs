@@ -15,10 +15,11 @@ namespace AlisverisSepeti
             return View();
         }
         [Route("/maymun/{id:int?}")]
-        public IActionResult Maymun(int? id)
+        public JsonResult Maymun(int? id)
         {
-            ViewBag.sayi = id;
-            return View(new {sayi = id});
+            return new JsonResult(id);
+            //ViewBag.sayi = id;
+            //return View(new {sayi = id});
         }
     }
 }
