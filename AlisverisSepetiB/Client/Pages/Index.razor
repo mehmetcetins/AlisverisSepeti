@@ -1,30 +1,33 @@
 ﻿@page "/"
 @page "/Home"
+@using AlisverisSepetiB.Client.Pages.Components
+@using AlisverisSepetiB.Shared
 @inject HttpClient http
-<h1>
+
     @if (names == null)
     {
         @("isim yok")
     }
     else
     {
-        <ul>
-
-            @foreach (var name in names)
-            {
-                <li>@name</li>
-
-
-            }
-        </ul>
+        
+<MudGrid>
+    @foreach (var name in names)
+    {
+    <MudItem xs="6" sm="6" md="4" lg="3" xl="2">
+        <UrunCard Title="@name.MarkaAdi" Description="@name.UrunAdi" Price="@name.Fiyati" />
+    </MudItem>
+    }
+</MudGrid>
+        
     }
 
-</h1>
+
 @code {
-    private List<string> names;
+    private List<UrunDTO> names;
     protected override async Task OnInitializedAsync()
     {
-        names = await http.GetFromJsonAsync<List<string>>("Home");
+        names = await http.GetFromJsonAsync<List<UrunDTO>>("Home");
 
     }
 }
