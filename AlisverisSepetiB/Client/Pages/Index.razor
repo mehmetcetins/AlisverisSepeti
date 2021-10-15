@@ -1,4 +1,5 @@
 ﻿@page "/"
+@page "/Home"
 @inject HttpClient http
 <h1>
     @if (names == null)
@@ -20,9 +21,10 @@
 
 </h1>
 @code {
-    private string[] names;
+    private List<string> names;
     protected override async Task OnInitializedAsync()
     {
-        names = await http.GetFromJsonAsync<string[]>("Home");
+        names = await http.GetFromJsonAsync<List<string>>("Home");
+
     }
 }

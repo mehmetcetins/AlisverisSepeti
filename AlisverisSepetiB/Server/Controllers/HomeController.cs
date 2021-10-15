@@ -11,19 +11,18 @@ namespace AlisverisSepetiB.Server.Controllers
     public class HomeController : Controller
     {
         [HttpGet]
-        public async Task<IEnumerable<string>> Get()
+        public async Task<List<string>> Get()
         {
-            string[] names = new string[10];
-            Array.Fill<string>(names, "-");
+            List<string> names = new List<string>();
             try
             {
                 
                 using (var context = new AlisverisSepeti.Models.AlisverisSepetiContext())
                 {
                     int c = 0;
-                    foreach (var urun in await context.Urunlers.AsNoTracking().Take(10).Include(urun => urun.UrunlerDils.Where(d => d.Dil.Varsayilanmi == true)).ToListAsync())
+                    foreach (var urun in await context.Urunlers.AsNoTracking().Include(urun => urun.UrunlerDils.Where(d => d.Dil.Varsayilanmi == true)).ToListAsync())
                     {
-                        names[c++] = urun.UrunlerDils.FirstOrDefault()?.UrunAdi ?? "Ürün Adı Yok";
+                        names.Add(urun.UrunlerDils.FirstOrDefault()?.UrunAdi ?? "Ürün Adı Yok");
 
                     }
                 }
@@ -32,10 +31,10 @@ namespace AlisverisSepetiB.Server.Controllers
             catch(Exception e)
             {
                 
-                return names.ToArray();
+                return names;
             }
             
-            return names.ToArray();
+            return names;
             
         }
     }
