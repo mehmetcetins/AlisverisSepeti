@@ -1,14 +1,26 @@
-﻿@page "/Card"
-<MudCard>
+﻿
+<MudCard >
+    <MudCardMedia Image="@Image" />
     <MudCardContent>
-        <MudText>Story of the day</MudText>
-        <MudText Typo="Typo.body2">The quick, brown fox jumps over a lazy dog.</MudText>
+        <MudText Typo="Typo.body2"><b>@Title</b> @Description</MudText>
+        <MudText Typo="Typo.body2">@Price</MudText>
     </MudCardContent>
     <MudCardActions>
-        <MudButton Variant="Variant.Text" Color="Color.Primary">Learn More</MudButton>
+        <MudButton Variant="Variant.Filled" Color="Color.Dark">@ButtonValue</MudButton>
     </MudCardActions>
 </MudCard>
 
 @code {
+    [Parameter]
+    public string Image { get; set; } = "https://productimages.hepsiburada.net/s/103/550/110000046559825.jpg/format:webp";
+    [Parameter]
+    public string Title { get; set; } = "Title";
+    [Parameter]
+    public string Description { get; set; } = "Description";
+    [Parameter]
+    public string ButtonValue { get; set; } = "Sepete Ekle";
+    [Parameter]
+    public string Price { get; set; } = "0 TL";
+
 
 }
