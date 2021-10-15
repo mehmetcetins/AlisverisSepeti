@@ -5,11 +5,11 @@ VisualStudioVersion = 16.0.31624.102
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AlisverisSepeti", "AlisverisSepeti\AlisverisSepeti.csproj", "{7265F270-7FB2-4BB3-A448-5DD2D4306C11}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AlisverisSepetiB.Server", "AlisverisSepetiB\Server\AlisverisSepetiB.Server.csproj", "{10F3E0D7-452D-4B25-9185-7F17E5CDE689}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AlisverisSepetiB.Server", "AlisverisSepetiB\Server\AlisverisSepetiB.Server.csproj", "{10F3E0D7-452D-4B25-9185-7F17E5CDE689}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AlisverisSepetiB.Client", "AlisverisSepetiB\Client\AlisverisSepetiB.Client.csproj", "{4EC3DB31-DCA0-4F02-9CA2-5B53242790E9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AlisverisSepetiB.Client", "AlisverisSepetiB\Client\AlisverisSepetiB.Client.csproj", "{4EC3DB31-DCA0-4F02-9CA2-5B53242790E9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AlisverisSepetiB.Shared", "AlisverisSepetiB\Shared\AlisverisSepetiB.Shared.csproj", "{F27769BB-9D26-41C8-BD5A-5481A6744F9B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AlisverisSepetiB.Shared", "AlisverisSepetiB\Shared\AlisverisSepetiB.Shared.csproj", "{F27769BB-9D26-41C8-BD5A-5481A6744F9B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
