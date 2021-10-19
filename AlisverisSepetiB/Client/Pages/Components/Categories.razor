@@ -1,0 +1,14 @@
+﻿<MudAppBar Fixed="false">
+    <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Inherit" OnClick="@ToggleDrawer"/>
+</MudAppBar>
+<MudDrawer @bind-Open="@Open">
+
+</MudDrawer>
+
+@code {
+    private bool Open { get; set; } = false;
+    private void ToggleDrawer(MouseEventArgs e)
+    {
+        Open = !Open;
+    }
+}
