@@ -1,14 +1,86 @@
-﻿<MudAppBar Fixed="false">
-    <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Inherit" OnClick="@ToggleDrawer"/>
+﻿@using Microsoft.AspNetCore.Components.Rendering
+<MudAppBar Fixed="false">
+    <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Inherit" OnClick="@ToggleDrawer" />
 </MudAppBar>
 <MudDrawer @bind-Open="@Open">
-
+    <MudDrawerHeader>
+        <MudText Typo="Typo.h5">Kategoriler</MudText>
+    </MudDrawerHeader>
+    <MudDrawerContainer>
+        <MudNavMenu>
+            
+            @categor
+        </MudNavMenu>
+    </MudDrawerContainer>
 </MudDrawer>
 
 @code {
+    protected override void OnInitialized()
+    {
+        categor = RenderCategories(dummyData);
+    }
+    private Dictionary<string, dynamic> dummyData = new Dictionary<string, dynamic>()
+    {
+        {
+            "Elektronik" ,
+            new Dictionary<string, dynamic>()
+            {
+                {
+                    "Bilgisayar & Tablet",
+                    null
+                },
+                {
+                    "Yazıcılar & Projeksiyon",
+                    null
+                }
+            }
+        },
+        {
+            "Moda",
+            new Dictionary<string, dynamic>
+            {
+                {
+                    "Aksesuar & Takı",
+                    null
+                }
+            }
+        }
+    };
     private bool Open { get; set; } = false;
     private void ToggleDrawer(MouseEventArgs e)
     {
         Open = !Open;
     }
+    private RenderFragment categor { get; set; }
+    private RenderFragment RenderCategories(Dictionary<string, dynamic> data) =>__builder =>
+    {
+       
+
+        foreach (var d in data)
+        {
+            Console.WriteLine((object)d.Value ?? "yok");
+            
+            if (d.Value != null)
+            {
+                __builder.OpenComponent<MudNavGroup>(0);
+                __builder.AddAttribute(0, "Title", d.Key);
+                __builder.OpenComponent<MudNavLink>(1);
+                __builder.OpenComponent<MudText>(2);
+                __builder.AddContent(2, (RenderFragment)RenderCategories(d.Value));
+                Console.WriteLine("Bitirdi");
+                __builder.CloseComponent();
+                __builder.CloseComponent();
+                __builder.CloseComponent();
+            }
+            else
+            {
+                __builder.OpenComponent<MudNavLink>(0);
+                __builder.OpenComponent<MudText>(1);
+                __builder.AddContent(1, d.Key);
+                __builder.CloseComponent();
+                __builder.CloseComponent();
+
+            }
+        }
+    };
 }
