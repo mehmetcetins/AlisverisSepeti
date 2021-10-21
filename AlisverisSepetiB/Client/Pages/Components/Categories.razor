@@ -15,72 +15,84 @@
 </MudDrawer>
 
 @code {
-    protected override void OnInitialized()
-    {
-        categor = RenderCategories(dummyData);
-    }
-    private Dictionary<string, dynamic> dummyData = new Dictionary<string, dynamic>()
-    {
+        public struct Dummy
         {
-            "Elektronik" ,
-            new Dictionary<string, dynamic>()
-            {
-                {
-                    "Bilgisayar & Tablet",
-                    null
-                },
-                {
-                    "Yazıcılar & Projeksiyon",
-                    null
-                }
-            }
+            public int id;
+            public string category;
+            public bool haveSubs;
+            public int parentID;
+        }
+        private RenderFragment categor;
+        protected override void OnInitialized()
+        {
+            categor = RenderCategories(dummyData);
+        }
+        private List<Dummy> dummyData = new List<Dummy>
+    {
+        new Dummy {
+            id = 1,
+            category = "Elektronik",
+            haveSubs= true,
+            parentID=-1
         },
+        new Dummy {
+            id = 3,
+            category = "Bilgisayar/Tablet",
+            haveSubs= false,
+            parentID = 1
+        },
+        new Dummy {
+            id = 4,
+            category = "Yazıcılar & Projeksiyon",
+            haveSubs= false,
+            parentID = 1
+        },
+        new Dummy {
+            id = 2,
+            category = "Moda",
+            haveSubs= true,
+            parentID = -1
+        },
+        new Dummy {
+            id = 5,
+            category = "Aksesuar & Takı",
+            haveSubs= false,
+            parentID = 2
+        }
+
+    };
+        private bool Open { get; set; } = false;
+        private void ToggleDrawer(MouseEventArgs e)
         {
-            "Moda",
-            new Dictionary<string, dynamic>
+            Open = !Open;
+        }
+        private RenderFragment RenderCategories(List<Dummy> data) => __builder => {
+
+            __builder.OpenElement(0, "div");
+            foreach (var d in data)
             {
+                if (d.haveSubs)
                 {
-                    "Aksesuar & Takı",
-                    null
+
+                    __builder.OpenComponent<MudNavGroup>(d.id);
+                    __builder.AddAttribute(d.id, "Title", d.category);
+
+                    __builder.CloseComponent();
                 }
+                /*
+                else
+                {
+                    __builder.OpenComponent<MudNavLink>(d.parentID + d.id );
+
+
+                    __builder.AddContent(d.parentID + d.id,d.category);
+
+                    __builder.CloseComponent();
+                }*/
+
             }
-        }
-    };
-    private bool Open { get; set; } = false;
-    private void ToggleDrawer(MouseEventArgs e)
-    {
-        Open = !Open;
+            __builder.CloseElement();
+
+        };
     }
-    private RenderFragment categor { get; set; }
-    private RenderFragment RenderCategories(Dictionary<string, dynamic> data) =>__builder =>
-    {
-       
 
-        foreach (var d in data)
-        {
-            Console.WriteLine((object)d.Value ?? "yok");
-            
-            if (d.Value != null)
-            {
-                __builder.OpenComponent<MudNavGroup>(0);
-                __builder.AddAttribute(0, "Title", d.Key);
-                __builder.OpenComponent<MudNavLink>(1);
-                __builder.OpenComponent<MudText>(2);
-                __builder.AddContent(2, (RenderFragment)RenderCategories(d.Value));
-                Console.WriteLine("Bitirdi");
-                __builder.CloseComponent();
-                __builder.CloseComponent();
-                __builder.CloseComponent();
-            }
-            else
-            {
-                __builder.OpenComponent<MudNavLink>(0);
-                __builder.OpenComponent<MudText>(1);
-                __builder.AddContent(1, d.Key);
-                __builder.CloseComponent();
-                __builder.CloseComponent();
-
-            }
-        }
-    };
-}
