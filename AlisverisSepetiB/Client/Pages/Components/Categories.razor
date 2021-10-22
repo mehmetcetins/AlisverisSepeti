@@ -1,4 +1,6 @@
 ﻿@using Microsoft.AspNetCore.Components.Rendering
+@inject HttpClient Http
+
 <MudAppBar Fixed="false">
     <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Inherit" OnClick="@ToggleDrawer" />
 </MudAppBar>
@@ -8,91 +10,28 @@
     </MudDrawerHeader>
     <MudDrawerContainer>
         <MudNavMenu>
-            
-            @categor
+            @if (categories != null)
+            {
+                <Recursive data="@categories" />
+
+            }
         </MudNavMenu>
     </MudDrawerContainer>
 </MudDrawer>
 
 @code {
-        public struct Dummy
-        {
-            public int id;
-            public string category;
-            public bool haveSubs;
-            public int parentID;
-        }
-        private RenderFragment categor;
-        protected override void OnInitialized()
-        {
-            categor = RenderCategories(dummyData);
-        }
-        private List<Dummy> dummyData = new List<Dummy>
+
+
+    private bool Open { get; set; } = false;
+    private void ToggleDrawer(MouseEventArgs e)
     {
-        new Dummy {
-            id = 1,
-            category = "Elektronik",
-            haveSubs= true,
-            parentID=-1
-        },
-        new Dummy {
-            id = 3,
-            category = "Bilgisayar/Tablet",
-            haveSubs= false,
-            parentID = 1
-        },
-        new Dummy {
-            id = 4,
-            category = "Yazıcılar & Projeksiyon",
-            haveSubs= false,
-            parentID = 1
-        },
-        new Dummy {
-            id = 2,
-            category = "Moda",
-            haveSubs= true,
-            parentID = -1
-        },
-        new Dummy {
-            id = 5,
-            category = "Aksesuar & Takı",
-            haveSubs= false,
-            parentID = 2
-        }
-
-    };
-        private bool Open { get; set; } = false;
-        private void ToggleDrawer(MouseEventArgs e)
-        {
-            Open = !Open;
-        }
-        private RenderFragment RenderCategories(List<Dummy> data) => __builder => {
-
-            __builder.OpenElement(0, "div");
-            foreach (var d in data)
-            {
-                if (d.haveSubs)
-                {
-
-                    __builder.OpenComponent<MudNavGroup>(d.id);
-                    __builder.AddAttribute(d.id, "Title", d.category);
-
-                    __builder.CloseComponent();
-                }
-                /*
-                else
-                {
-                    __builder.OpenComponent<MudNavLink>(d.parentID + d.id );
-
-
-                    __builder.AddContent(d.parentID + d.id,d.category);
-
-                    __builder.CloseComponent();
-                }*/
-
-            }
-            __builder.CloseElement();
-
-        };
+        Open = !Open;
     }
+
+    private List<AlisverisSepetiB.Shared.Category> categories;
+    protected override async Task OnInitializedAsync()
+    {
+        categories = await Http.GetFromJsonAsync<List<AlisverisSepetiB.Shared.Category>>("Home/Categories");
+    }
+}
 

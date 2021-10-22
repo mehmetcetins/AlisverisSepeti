@@ -14,7 +14,7 @@ namespace AlisverisSepetiB.Server.Controllers
 
 
         [HttpGet("Categories")]
-        public async Task<List<Urunkategoriler>> Categories()
+        public async Task<List<Category>> Categories()
         {
             int maxDepth;
             List<Urunkategoriler> kategoriler;
@@ -22,23 +22,44 @@ namespace AlisverisSepetiB.Server.Controllers
             {
                 maxDepth = await context.Urunkategorilers.AsNoTracking().MaxAsync(kategori => kategori.Depth);
                 kategoriler = await context.Urunkategorilers.AsNoTracking().OrderBy(kategori => kategori.Depth).ToListAsync();
-                return kategoriler;
+                
             }
-            /*
-            int depth = 0;
-            List listem = new System.Collections.Generic.List();
+            List<Category> categories = new List<Category>();
+            List<Category> _Categories = new List<Category>();
+            Category temp;
+            Category category;
             foreach(var kategori in kategoriler)
             {
-                if (kategori.Depth == depth + 1)
+                if (kategori.PkategoriId != null)
                 {
-                    ++depth;
+                    temp = _Categories.Where(k => k.id == kategori.PkategoriId).First();
+                    if (temp.SubCategory == null)
+                    {
+                        temp.SubCategory = new List<Category>();
+                    }
+                    category = new Category()
+                    {
+                        id = kategori.KategoriId,
+                        categoryName = kategori.KategoriAdi,
+                        SubCategory = null
+                    };
+                    _Categories.Add(category);
+                    temp.SubCategory.Add(category);
                 }
-                if (kategori.Depth == depth)
+                else
                 {
-                    
+                    category = new Category()
+                    {
+                        id = kategori.KategoriId,
+                        categoryName = kategori.KategoriAdi,
+                        SubCategory = null
+                    };
+                    _Categories.Add(category);
+                    categories.Add(category);
                 }
                 
-            }*/
+            }
+            return categories;
         }
 
         [HttpGet]

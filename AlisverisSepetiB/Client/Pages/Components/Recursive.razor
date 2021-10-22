@@ -1,0 +1,22 @@
+﻿@foreach(var d in data)
+            {
+                @if(d.SubCategory != null)
+                {
+                <MudNavGroup Title="@d.categoryName" @key="d.id">
+                        <Recursive data="@d.SubCategory" />
+                        <MudNavLink>
+                            @d.categoryName
+                        </MudNavLink>
+                </MudNavGroup>
+                }
+                else
+                {
+                    <MudNavLink @key="d.id">
+                        @d.categoryName
+                    </MudNavLink>
+                }
+            }
+@code {
+    [Parameter]
+    public List<AlisverisSepetiB.Shared.Category> data { get; set; }
+}
