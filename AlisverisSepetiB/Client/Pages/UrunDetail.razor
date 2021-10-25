@@ -1,0 +1,80 @@
+﻿@page "/Urun/{id}"
+@inject HttpClient http
+<MudPaper Square="true" Class="mb-5">
+    <MudGrid>
+        <MudItem xs="6">
+            <img src="https://productimages.hepsiburada.net/s/131/550/110000082292912.jpg/format:webp" width="100%" />
+        </MudItem>
+        <MudItem xs="6">
+            <MudText Typo="Typo.h5">@urunSpecs?.UrunAdi</MudText>
+            <MudText Class="mb-5" Typo="Typo.h6">@urunSpecs?.MarkaAdi</MudText>
+            <MudText Typo="Typo.h3">@urunSpecs?.Fiyati</MudText>
+            <MudDivider Class="mb-10 mt-10" />
+            <MudButton Variant="Variant.Filled" Class="px-16 py-3" Color="Color.Dark">Sepete Ekle</MudButton>
+        </MudItem>
+    </MudGrid>
+</MudPaper>
+<MudPaper Outlined="true">
+    <MudTabs Elevation="1" Color="Color.Dark">
+        <MudTabPanel Class="px-10" Text="Ürün Açıklaması">
+            <MudContainer Fixed="true" Class="pa-5">
+                <MudText>
+                    HP 250 G8 Intel Core i7-1165G7 24GB 1TB SSD 15.6'' FHD Windows 10 Pro Taşınabilir Bilgisayar 34N99ES43
+                </MudText>
+                <MudTable Items="@Elements">
+                    
+                    <RowTemplate>
+                        <MudTd Class="font-weight-bold" DataLabel="ozellikadi">@context.Key</MudTd>
+                        <MudTd DataLabel="degeri">@context.Value</MudTd>
+                    </RowTemplate>
+                </MudTable>
+            </MudContainer>
+        </MudTabPanel>
+        <MudTabPanel Class="px-10" Text="Soru & Cevap">
+            <MudText Class="text-center pa-16">Bu ürün hakkında soru bulunmuyor.</MudText>
+        </MudTabPanel>
+        <MudTabPanel Class="px-10" Text="İade Koşulları">
+            <MudText Class="pa-5" Typo="Typo.body1">
+                İncelediğiniz ürün, Mesafeli Sözleşmelere Dair Yönetmeliğin 7. maddesinde yer alan aşağıdaki hükümler gereğince iade alınmamaktadır.
+                <br />
+                <br />
+                Tüketicinin özel istekleri veya açıkça onun kişisel ihtiyaçları doğrultusunda hazırlanan, niteliği itibariyle geri gönderilmeye elverişli olmayan, çabuk bozulma tehlikesi olan veya son kullanma tarihi geçme ihtimali olan ürünler iade edilemez.
+                <br />
+                <br />
+                Tüketici tarafından ambalajı açılmış ise; ses veya görüntü kayıtlarına, yazılım programlarına ve bilgisayar sarf malzemelerine ilişkin ürünler (Örneğin; DVD, VCD, CD ve kasetler, toner, kartuş, şerit, vb. gibi) iade edilemez.
+                <br />
+                <br />
+                Hijyenik ürünler (iç çamaşırı gibi), süpermarket ürünleri (gıda ürünleri gibi), gazete, dergi gibi süreli yayınlar iade edilemez.
+                <br />
+                <br />
+                Fiyatı borsa veya teşkilatlanmış diğer piyasalarda belirlenen ürünler (altın grubu) iade edilemez.
+                Daha detaylı bilgi için Çözüm Merkezi sayfasını ziyaret edebilirsiniz.
+            </MudText>
+        </MudTabPanel>
+    </MudTabs>
+</MudPaper>
+@code {
+    [Parameter]
+    public string id { get; set; }
+    private UrunSpecs? urunSpecs { get; set; }
+    protected override async void OnInitialized()
+    {
+        urunSpecs = await http.GetFromJsonAsync<UrunSpecs>("Home/UrunSpecs/" + id);
+        StateHasChanged();
+    }
+    private Dictionary<string, string> Elements = new Dictionary<string, string>()
+    {
+        {
+            "10/100 Ethernet",
+            "Var"
+        },
+        {
+            "Bellek Hızı",
+            "2666 MHz"
+        },
+        {
+            "Bellek Yuvası",
+            "2"
+        }
+    };
+}

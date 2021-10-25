@@ -75,6 +75,7 @@ namespace AlisverisSepetiB.Server.Controllers
                     foreach (var urun in await context.Urunlers.AsNoTracking().Include(urun=> urun.Urunozellikleris).Include(urun => urun.Marka).Include(urun => urun.UrunlerDils.Where(d => d.Dil.Varsayilanmi == true)).ToListAsync())
                     {
                         urunt = new UrunDTO();
+                        urunt.id = urun.UrunId.ToString();
                         urunt.UrunAdi = urun.UrunlerDils.FirstOrDefault()?.UrunAdi ?? "Ürün Adi Yok";
                         urunt.MarkaAdi = urun.Marka.MarkaAdi;
                         urunt.Fiyati = urun.Urunozellikleris.Where(ozellik => ozellik.OzellikAdi.Equals("Price")).FirstOrDefault()?.Deger ?? "0 TL";
@@ -91,6 +92,32 @@ namespace AlisverisSepetiB.Server.Controllers
             }
             
             return uruns;
+            
+        }
+        [HttpGet("UrunSpecs/{id}")]
+        public async Task<UrunSpecs> GetUrunSpecs(string id)
+        {
+            using (var context = new AlisverisSepetiContext())
+            {
+                
+                Urunler urun = await context.Urunlers
+                    .AsNoTracking()
+                    .Where(urun => urun.UrunId == Convert.ToInt32(id))
+                    .Include(urun => urun.UrunlerDils.Where(dil => dil.Dil.Varsayilanmi == true))
+                    .Include(urun => urun.Marka)
+                    .Include(urun => urun.Urunozellikleris)
+                    .FirstOrDefaultAsync();
+                if(urun == null)
+                {
+                    return new UrunSpecs();
+                }
+                UrunSpecs urunSpecs = new UrunSpecs();
+                urunSpecs.UrunAdi = urun.UrunlerDils.FirstOrDefault()?.UrunAdi ?? "Ürün Adi Yok";
+                urunSpecs.MarkaAdi = urun.Marka.MarkaAdi;
+                urunSpecs.Fiyati = urun.Urunozellikleris.Where(ozellik => ozellik.OzellikAdi.Equals("Price")).FirstOrDefault()?.Deger ?? "0 TL";
+                urunSpecs.id = id;
+                return urunSpecs;
+            }
             
         }
     }

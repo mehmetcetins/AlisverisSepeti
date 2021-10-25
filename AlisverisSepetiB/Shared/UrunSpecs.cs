@@ -6,11 +6,12 @@ using System.Threading.Tasks;
 
 namespace AlisverisSepetiB.Shared
 {
-    public class UrunDTO
+    public class UrunSpecs
     {
         public string id { get; set; }
         public string UrunAdi { get; set; }
         public string MarkaAdi { get; set; }
         public string Fiyati { get; set; }
+
     }
 }
