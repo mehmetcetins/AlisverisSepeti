@@ -15,7 +15,7 @@
     @foreach (var name in names)
     {
     <MudItem xs="6" sm="6" md="4" lg="3" xl="2">
-        <UrunCard Title="@name.MarkaAdi" Description="@name.UrunAdi" Price="@name.Fiyati" />
+        <UrunCard Title="@name.MarkaAdi" Description="@name.UrunAdi" Price="@name.Fiyati" id="@name.id" @key="@name.id" />
     </MudItem>
     }
 </MudGrid>

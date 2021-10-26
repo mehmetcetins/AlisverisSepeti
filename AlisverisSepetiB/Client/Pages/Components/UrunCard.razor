@@ -1,12 +1,12 @@
-﻿
-<MudCard>
+﻿@inject NavigationManager _nav
+<MudCard @onclick="Clicked" @onmouseover="Elevate" @onmouseout="@OnExit" Elevation="@elevate">
     <MudCardMedia Image="@Image" />
     <MudCardContent Style="height:92px">
         <MudText Typo="Typo.body2"><b>@Title</b> @Description</MudText>
         <MudText Typo="Typo.body2">@Price</MudText>
     </MudCardContent>
     <MudCardActions>
-        <MudButton Variant="Variant.Filled" Color="Color.Dark">@ButtonValue</MudButton>
+        <MudButton Variant="Variant.Filled" Color="Color.Dark" >@ButtonValue</MudButton>
     </MudCardActions>
 </MudCard>
 
@@ -21,6 +21,21 @@
     public string ButtonValue { get; set; } = "Sepete Ekle";
     [Parameter]
     public string Price { get; set; } = "0 TL";
+    [Parameter]
+    public string id { get; set; }
 
+    private void Clicked(MouseEventArgs e)
+    {
+        _nav.NavigateTo("Urun/"+id);
+    }
+    private int elevate { get; set; } = 0;
+    private void Elevate(MouseEventArgs e)
+    {
+        elevate = 10;
+    }
+    private void OnExit(MouseEventArgs e)
+    {
+        elevate = 0;
+    }
 
 }
