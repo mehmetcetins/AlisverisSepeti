@@ -1,8 +1,11 @@
 ﻿@using Microsoft.AspNetCore.Components.Rendering
+@using AlisverisSepetiB.Client.StateContainers
 @inject HttpClient Http
-
+@inject BasketContainer basket; 
 <MudAppBar Fixed="false">
     <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Inherit" OnClick="@ToggleDrawer" />
+    <MudSpacer/>
+    <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Inherit" OnClick="@ToggleBasket" />
 </MudAppBar>
 <MudDrawer @bind-Open="@Open">
     <MudDrawerHeader>
@@ -18,20 +21,42 @@
         </MudNavMenu>
     </MudDrawerContainer>
 </MudDrawer>
+<MudDrawer @bind-Open="@OpenBasket" Anchor="Anchor.End">
+    <MudDrawerHeader>
+        <MudText Typo="Typo.h5">Sepet</MudText>
+    </MudDrawerHeader>
+    <MudDrawerContainer>
+        <MudList>
+            @foreach (UrunDTO item in basket.basket)
+            {
+                <MudListItem Text="@item.UrunAdi"/>
+            }
+        </MudList>
+    </MudDrawerContainer>
+</MudDrawer>
 
 @code {
 
 
     private bool Open { get; set; } = false;
+    private bool OpenBasket { get; set; } = false;
     private void ToggleDrawer(MouseEventArgs e)
     {
         Open = !Open;
     }
-
+    private void ToggleBasket(MouseEventArgs e)
+    {
+        OpenBasket = !OpenBasket;
+    }
     private List<AlisverisSepetiB.Shared.Category> categories;
     protected override async Task OnInitializedAsync()
     {
+        basket.OnChange += StateHasChanged;
         categories = await Http.GetFromJsonAsync<List<AlisverisSepetiB.Shared.Category>>("Home/Categories");
+    }
+    public void Dispose()
+    {
+        basket.OnChange -= StateHasChanged;
     }
 }
 

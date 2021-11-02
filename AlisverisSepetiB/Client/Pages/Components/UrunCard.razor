@@ -1,4 +1,6 @@
 ﻿@inject NavigationManager _nav
+@using AlisverisSepetiB.Client.StateContainers 
+@inject BasketContainer basket;
 <MudCard @onclick="Clicked" @onmouseover="Elevate" @onmouseout="@OnExit" Elevation="@elevate">
     <MudCardMedia Image="@Image" />
     <MudCardContent Style="height:92px">
@@ -6,23 +8,36 @@
         <MudText Typo="Typo.body2">@Price</MudText>
     </MudCardContent>
     <MudCardActions>
-        <MudButton Variant="Variant.Filled" Color="Color.Dark" >@ButtonValue</MudButton>
+        <MudButton Variant="Variant.Filled" Color="Color.Dark" OnClick="@AddToBasket">@ButtonValue</MudButton>
     </MudCardActions>
 </MudCard>
 
 @code {
-    [Parameter]
-    public string Image { get; set; } = "https://productimages.hepsiburada.net/s/103/550/110000046559825.jpg/format:webp";
-    [Parameter]
-    public string Title { get; set; } = "Title";
-    [Parameter]
-    public string Description { get; set; } = "Description";
-    [Parameter]
-    public string ButtonValue { get; set; } = "Sepete Ekle";
-    [Parameter]
-    public string Price { get; set; } = "0 TL";
-    [Parameter]
-    public string id { get; set; }
+        [Parameter]
+        public string Image { get; set; } = "https://productimages.hepsiburada.net/s/103/550/110000046559825.jpg/format:webp";
+        [Parameter]
+        public string Title { get; set; } = "Title";
+        [Parameter]
+        public string Description { get; set; } = "Description";
+        [Parameter]
+        public string ButtonValue { get; set; } = "Sepete Ekle";
+        [Parameter]
+        public string Price { get; set; } = "0 TL";
+        [Parameter]
+        public string id { get; set; }
+
+
+        private void AddToBasket(MouseEventArgs e)
+        {
+            UrunDTO urun = new UrunDTO()
+            {
+                UrunAdi = Description,
+                MarkaAdi = Title,
+                Fiyati = Price,
+                id = id
+        };
+        basket.AddNewItem(urun);
+    }
 
     private void Clicked(MouseEventArgs e)
     {
